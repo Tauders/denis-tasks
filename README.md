@@ -41,3 +41,7 @@
 ### Задача первая FileCalculator
 
 Условия задачи в папке [task-6](CSharpTasks/task-6/README.md)
+
+## Задачи для изучения React
+
+Условия задач в папке [ReactTasks](ReactTasks)
