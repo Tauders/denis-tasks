@@ -1,7 +1,7 @@
 import classes from './App.module.scss';
-import TodoList from './components/TodoList/TodoList';
+import { TodoList } from './components/TodoList/TodoList';
 
-const App = () => {
+export const App = () => {
   return (
     <main className={classes.main}>
       <h1 className={classes.main__title}>TO-DO List</h1>
@@ -9,5 +9,3 @@ const App = () => {
     </main>
   );
 };
-
-export default App;

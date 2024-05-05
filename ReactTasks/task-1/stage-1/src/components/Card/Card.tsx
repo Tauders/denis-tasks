@@ -5,7 +5,7 @@ type CardProps = {
   description: string;
 };
 
-const Card = ({ title, description }: CardProps) => {
+export const Card = ({ title, description }: CardProps) => {
   return (
     <li className={classes.card}>
       <h3 className={classes.card__title}>{title}</h3>
@@ -13,5 +13,3 @@ const Card = ({ title, description }: CardProps) => {
     </li>
   );
 };
-
-export default Card;

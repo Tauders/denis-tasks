@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import { Card } from '../Card/Card';
 import classes from './TodoList.module.scss';
 import { dataTasks, Task } from '../../data/dataTasks';
 import { sortByCardOrder } from '../../utils';
@@ -8,7 +8,7 @@ type TodoListProps = {
   title: string;
 };
 
-const TodoList = ({ title }: TodoListProps) => {
+export const TodoList = ({ title }: TodoListProps) => {
   const list: Array<Task> = dataTasks.map((task, index) => {
     task.id = uuidv4();
     task.order = index + 1;
@@ -31,5 +31,3 @@ const TodoList = ({ title }: TodoListProps) => {
     </section>
   );
 };
-
-export default TodoList;
