@@ -5,7 +5,7 @@ type CardProps = {
   description: string;
 };
 
-const Card: React.FC<CardProps> = ({ title, description }) => {
+const Card = ({ title, description }: CardProps) => {
   return (
     <li className={classes.card}>
       <h3 className={classes.card__title}>{title}</h3>

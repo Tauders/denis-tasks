@@ -1,11 +1,11 @@
-export interface task {
-  id?: number;
+export interface Task {
+  id?: string;
   order?: number;
   title: string;
   description: string;
 }
 
-const dataTasks: Array<task> = [
+export const dataTasks: Array<Task> = [
   {
     title: 'task 1',
     description:
@@ -32,5 +32,3 @@ const dataTasks: Array<task> = [
       'Nunc vel risus commodo viverra maecenas accumsan. Lobortis mattis aliquam faucibus purus in. Pellentesque adipiscing commodo elit at.',
   },
 ];
-
-export default dataTasks;

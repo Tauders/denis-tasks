@@ -1,13 +1,13 @@
-import './App.scss';
-import Todolist from './components/TodoList/TodoList';
+import classes from './App.module.scss';
+import TodoList from './components/TodoList/TodoList';
 
-function App() {
+const App = () => {
   return (
-    <main className="main">
-      <h1 className={'main__title'}>TO-DO List</h1>
-      <Todolist title={'Tasks'} />
+    <main className={classes.main}>
+      <h1 className={classes.main__title}>TO-DO List</h1>
+      <TodoList title="Tasks" />
     </main>
   );
-}
+};
 
 export default App;

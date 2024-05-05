@@ -1,24 +1,24 @@
 import Card from '../Card/Card';
 import classes from './TodoList.module.scss';
-import dataTasks, { task } from '../../data/dataTasks';
-import { sort, generateID } from '../../utils';
+import { dataTasks, Task } from '../../data/dataTasks';
+import { sortByCardOrder } from '../../utils';
+import { v4 as uuidv4 } from 'uuid';
 
-type TodolistProps = {
+type TodoListProps = {
   title: string;
 };
 
-const Todolist: React.FC<TodolistProps> = ({ title }) => {
-  const setId: Set<number> = new Set();
-  const list: Array<task> = dataTasks.map((task, index) => {
-    task.id = generateID(setId);
+const TodoList = ({ title }: TodoListProps) => {
+  const list: Array<Task> = dataTasks.map((task, index) => {
+    task.id = uuidv4();
     task.order = index + 1;
     return task;
   });
   return (
     <section className={classes.todoListSection}>
       <h2 className={classes.todoListSection__title}>{title}</h2>
-      <ul className={classes.list}>
-        {list.sort(sort).map(item => {
+      <ul className={classes.todoListList}>
+        {list.sort(sortByCardOrder).map(item => {
           return (
             <Card
               key={item.id}
@@ -32,4 +32,4 @@ const Todolist: React.FC<TodolistProps> = ({ title }) => {
   );
 };
 
-export default Todolist;
+export default TodoList;
