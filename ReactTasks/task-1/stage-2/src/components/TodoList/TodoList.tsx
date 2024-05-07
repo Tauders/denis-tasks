@@ -19,19 +19,23 @@ export const TodoList = ({ title }: TodoListProps) => {
 
   useEffect(() => {
     setCards(
-      cards.map((task, index) => {
-        task.id = uuidv4();
-        task.order = index + 1;
-        return task;
-      })
+      cards
+        .map((task, index) => {
+          task.id = uuidv4();
+          task.order = index + 1;
+          return task;
+        })
+        .sort(sortByCardOrder)
     );
   }, []);
 
   const handleDeleteCard = (item: Task) => {
-    setCards(prevCards => prevCards.filter(elem => elem.id !== item.id));
+    setCards(prevCards =>
+      prevCards.filter(elem => elem.id !== item.id).sort(sortByCardOrder)
+    );
   };
   const handleAddCard = (cards: Array<Task>) => {
-    setCards(cards);
+    setCards(cards.sort(sortByCardOrder));
   };
 
   const openModal = () => {
@@ -52,7 +56,7 @@ export const TodoList = ({ title }: TodoListProps) => {
       </Modal>
       <h2 className={classes.todoListSection__title}>{title}</h2>
       <ul className={classes.todoListList}>
-        {cards.sort(sortByCardOrder).map((item, index) => {
+        {cards.map((item, index) => {
           return (
             <Card
               key={index}
