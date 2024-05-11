@@ -1,14 +1,18 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    svgr(),
+  ],
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/styles/utils"; @import "./src/styles/variable"; `
-      }
-    }
-  }
-})
+        additionalData: `@import "./src/styles/utils"; @import "./src/styles/variable"; `,
+      },
+    },
+  },
+});

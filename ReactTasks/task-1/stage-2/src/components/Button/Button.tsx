@@ -1,11 +1,12 @@
 import classes from './Button.module.scss';
+import classNames from 'classnames';
 
 type ButtonProps = {
   className?: string;
-  onClick?: React.FormEventHandler<Element> | React.MouseEventHandler<Element>;
-  onKeyDown?: React.FormEventHandler<Element>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
-  disabled?: boolean;
+  isDisabled?: boolean;
 };
 
 export const Button = ({
@@ -13,17 +14,14 @@ export const Button = ({
   onClick,
   onKeyDown,
   children,
-  disabled,
+  isDisabled,
 }: ButtonProps) => {
-  let classesNames = className
-    ? className + ' ' + classes.button
-    : classes.button;
   return (
     <button
-      className={classesNames}
+      className={classNames(className && className, classes.button)}
       onClick={onClick}
       onKeyDown={onKeyDown}
-      disabled={disabled}
+      disabled={isDisabled}
     >
       {children}
     </button>

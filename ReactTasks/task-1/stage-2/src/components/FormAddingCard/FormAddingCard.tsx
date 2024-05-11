@@ -6,34 +6,30 @@ import { Task } from '../../data/dataTasks';
 import { v4 as uuidv4 } from 'uuid';
 
 type FormAddingCardProps = {
-  className?: string;
   cards: Array<Task>;
-  onAddCard: Function;
-  closeModal: Function;
+  onAddCard: (cards: Task) => void;
+  onCloseModal: () => void;
 };
 
 export const FormAddingCard = ({
-  className,
   cards,
   onAddCard,
-  closeModal,
+  onCloseModal,
 }: FormAddingCardProps) => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const handleChangeTitle: React.FormEventHandler<Element> = (
+  const handleChangeTitle: React.ChangeEventHandler<HTMLInputElement> = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setTitle(e.currentTarget.value);
-    if (title !== '') setIsDisabled(false);
   };
 
-  const handleChangeDescription: React.FormEventHandler<Element> = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleChangeDescription: React.ChangeEventHandler<
+    HTMLTextAreaElement
+  > = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.currentTarget.value);
-    if (description !== '') setIsDisabled(false);
   };
 
   const clearForm = () => {
@@ -45,9 +41,14 @@ export const FormAddingCard = ({
     if (title === '' || description === '') {
       setIsDisabled(true);
     }
+    if (title !== '' && description !== '') {
+      setIsDisabled(false);
+    }
   }, [title, description]);
 
-  const onSubmit: React.FormEventHandler<Element> = (e: React.FormEvent) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     const prevCard: Task = cards[cards.length - 1];
     const newCard = new SimpleCard({
@@ -57,20 +58,14 @@ export const FormAddingCard = ({
       description,
     });
 
-    const newCards = [...cards, newCard];
-
-    onAddCard(newCards);
+    onAddCard(newCard);
 
     clearForm();
-    closeModal();
+    onCloseModal();
   };
 
-  const classesNames = className
-    ? classes.form + ' ' + className
-    : classes.form;
-
   return (
-    <form className={classesNames}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <input
         className={classes.form__input}
         value={title}
@@ -84,7 +79,7 @@ export const FormAddingCard = ({
         onChange={handleChangeDescription}
         placeholder="Description"
       />
-      <Button disabled={isDisabled} children={'Add card'} onClick={onSubmit} />
+      <Button isDisabled={isDisabled}>Add card</Button>
     </form>
   );
 };
