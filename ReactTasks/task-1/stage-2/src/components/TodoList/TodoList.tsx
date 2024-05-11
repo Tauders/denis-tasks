@@ -2,7 +2,7 @@ import { Card } from '../Card/Card';
 import { dataTasks, Task } from '../../data/dataTasks';
 import { sortByCardOrder } from '../../ts/utils';
 import { v4 as uuidv4 } from 'uuid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../Button/Button';
 import classes from './TodoList.module.scss';
 import { Modal } from '../Modal/Modal';
@@ -13,21 +13,19 @@ type TodoListProps = {
   title: string;
 };
 
-export const TodoList = ({ title }: TodoListProps) => {
-  const [cards, setCards] = useState<Task[]>(dataTasks);
-  const [isOpen, setIsOpen] = useState(false);
+export const TodoList = (props: TodoListProps) => {
+  const { title } = props;
 
-  useEffect(() => {
-    setCards(
-      cards
-        .map((task, index) => {
-          task.id = uuidv4();
-          task.order = index + 1;
-          return task;
-        })
-        .sort(sortByCardOrder)
-    );
-  }, []);
+  const [cards, setCards] = useState<Task[]>(
+    dataTasks
+      .map((task, index) => {
+        task.id = uuidv4();
+        task.order = index + 1;
+        return task;
+      })
+      .sort(sortByCardOrder)
+  );
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleDeleteCard = (item: Task) => {
     setCards(prevCards =>
@@ -35,7 +33,16 @@ export const TodoList = ({ title }: TodoListProps) => {
     );
   };
   const handleAddCard = (newCard: Task) => {
-    setCards([...cards, newCard].sort(sortByCardOrder));
+    const prevCard: Task = cards[cards.length - 1];
+    setCards(
+      [
+        ...cards,
+        {
+          ...newCard,
+          order: cards.length > 0 && prevCard.order ? prevCard.order + 1 : 1,
+        },
+      ].sort(sortByCardOrder)
+    );
   };
 
   const handleOpenModal = () => {
@@ -57,28 +64,14 @@ export const TodoList = ({ title }: TodoListProps) => {
       <h2 className={classes.todoListSection__title}>{title}</h2>
       <ul className={classes.todoListList}>
         {cards.map((card: Task) => {
-          return (
-            <Card
-              key={card.id && card.id.replace(/[^\d]/g, '')}
-              title={card.title}
-              description={card.description}
-              onDelete={handleDeleteCard}
-              card={card}
-            />
-          );
+          return <Card key={card.id} onDelete={handleDeleteCard} card={card} />;
         })}
       </ul>
       <Button
         className={classes.todoListSection__button_light}
         onClick={handleOpenModal}
       >
-        <AddIcon
-          className={classes.todoListSection__icon}
-          width={16}
-          height={16}
-          color="#7c4886"
-          preserveAspectRatio="xMidYMid meet"
-        />
+        <AddIcon className={classes.todoListSection__icon} color="#7c4886" />
       </Button>
     </section>
   );
