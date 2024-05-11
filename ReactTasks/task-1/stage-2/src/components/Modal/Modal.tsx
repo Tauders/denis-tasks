@@ -6,15 +6,12 @@ type ModalProps = {
   title: string;
   children: React.ReactNode;
   isOpen: boolean;
-  onCloseModal: React.MouseEventHandler;
+  onCloseModal: () => void;
 };
 
-export const Modal = ({
-  title,
-  children,
-  isOpen,
-  onCloseModal,
-}: ModalProps) => {
+export const Modal = (props: ModalProps) => {
+  const { title, children, isOpen, onCloseModal } = props;
+
   return (
     <dialog className={classes.modal} open={isOpen}>
       <div className={classes.modal__content}>
@@ -24,13 +21,7 @@ export const Modal = ({
             className={classes.modal__button_close}
             onClick={onCloseModal}
           >
-            <CloseIcon
-              className={classes.modal__icon}
-              preserveAspectRatio="xMidYMid meet"
-              width={16}
-              height={16}
-              color="#7c4886"
-            />
+            <CloseIcon className={classes.modal__icon} color="#7c4886" />
           </Button>
         </div>
         {children}

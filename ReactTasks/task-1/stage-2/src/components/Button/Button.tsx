@@ -9,16 +9,12 @@ type ButtonProps = {
   isDisabled?: boolean;
 };
 
-export const Button = ({
-  className,
-  onClick,
-  onKeyDown,
-  children,
-  isDisabled,
-}: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
+  const { className, onClick, onKeyDown, children, isDisabled } = props;
+
   return (
     <button
-      className={classNames(className && className, classes.button)}
+      className={classNames(classes.button, className && className)}
       onClick={onClick}
       onKeyDown={onKeyDown}
       disabled={isDisabled}
