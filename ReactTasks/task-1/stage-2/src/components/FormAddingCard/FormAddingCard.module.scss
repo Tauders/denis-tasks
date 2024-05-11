@@ -24,4 +24,8 @@
     text-align: justify;
     min-height: rem(50);
   }
+  &__input:invalid + &__button,
+  &__textarea:invalid + &__button {
+    opacity: 0.8;
+  }
 }
