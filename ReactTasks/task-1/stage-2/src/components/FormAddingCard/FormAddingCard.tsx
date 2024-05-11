@@ -1,34 +1,28 @@
 import classes from './FormAddingCard.module.scss';
-import { useEffect, useState } from 'react';
-import SimpleCard from '../../ts/classes/simpleCard/simpleCard';
+import { useState } from 'react';
 import { Button } from '../Button/Button';
 import { Task } from '../../data/dataTasks';
 import { v4 as uuidv4 } from 'uuid';
 
 type FormAddingCardProps = {
   cards: Array<Task>;
-  onAddCard: (cards: Task) => void;
+  onAddCard: (task: Task) => void;
   onCloseModal: () => void;
 };
 
-export const FormAddingCard = ({
-  cards,
-  onAddCard,
-  onCloseModal,
-}: FormAddingCardProps) => {
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [isDisabled, setIsDisabled] = useState(true);
+export const FormAddingCard = (props: FormAddingCardProps) => {
+  const { onAddCard, onCloseModal } = props;
 
-  const handleChangeTitle: React.ChangeEventHandler<HTMLInputElement> = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value);
   };
 
-  const handleChangeDescription: React.ChangeEventHandler<
-    HTMLTextAreaElement
-  > = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChangeDescription = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDescription(e.currentTarget.value);
   };
 
@@ -37,26 +31,13 @@ export const FormAddingCard = ({
     setDescription('');
   };
 
-  useEffect(() => {
-    if (title === '' || description === '') {
-      setIsDisabled(true);
-    }
-    if (title !== '' && description !== '') {
-      setIsDisabled(false);
-    }
-  }, [title, description]);
-
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const prevCard: Task = cards[cards.length - 1];
-    const newCard = new SimpleCard({
+    const newCard = {
       id: uuidv4(),
-      order: cards.length > 0 && prevCard.order ? prevCard.order + 1 : 1,
       title,
       description,
-    });
+    };
 
     onAddCard(newCard);
 
@@ -72,14 +53,16 @@ export const FormAddingCard = ({
         onChange={handleChangeTitle}
         type="text"
         placeholder="Title"
+        required
       />
       <textarea
         className={classes.form__textarea}
         value={description}
         onChange={handleChangeDescription}
         placeholder="Description"
+        required
       />
-      <Button isDisabled={isDisabled}>Add card</Button>
+      <Button className={classes.form__button}>Add card</Button>
     </form>
   );
 };
