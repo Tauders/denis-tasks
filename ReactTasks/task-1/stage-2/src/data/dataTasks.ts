@@ -1,3 +1,6 @@
+import { sortByCardOrder } from '../ts/utils';
+import { v4 as uuidv4 } from 'uuid';
+
 export interface Task {
   id?: string;
   order?: number;
@@ -32,3 +35,14 @@ export const dataTasks: Array<Task> = [
       'Nunc vel risus commodo viverra maecenas accumsan. Lobortis mattis aliquam faucibus purus in. Pellentesque adipiscing commodo elit at.',
   },
 ];
+
+export const prepareDataTasks = (data: Array<Task>) => {
+  data
+    .map((task, index) => {
+      task.id = uuidv4();
+      task.order = index + 1;
+      return task;
+    })
+    .sort(sortByCardOrder);
+  return data;
+};
