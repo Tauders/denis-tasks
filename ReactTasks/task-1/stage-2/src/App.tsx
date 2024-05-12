@@ -1,5 +1,5 @@
 import classes from './App.module.scss';
-import { TodoList } from './components/TodoList/TodoList';
+import { TodoList } from './pages/TodoList/TodoList';
 
 export const App = () => {
   return (

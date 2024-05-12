@@ -1,7 +1,7 @@
 import classes from './FormAddingCard.module.scss';
 import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Task } from '../../data/dataTasks';
+import { Button } from '../../../../components/Button/Button';
+import { Task } from '../../../../data/dataTasks';
 import { v4 as uuidv4 } from 'uuid';
 
 type FormAddingCardProps = {
@@ -33,7 +33,7 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newCard = {
+    const newCard: Task = {
       id: uuidv4(),
       title,
       description,

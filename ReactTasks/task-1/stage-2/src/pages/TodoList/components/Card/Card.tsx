@@ -1,6 +1,6 @@
-import { Task } from '../../data/dataTasks';
-import { Button } from '../Button/Button';
-import DeleteIcon from '../../assets/icons/DeleteIcon.svg?react';
+import { Task } from '../../../../data/dataTasks';
+import { Button } from '../../../../components/Button/Button';
+import DeleteIcon from '../../../../assets/icons/DeleteIcon.svg?react';
 import classes from './Card.module.scss';
 
 type CardProps = {
