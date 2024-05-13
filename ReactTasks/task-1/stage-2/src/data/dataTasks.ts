@@ -37,12 +37,11 @@ export const dataTasks: Array<Task> = [
 ];
 
 export const prepareDataTasks = (data: Array<Task>) => {
-  data
+  return data
     .map((task, index) => {
       task.id = uuidv4();
       task.order = index + 1;
       return task;
     })
     .sort(sortByCardOrder);
-  return data;
 };
