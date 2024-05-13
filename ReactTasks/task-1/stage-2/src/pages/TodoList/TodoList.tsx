@@ -16,7 +16,7 @@ type TodoListProps = {
 export const TodoList = (props: TodoListProps) => {
   const { title } = props;
 
-  const [cards, setCards] = useState<Task[]>(prepareDataTasks(dataTasks));
+  const [cards, setCards] = useState(prepareDataTasks(dataTasks));
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDeleteCard = (item: Task) => {
