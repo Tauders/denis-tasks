@@ -18,6 +18,7 @@ export const TodoList = (props: TodoListProps) => {
 
   const [cards, setCards] = useState(prepareDataTasks(dataTasks));
   const [isOpen, setIsOpen] = useState(false);
+  const [currentCard, setCurrentCard] = useState(Object);
 
   const handleDeleteCard = (item: Task) => {
     setCards(prevCards =>
@@ -47,6 +48,34 @@ export const TodoList = (props: TodoListProps) => {
     setIsOpen(false);
   };
 
+  const handleDragCard = (task: Task) => {
+    setCurrentCard(task);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const dropHandler = (e: React.DragEvent, task: Task) => {
+    e.preventDefault();
+    setCards(
+      [...cards]
+        .map(card => {
+          if (card.id === task.id) {
+            return { ...card, order: currentCard.order };
+          }
+          if (card.id === currentCard.id) {
+            return { ...card, order: task.order };
+          }
+          return card;
+        })
+        .sort(sortByCardOrder)
+    );
+  };
+
   return (
     <section className={classes.todoListSection}>
       <Modal isOpen={isOpen} onCloseModal={handleCloseModal} title="Add task">
@@ -59,7 +88,17 @@ export const TodoList = (props: TodoListProps) => {
       <h2 className={classes.todoListSection__title}>{title}</h2>
       <ul className={classes.todoListList}>
         {cards.map((card: Task) => {
-          return <Card key={card.id} onDelete={handleDeleteCard} card={card} />;
+          return (
+            <Card
+              key={card.id}
+              onDelete={handleDeleteCard}
+              handleDrag={() => handleDragCard(card)}
+              handleDrop={e => dropHandler(e, card)}
+              handleDragLeave={e => handleDragLeave(e)}
+              handleDragOver={e => handleDragOver(e)}
+              card={card}
+            />
+          );
         })}
       </ul>
       <Button

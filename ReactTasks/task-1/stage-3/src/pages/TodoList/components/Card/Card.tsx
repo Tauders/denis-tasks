@@ -6,17 +6,35 @@ import classes from './Card.module.scss';
 type CardProps = {
   card: Task;
   onDelete: (card: Task) => void;
+  handleDrop: React.DragEventHandler;
+  handleDrag: React.DragEventHandler;
+  handleDragLeave: React.DragEventHandler;
+  handleDragOver: React.DragEventHandler;
 };
 
 export const Card = (props: CardProps) => {
-  const { card, onDelete } = props;
+  const {
+    card,
+    onDelete,
+    handleDrop,
+    handleDrag,
+    handleDragLeave,
+    handleDragOver,
+  } = props;
 
   const handleDeleteCard = () => {
     onDelete(card);
   };
 
   return (
-    <li className={classes.card}>
+    <li
+      className={classes.card}
+      draggable={true}
+      onDrag={handleDrag}
+      onDragLeave={handleDragLeave}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
       <h3 className={classes.card__title}>{card.title}</h3>
       <p className={classes.card__description}>{card.description}</p>
       <Button className={classes.card__button_light} onClick={handleDeleteCard}>
