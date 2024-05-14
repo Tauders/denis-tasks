@@ -18,7 +18,7 @@ export const TodoList = (props: TodoListProps) => {
 
   const [cards, setCards] = useState(prepareDataTasks(dataTasks));
   const [isOpen, setIsOpen] = useState(false);
-  const [currentCard, setCurrentCard] = useState(Object);
+  const [currentCard, setCurrentCard] = useState<null | Task>(null);
 
   const handleDeleteCard = (item: Task) => {
     setCards(prevCards =>
@@ -61,19 +61,20 @@ export const TodoList = (props: TodoListProps) => {
 
   const dropHandler = (e: React.DragEvent, task: Task) => {
     e.preventDefault();
-    setCards(
-      [...cards]
-        .map(card => {
-          if (card.id === task.id) {
-            return { ...card, order: currentCard.order };
-          }
-          if (card.id === currentCard.id) {
-            return { ...card, order: task.order };
-          }
-          return card;
-        })
-        .sort(sortByCardOrder)
-    );
+    currentCard !== null &&
+      setCards(
+        [...cards]
+          .map(card => {
+            if (card.id === task.id) {
+              return { ...card, order: currentCard.order };
+            }
+            if (card.id === currentCard.id) {
+              return { ...card, order: task.order };
+            }
+            return card;
+          })
+          .sort(sortByCardOrder)
+      );
   };
 
   return (
