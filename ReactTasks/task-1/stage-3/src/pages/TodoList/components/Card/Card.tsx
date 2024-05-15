@@ -6,21 +6,13 @@ import classes from './Card.module.scss';
 type CardProps = {
   card: Task;
   onDelete: (card: Task) => void;
-  handleDrop: React.DragEventHandler;
-  handleDrag: React.DragEventHandler;
-  handleDragLeave: React.DragEventHandler;
-  handleDragOver: React.DragEventHandler;
+  onDrop: React.DragEventHandler;
+  onDrag: React.DragEventHandler;
+  onDragOver: React.DragEventHandler;
 };
 
 export const Card = (props: CardProps) => {
-  const {
-    card,
-    onDelete,
-    handleDrop,
-    handleDrag,
-    handleDragLeave,
-    handleDragOver,
-  } = props;
+  const { card, onDelete, onDrop, onDrag, onDragOver } = props;
 
   const handleDeleteCard = () => {
     onDelete(card);
@@ -30,10 +22,9 @@ export const Card = (props: CardProps) => {
     <li
       className={classes.card}
       draggable={true}
-      onDrag={handleDrag}
-      onDragLeave={handleDragLeave}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
+      onDrag={onDrag}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
     >
       <h3 className={classes.card__title}>{card.title}</h3>
       <p className={classes.card__description}>{card.description}</p>

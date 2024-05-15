@@ -47,19 +47,15 @@ export const TodoList = (props: TodoListProps) => {
   const handleCloseModal = () => {
     setIsOpen(false);
   };
-
   const handleDragCard = (task: Task) => {
     setCurrentCard(task);
   };
 
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
 
-  const dropHandler = (e: React.DragEvent, task: Task) => {
+  const handleDrop = (e: React.DragEvent, task: Task) => {
     e.preventDefault();
     currentCard !== null &&
       setCards(
@@ -93,10 +89,9 @@ export const TodoList = (props: TodoListProps) => {
             <Card
               key={card.id}
               onDelete={handleDeleteCard}
-              handleDrag={() => handleDragCard(card)}
-              handleDrop={e => dropHandler(e, card)}
-              handleDragLeave={e => handleDragLeave(e)}
-              handleDragOver={e => handleDragOver(e)}
+              onDrag={() => handleDragCard(card)}
+              onDrop={e => handleDrop(e, card)}
+              onDragOver={e => handleDragOver(e)}
               card={card}
             />
           );
