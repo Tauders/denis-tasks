@@ -1,0 +1,37 @@
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
+  padding: rem(15);
+  background-color: $color_white;
+  border: 1px solid rgba($color_grey, 0.2);
+  border-radius: rem(10);
+  box-shadow: 10px 10px 12px -10px rgba($color_grey, 0.2);
+  cursor: grab;
+  &__title {
+    width: 100%;
+    font-size: rem(20);
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: rem(10);
+  }
+  &__description {
+    font-size: rem(14);
+    font-weight: 400;
+    text-align: justify;
+    margin-bottom: rem(10);
+    width: 100%;
+  }
+  &__button_light {
+    background-color: $color_violet-light;
+    &:hover {
+      background-color: $color_white;
+    }
+  }
+  &__icon {
+    display: inline-block;
+    width: rem(16);
+    height: rem(16);
+  }
+}
