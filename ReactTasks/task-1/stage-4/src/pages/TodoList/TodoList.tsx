@@ -16,19 +16,38 @@ type TodoListProps = {
 export const TodoList = (props: TodoListProps) => {
   const { title } = props;
 
-  const [cards, setCards] = useState(prepareDataTasks(dataTasks));
+  const getItemsInStorage = () => {
+    const cardsJson = localStorage.getItem('cards');
+    const cards: Task[] | null =
+      cardsJson !== null ? JSON.parse(cardsJson) : null;
+    if (cards === null) {
+      return prepareDataTasks(dataTasks);
+    }
+    return cards;
+  };
+
+  const [cards, setCards] = useState(getItemsInStorage());
   const [isOpen, setIsOpen] = useState(false);
   const [currentCard, setCurrentCard] = useState<null | Task>(null);
 
-  const handleDeleteCard = (item: Task) => {
-    setCards(prevCards =>
-      prevCards.filter(elem => elem.id !== item.id).sort(sortByCardOrder)
-    );
+  const setItemInStorage = (newCards: Task[]) => {
+    localStorage.setItem('cards', JSON.stringify(newCards));
   };
+
+  const handleDeleteCard = (item: Task) => {
+    setCards(prevCards => {
+      const newCards = prevCards
+        .filter(elem => elem.id !== item.id)
+        .sort(sortByCardOrder);
+      setItemInStorage(newCards);
+      return newCards;
+    });
+  };
+
   const handleAddCard = (newCard: Task) => {
     const prevCard: Task = cards[cards.length - 1];
-    setCards(
-      [
+    setCards(() => {
+      const newCards = [
         ...cards,
         {
           ...newCard,
@@ -37,8 +56,10 @@ export const TodoList = (props: TodoListProps) => {
               ? prevCard.order + 1
               : 1,
         },
-      ].sort(sortByCardOrder)
-    );
+      ].sort(sortByCardOrder);
+      setItemInStorage(newCards);
+      return newCards;
+    });
   };
 
   const handleOpenModal = () => {
@@ -58,8 +79,8 @@ export const TodoList = (props: TodoListProps) => {
   const handleDrop = (e: React.DragEvent, task: Task) => {
     e.preventDefault();
     currentCard !== null &&
-      setCards(
-        [...cards]
+      setCards(() => {
+        const newCards = [...cards]
           .map(card => {
             if (card.id === task.id) {
               return { ...card, order: currentCard.order };
@@ -69,8 +90,10 @@ export const TodoList = (props: TodoListProps) => {
             }
             return card;
           })
-          .sort(sortByCardOrder)
-      );
+          .sort(sortByCardOrder);
+        setItemInStorage(newCards);
+        return newCards;
+      });
   };
 
   return (
