@@ -1,5 +1,5 @@
 import { Card } from './components/Card/Card';
-import { dataTasks, isTask, Task } from '../../data/dataTasks';
+import { dataTasks, Task } from '../../data/dataTasks';
 import { sortByCardOrder } from '../../ts/utils';
 import {
   getItemsFromLocalStorage,
@@ -20,7 +20,9 @@ type TodoListProps = {
 export const TodoList = (props: TodoListProps) => {
   const { title } = props;
 
-  const [cards, setCards] = useState(getItemsFromLocalStorage(isTask) || prepareDataTasks(dataTasks));
+  const [cards, setCards] = useState(
+    getItemsFromLocalStorage() || prepareDataTasks(dataTasks)
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [currentCard, setCurrentCard] = useState<null | Task>(null);
 
