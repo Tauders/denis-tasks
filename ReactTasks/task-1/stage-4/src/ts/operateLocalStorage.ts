@@ -7,13 +7,16 @@ export const getItemsFromLocalStorage = () => {
 
   if (
     cardsJson === null ||
-    !Array.isArray(JSON.parse(cardsJson)) ||
-    JSON.parse(cardsJson).length <= 0
+    !Array.isArray(JSON.parse(cardsJson))
   ) {
     return false;
   }
 
   const cards: Task[] = JSON.parse(cardsJson);
+
+  if ( cards.length <= 0) {
+    return false;
+  }
 
   for (const card of cards) {
     if (
