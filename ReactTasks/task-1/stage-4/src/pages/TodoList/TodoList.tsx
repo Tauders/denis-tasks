@@ -1,8 +1,12 @@
 import { Card } from './components/Card/Card';
-import { dataTasks, Task } from '../../data/dataTasks';
+import { dataTasks, isTask, Task } from '../../data/dataTasks';
 import { sortByCardOrder } from '../../ts/utils';
+import {
+  getItemsFromLocalStorage,
+  setItemToLocalStorage,
+} from '../../ts/operateLocalStorage';
 import { prepareDataTasks } from '../../data/dataTasks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button/Button';
 import classes from './TodoList.module.scss';
 import { Modal } from '../../components/Modal/Modal';
@@ -16,38 +20,24 @@ type TodoListProps = {
 export const TodoList = (props: TodoListProps) => {
   const { title } = props;
 
-  const getItemsInStorage = () => {
-    const cardsJson = localStorage.getItem('cards');
-    const cards: Task[] | null =
-      cardsJson !== null ? JSON.parse(cardsJson) : null;
-    if (cards === null) {
-      return prepareDataTasks(dataTasks);
-    }
-    return cards;
-  };
-
-  const [cards, setCards] = useState(getItemsInStorage());
+  const [cards, setCards] = useState(getItemsFromLocalStorage(isTask) || prepareDataTasks(dataTasks));
   const [isOpen, setIsOpen] = useState(false);
   const [currentCard, setCurrentCard] = useState<null | Task>(null);
 
-  const setItemInStorage = (newCards: Task[]) => {
-    localStorage.setItem('cards', JSON.stringify(newCards));
-  };
+  useEffect(() => {
+    setItemToLocalStorage(cards);
+  }, [cards]);
 
   const handleDeleteCard = (item: Task) => {
-    setCards(prevCards => {
-      const newCards = prevCards
-        .filter(elem => elem.id !== item.id)
-        .sort(sortByCardOrder);
-      setItemInStorage(newCards);
-      return newCards;
-    });
+    setCards(prevCards =>
+      prevCards.filter(elem => elem.id !== item.id).sort(sortByCardOrder)
+    );
   };
 
   const handleAddCard = (newCard: Task) => {
     const prevCard: Task = cards[cards.length - 1];
-    setCards(() => {
-      const newCards = [
+    setCards(
+      [
         ...cards,
         {
           ...newCard,
@@ -56,10 +46,8 @@ export const TodoList = (props: TodoListProps) => {
               ? prevCard.order + 1
               : 1,
         },
-      ].sort(sortByCardOrder);
-      setItemInStorage(newCards);
-      return newCards;
-    });
+      ].sort(sortByCardOrder)
+    );
   };
 
   const handleOpenModal = () => {
@@ -79,8 +67,8 @@ export const TodoList = (props: TodoListProps) => {
   const handleDrop = (e: React.DragEvent, task: Task) => {
     e.preventDefault();
     currentCard !== null &&
-      setCards(() => {
-        const newCards = [...cards]
+      setCards(
+        [...cards]
           .map(card => {
             if (card.id === task.id) {
               return { ...card, order: currentCard.order };
@@ -90,10 +78,8 @@ export const TodoList = (props: TodoListProps) => {
             }
             return card;
           })
-          .sort(sortByCardOrder);
-        setItemInStorage(newCards);
-        return newCards;
-      });
+          .sort(sortByCardOrder)
+      );
   };
 
   return (
