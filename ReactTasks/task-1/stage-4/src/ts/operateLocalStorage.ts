@@ -1,24 +1,18 @@
-import { Task, isTask } from '../data/dataTasks';
+import { Task, isTasks } from '../data/dataTasks';
 
 const localStorageCardsKey: string = 'cards';
 
 export const getItemsFromLocalStorage = () => {
   const cardsJson: string | null = localStorage.getItem(localStorageCardsKey);
 
-  if (cardsJson === null || !Array.isArray(JSON.parse(cardsJson))) {
+  if (cardsJson === null) {
     return false;
   }
 
   const cards: Task[] = JSON.parse(cardsJson);
 
-  if (cards.length <= 0) {
+  if (!isTasks(cards)) {
     return false;
-  }
-
-  for (const card of cards) {
-    if (!isTask(card)) {
-      return false;
-    }
   }
 
   return cards;

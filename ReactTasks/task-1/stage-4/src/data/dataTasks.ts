@@ -46,19 +46,24 @@ export const prepareDataTasks = (data: Array<Task>) => {
     .sort(sortByCardOrder);
 };
 
-export const isTask = (task: unknown): task is Task => {
-  if (
-    task instanceof Object &&
-    'id' in task &&
-    typeof task.id === 'string' &&
-    'order' in task &&
-    typeof task.order === 'number' &&
-    'title' in task &&
-    typeof task.title === 'string' &&
-    'description' in task &&
-    typeof task.description === 'string'
-  ) {
-    return true;
+export const isTasks = (tasks: unknown): tasks is Task[] => {
+  if (!(tasks instanceof Array) || tasks.length === 0) {
+    return false;
   }
-  return false;
+  for (const task of tasks) {
+    if (
+      !(task instanceof Object) ||
+      !('id' in task) ||
+      typeof task.id !== 'string' ||
+      !('order' in task) ||
+      typeof task.order !== 'number' ||
+      !('title' in task) ||
+      typeof task.title !== 'string' ||
+      !('description' in task) ||
+      typeof task.description !== 'string'
+    ) {
+      return false;
+    }
+  }
+  return true;
 };
