@@ -45,3 +45,15 @@ export const prepareDataTasks = (data: Array<Task>) => {
     })
     .sort(sortByCardOrder);
 };
+
+export const isTask = (task: any): task is Task => {
+  if (
+    typeof task.id === 'string' &&
+    typeof task.order === 'number' &&
+    typeof task.title === 'string' &&
+    typeof task.description === 'string'
+  ) {
+    return true;
+  }
+  return false;
+};
