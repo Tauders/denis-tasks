@@ -48,19 +48,22 @@ export const prepareDataTasks = (data: Array<Task>) => {
 
 export const isTask = (task: unknown): task is Task => {
   if (
-    task instanceof Object &&
-    'id' in task &&
-    typeof task.id === 'string' &&
-    'order' in task &&
-    typeof task.order === 'number' &&
+    !(task instanceof Object) ||
+    ('id' in task && typeof task.id !== 'string') ||
+    ('order' in task && typeof task.order !== 'number')
+  ) {
+    return false;
+  }
+  if (
     'title' in task &&
     typeof task.title === 'string' &&
     'description' in task &&
     typeof task.description === 'string'
   ) {
     return true;
+  } else {
+    return false;
   }
-  return false;
 };
 
 export const isTasks = (tasks: unknown): tasks is Task[] => {
