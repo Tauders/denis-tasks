@@ -21,7 +21,7 @@ export const TodoList = (props: TodoListProps) => {
   const { title } = props;
 
   const [cards, setCards] = useState(
-    getItemsFromLocalStorage() || prepareDataTasks(dataTasks)
+    getItemsFromLocalStorage(prepareDataTasks(dataTasks))
   );
   const [isOpen, setIsOpen] = useState(false);
   const [currentCard, setCurrentCard] = useState<null | Task>(null);

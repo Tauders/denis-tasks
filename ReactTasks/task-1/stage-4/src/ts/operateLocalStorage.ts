@@ -1,18 +1,18 @@
 import { Task, isTasks } from '../data/dataTasks';
 
-const localStorageCardsKey: string = 'cards';
+const localStorageCardsKey = 'cards';
 
-export const getItemsFromLocalStorage = () => {
-  const cardsJson: string | null = localStorage.getItem(localStorageCardsKey);
+export const getItemsFromLocalStorage = (defaultValues: Task[] = []) => {
+  const cardsJson = localStorage.getItem(localStorageCardsKey);
 
   if (cardsJson === null) {
-    return false;
+    return defaultValues;
   }
 
-  const cards: Task[] = JSON.parse(cardsJson);
+  const cards = JSON.parse(cardsJson);
 
   if (!isTasks(cards)) {
-    return false;
+    return defaultValues;
   }
 
   return cards;
