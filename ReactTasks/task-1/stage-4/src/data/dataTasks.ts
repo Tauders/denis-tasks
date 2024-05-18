@@ -61,9 +61,8 @@ export const isTask = (task: unknown): task is Task => {
     typeof task.description === 'string'
   ) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 };
 
 export const isTasks = (tasks: unknown): tasks is Task[] => {
