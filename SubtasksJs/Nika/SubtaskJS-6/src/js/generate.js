@@ -18,7 +18,7 @@ export default function generate(file) {
       formResult.classList.add(visibleFormClassName);
     });
   });
-  for (let i = 0; i < formResult.length; i++) {
-    formResult[i].addEventListener('input', e => validateFormResult(e.target));
+  for (const elem of formResult) {
+    elem.addEventListener('input', e => validateFormResult(e.target));
   }
 }
