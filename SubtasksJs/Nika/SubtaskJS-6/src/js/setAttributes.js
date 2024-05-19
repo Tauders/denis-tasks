@@ -1,6 +1,6 @@
 export default function setAttributes(elem, objAttrs) {
   const arrAttrs = Object.entries(objAttrs);
-  arrAttrs.forEach(([key, value]) => {
+  for (const [key, value] of arrAttrs) {
     if (Array.isArray(value)) {
       value.map(item => {
         const option = document.createElement('option');
@@ -11,5 +11,5 @@ export default function setAttributes(elem, objAttrs) {
     } else {
       elem.setAttribute(key, value);
     }
-  });
+  }
 }
