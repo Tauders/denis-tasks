@@ -1,5 +1,7 @@
 export default function readFile(file) {
-  if (!file) return;
+  if (!file) {
+    return;
+  }
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
