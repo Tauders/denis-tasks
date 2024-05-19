@@ -8,16 +8,16 @@ import {
 
 export function handleResetButton(button, buttonSend) {
   button.addEventListener('click', () => {
-    for (let i = 0; i < formResult.length; i++) {
-      if (formResult[i] instanceof HTMLLabelElement) continue;
-      if (formResult[i] instanceof HTMLInputElement) {
-        formResult[i].classList.remove(classInputError);
+    for (const elem of formResult) {
+      if (elem instanceof HTMLLabelElement) continue;
+      if (elem instanceof HTMLInputElement) {
+        elem.classList.remove(classInputError);
       }
-      formResult[i].value = '';
+      elem.value = '';
     }
     const errors = document.querySelectorAll('.' + errorTextClassName);
-    for (let i = 0; i < errors.length; i++) {
-      errors[i].remove();
+    for (const error of errors) {
+      error.remove();
     }
     document.getElementById('download') &&
       document.getElementById('download').remove();
