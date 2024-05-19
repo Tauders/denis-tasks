@@ -28,8 +28,8 @@ export const error = {
     id: 'error-incorrect-lastname',
     text: 'Введите корректное значение фамилии',
   },
-  email: { id: 'error-incorrect-email', text: 'Неккоректный адрес email' },
-  phone: { id: 'error-incorrect-phone', text: 'Неккоректный номер телефона' },
+  email: { id: 'error-incorrect-email', text: 'Некорректный адрес email' },
+  phone: { id: 'error-incorrect-phone', text: 'Некорректный номер телефона' },
 };
 export const visibleFormClassName = 'form_visible';
 export const visibleErrorClassName = 'form__error_visible';
