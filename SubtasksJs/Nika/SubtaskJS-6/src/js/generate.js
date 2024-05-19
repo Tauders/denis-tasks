@@ -5,7 +5,7 @@ import { validateFormResult } from './validate';
 export default function generate(file) {
   file.form.map(formItem => {
     const arrFormElems = Object.entries(formItem);
-    arrFormElems.forEach(([formElem, attrs]) => {
+    for (const [formElem, attrs] of arrFormElems) {
       const elem = document.createElement(formElem);
       elem.classList.add(`form__${formElem}`);
       setAttributes(elem, attrs);
@@ -16,7 +16,7 @@ export default function generate(file) {
           elem.previousSibling.textContent + ' *';
       }
       formResult.classList.add(visibleFormClassName);
-    });
+    }
   });
   for (const elem of formResult) {
     elem.addEventListener('input', e => validateFormResult(e.target));
