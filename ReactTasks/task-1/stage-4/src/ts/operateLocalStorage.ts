@@ -4,7 +4,6 @@ const localStorageCardsKey = 'cards';
 
 export const getItemsFromLocalStorage = (defaultValues: Task[] = []) => {
   const cardsJson = localStorage.getItem(localStorageCardsKey);
-
   if (cardsJson === null) {
     return defaultValues;
   }

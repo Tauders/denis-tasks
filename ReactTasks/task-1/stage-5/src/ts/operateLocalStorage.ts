@@ -1,23 +1,23 @@
-import { Task, isTasks } from '../data/dataTasks';
+import { List } from '../pages/TodoList/components/List/List';
+import { isLists } from './isType';
 
-const localStorageCardsKey = 'cards';
+const localStorageListsKey = 'lists';
 
-export const getItemsFromLocalStorage = (defaultValues: Task[] = []) => {
-  const cardsJson = localStorage.getItem(localStorageCardsKey);
-
-  if (cardsJson === null) {
+export const getItemsFromLocalStorage = (defaultValues: List[] = []) => {
+  const listsJson = localStorage.getItem(localStorageListsKey);
+  if (listsJson === null) {
     return defaultValues;
   }
 
-  const cards = JSON.parse(cardsJson);
+  const lists = JSON.parse(listsJson);
 
-  if (!isTasks(cards)) {
+  if (!isLists(lists)) {
     return defaultValues;
   }
 
-  return cards;
+  return lists;
 };
 
-export const setItemToLocalStorage = (newCards: Task[]) => {
-  localStorage.setItem(localStorageCardsKey, JSON.stringify(newCards));
+export const setItemToLocalStorage = (lists: List[]) => {
+  localStorage.setItem(localStorageListsKey, JSON.stringify(lists));
 };

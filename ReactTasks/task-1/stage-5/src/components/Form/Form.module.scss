@@ -9,14 +9,14 @@
   border: 1px solid rgba($color_grey, 0.2);
   border-radius: rem(10);
   box-shadow: 10px 10px 12px -10px rgba($color_grey, 0.2);
-  &__input {
+  input {
     width: 100%;
     border: none;
     font-size: rem(18);
     text-align: center;
     font-weight: 500;
   }
-  &__textarea {
+  textarea {
     width: 100%;
     border: none;
     font-size: rem(12);
@@ -24,8 +24,8 @@
     text-align: justify;
     min-height: rem(50);
   }
-  &__input:invalid + &__button,
-  &__textarea:invalid + &__button {
+  input:invalid + &__button,
+  textarea:invalid + &__button {
     opacity: 0.8;
   }
 }

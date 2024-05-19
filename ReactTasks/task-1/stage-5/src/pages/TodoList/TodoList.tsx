@@ -1,119 +1,53 @@
-import { Card } from './components/Card/Card';
-import { dataTasks, Task } from '../../data/dataTasks';
-import { sortByCardOrder } from '../../ts/utils';
+import { useEffect, useState } from 'react';
+import { Task, dataTasks, prepareDataTasks } from '../../data/dataTasks';
+import classes from './TodoList.module.scss';
+import { List } from './components/List/List';
+import { v4 as uuidv4 } from 'uuid';
+import { HeaderTodoList } from './components/HeaderTodoList/HeaderTodoList';
 import {
   getItemsFromLocalStorage,
   setItemToLocalStorage,
 } from '../../ts/operateLocalStorage';
-import { prepareDataTasks } from '../../data/dataTasks';
-import { useEffect, useState } from 'react';
-import { Button } from '../../components/Button/Button';
-import classes from './TodoList.module.scss';
-import { Modal } from '../../components/Modal/Modal';
-import { FormAddingCard } from './components/FormAddingCard/FormAddingCard';
-import AddIcon from '../../assets/icons/AddIcon.svg?react';
 
-type TodoListProps = {
-  title: string;
-};
+export const TodoList = () => {
+  const defaultLists = [
+    {
+      id: uuidv4(),
+      title: 'List 1',
+      tasks: prepareDataTasks(dataTasks),
+    },
+  ];
 
-export const TodoList = (props: TodoListProps) => {
-  const { title } = props;
-
-  const [cards, setCards] = useState(
-    getItemsFromLocalStorage(prepareDataTasks(dataTasks))
-  );
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentCard, setCurrentCard] = useState<null | Task>(null);
+  const [lists, setLists] = useState(getItemsFromLocalStorage(defaultLists));
 
   useEffect(() => {
-    setItemToLocalStorage(cards);
-  }, [cards]);
+    setItemToLocalStorage(lists);
+  }, [lists]);
 
-  const handleDeleteCard = (item: Task) => {
-    setCards(prevCards =>
-      prevCards.filter(elem => elem.id !== item.id).sort(sortByCardOrder)
-    );
+  const handleAddList = (newList: List) => {
+    setLists([...lists, newList]);
   };
 
-  const handleAddCard = (newCard: Task) => {
-    const prevCard: Task = cards[cards.length - 1];
-    setCards(
-      [
-        ...cards,
-        {
-          ...newCard,
-          order:
-            cards.length > 0 && prevCard.order !== undefined
-              ? prevCard.order + 1
-              : 1,
-        },
-      ].sort(sortByCardOrder)
-    );
+  const handleDeleteList = (list: List) => {
+    setLists(prevLists => prevLists.filter(elem => elem.id !== list.id));
   };
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
-  const handleDragCard = (task: Task) => {
-    setCurrentCard(task);
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: React.DragEvent, task: Task) => {
-    e.preventDefault();
-    currentCard !== null &&
-      setCards(
-        [...cards]
-          .map(card => {
-            if (card.id === task.id) {
-              return { ...card, order: currentCard.order };
-            }
-            if (card.id === currentCard.id) {
-              return { ...card, order: task.order };
-            }
-            return card;
-          })
-          .sort(sortByCardOrder)
-      );
+  const handleChangeList = (id: string, title: string, cards: Task[]) => {
+    const newLists = lists.map(list => {
+      if (list.id === id) {
+        return { id, title, tasks: cards };
+      }
+      return list;
+    });
+    setLists(newLists);
   };
 
   return (
     <section className={classes.todoListSection}>
-      <Modal isOpen={isOpen} onCloseModal={handleCloseModal} title="Add task">
-        <FormAddingCard
-          cards={cards}
-          onAddCard={handleAddCard}
-          onCloseModal={handleCloseModal}
-        />
-      </Modal>
-      <h2 className={classes.todoListSection__title}>{title}</h2>
-      <ul className={classes.todoListList}>
-        {cards.map((card: Task) => {
-          return (
-            <Card
-              key={card.id}
-              onDelete={handleDeleteCard}
-              onDrag={() => handleDragCard(card)}
-              onDrop={e => handleDrop(e, card)}
-              onDragOver={e => handleDragOver(e)}
-              card={card}
-            />
-          );
-        })}
-      </ul>
-      <Button
-        className={classes.todoListSection__button_light}
-        onClick={handleOpenModal}
-      >
-        <AddIcon className={classes.todoListSection__icon} color="#7c4886" />
-      </Button>
+      <HeaderTodoList title="TO-DO List" onAddList={handleAddList} />
+      {lists.map(list => (
+        <List key={list.id} list={list} onList={handleChangeList} onDeleteList={handleDeleteList} />
+      ))}
     </section>
   );
 };

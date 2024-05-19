@@ -1,11 +1,9 @@
-import classes from './FormAddingCard.module.scss';
 import { useState } from 'react';
-import { Button } from '../../../../components/Button/Button';
 import { Task } from '../../../../data/dataTasks';
 import { v4 as uuidv4 } from 'uuid';
+import { Form } from '../../../../components/Form/Form';
 
 type FormAddingCardProps = {
-  cards: Array<Task>;
   onAddCard: (task: Task) => void;
   onCloseModal: () => void;
 };
@@ -46,9 +44,8 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
   };
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} textBtn="Add card">
       <input
-        className={classes.form__input}
         value={title}
         onChange={handleChangeTitle}
         type="text"
@@ -56,13 +53,11 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
         required
       />
       <textarea
-        className={classes.form__textarea}
         value={description}
         onChange={handleChangeDescription}
         placeholder="Description"
         required
       />
-      <Button className={classes.form__button}>Add card</Button>
-    </form>
+    </Form>
   );
 };
