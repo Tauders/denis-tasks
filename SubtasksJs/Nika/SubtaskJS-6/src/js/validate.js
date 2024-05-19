@@ -9,7 +9,7 @@ import {
   buttonSendID,
 } from './const';
 import { createError } from './createElements';
-import { clearError } from './clear';
+import { clearElement } from './clear';
 
 export function validateFile(file) {
   if (!file) {
@@ -19,7 +19,7 @@ export function validateFile(file) {
     createError(error.file.text, error.file.id);
     buttonHandle.disabled = true;
   } else {
-    clearError(error.file.id);
+    clearElement(error.file.id);
     blockError.classList.contains(visibleErrorClassName) &&
       blockError.classList.remove(visibleErrorClassName);
   }
@@ -39,7 +39,7 @@ export function validateFormResult(formElem) {
       formElem.classList.add(classInputError);
       return;
     } else {
-      clearError(error.firstname.id);
+      clearElement(error.firstname.id);
       formElem.classList.remove(classInputError);
     }
   }
@@ -52,7 +52,7 @@ export function validateFormResult(formElem) {
       formElem.classList.add(classInputError);
       return;
     } else {
-      clearError(error.lastname.id);
+      clearElement(error.lastname.id);
       formElem.classList.remove(classInputError);
     }
   }
@@ -65,7 +65,7 @@ export function validateFormResult(formElem) {
       formElem.classList.add(classInputError);
       return;
     } else {
-      clearError(error.email.id);
+      clearElement(error.email.id);
       formElem.classList.remove(classInputError);
     }
   }
@@ -83,7 +83,7 @@ export function validateFormResult(formElem) {
       formElem.classList.add(classInputError);
       return;
     } else {
-      clearError(error.phone.id);
+      clearElement(error.phone.id);
       formElem.classList.remove(classInputError);
     }
   }

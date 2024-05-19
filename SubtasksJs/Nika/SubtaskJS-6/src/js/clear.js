@@ -13,7 +13,7 @@ export function clearResults() {
   formResult.classList.remove(visibleFormClassName);
 }
 
-export function clearError(id) {
+export function clearElement(id) {
   if (document.getElementById(id)) {
     document.getElementById(id).remove();
   }
