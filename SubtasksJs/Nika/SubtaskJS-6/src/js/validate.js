@@ -12,7 +12,9 @@ import { createError } from './createElements';
 import { clearError } from './clear';
 
 export function validateFile(file) {
-  if (!file) return;
+  if (!file) {
+    return;
+  }
   if (file.type !== 'application/json') {
     createError(error.file.text, error.file.id);
     buttonHandle.disabled = true;
