@@ -9,7 +9,7 @@ export default function setAttributes(elem, objAttrs) {
         elem.append(option);
       });
     } else {
-      elem.setAttribute(`${key}`, `${value}`);
+      elem.setAttribute(key, value);
     }
   });
 }
