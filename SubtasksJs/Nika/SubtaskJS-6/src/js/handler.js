@@ -4,7 +4,9 @@ import {
   buttonLink,
   classInputError,
   errorTextClassName,
+  linkID,
 } from './const';
+import { clearElement } from './clear';
 
 export function handleResetButton(button, buttonSend) {
   button.addEventListener('click', () => {
@@ -21,8 +23,7 @@ export function handleResetButton(button, buttonSend) {
     for (const error of errors) {
       error.remove();
     }
-    document.getElementById('download') &&
-      document.getElementById('download').remove();
+    clearElement(linkID);
     buttonSend.disabled = true;
   });
 }

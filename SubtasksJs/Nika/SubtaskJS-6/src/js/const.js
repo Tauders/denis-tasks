@@ -36,3 +36,4 @@ export const visibleErrorClassName = 'form__error_visible';
 export const errorTextClassName = 'form__error-text';
 export const initialContentOfResultBlock =
   '<h2 class="form__title">Результат генерации</h2>';
+export const linkID = 'download';
