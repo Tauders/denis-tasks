@@ -9,7 +9,9 @@ import {
 export function handleResetButton(button, buttonSend) {
   button.addEventListener('click', () => {
     for (const elem of formResult) {
-      if (elem instanceof HTMLLabelElement) continue;
+      if (elem instanceof HTMLLabelElement) {
+        continue;
+      }
       if (elem instanceof HTMLInputElement) {
         elem.classList.remove(classInputError);
       }
