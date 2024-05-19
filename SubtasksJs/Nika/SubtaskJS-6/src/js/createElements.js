@@ -1,5 +1,4 @@
 import {
-  blockControl,
   blockError,
   buttonClassName,
   formResult,
@@ -18,8 +17,7 @@ export function createButton(children, id) {
 
   button.id = id;
   button.classList.add(buttonClassName);
-  blockControl.append(button);
-  return document.getElementById(id);
+  return button;
 }
 
 export function createLink(url, nameFile, text) {
@@ -44,4 +42,11 @@ export function createError(text, id, elem) {
         blockError.classList.add(visibleErrorClassName);
     }
   }
+}
+
+export function createElement(tag, id, className) {
+  const element = document.createElement(tag);
+  element.id = id;
+  element.classList.add(className);
+  return element;
 }

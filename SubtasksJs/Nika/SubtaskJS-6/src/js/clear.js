@@ -9,7 +9,6 @@ import {
 export function clearResults() {
   buttonHandle.disabled = false;
   formResult.innerHTML = initialContentOfResultBlock;
-  blockControl.innerHTML = '';
   formResult.classList.remove(visibleFormClassName);
 }
 

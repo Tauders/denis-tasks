@@ -1,5 +1,5 @@
-export const blockControlID = 'control';
-export const blockControl = document.getElementById(blockControlID);
+export const formControlID = 'control';
+export const formControlClassName = 'form__control';
 export const buttonHandleID = 'handle';
 export const buttonHandle = document.getElementById(buttonHandleID);
 export const buttonSendID = 'send';

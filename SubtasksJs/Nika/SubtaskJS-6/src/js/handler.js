@@ -28,8 +28,9 @@ export function handleResetButton(button, buttonSend) {
   });
 }
 
-export function handleSendButton(button) {
-  button.addEventListener('click', () => {
+export function handleSendButton(formControl) {
+  formResult.addEventListener('submit', (e) => {
+    e.preventDefault();
     if (!document.querySelector('.' + errorTextClassName)) {
       const formData = new FormData(formResult);
       const json = JSON.stringify(Object.fromEntries(formData));
@@ -40,7 +41,8 @@ export function handleSendButton(button) {
         buttonLink.innerHTML = '';
         buttonLink.append(createLink(url, 'file.json', 'Скачать'));
       } else {
-        createButton(createLink(url, 'file.json', 'Скачать'), 'download');
+        const buttonDownload = createButton(createLink(url, 'file.json', 'Скачать'), 'download');
+        formControl.append(buttonDownload);
       }
     }
   });

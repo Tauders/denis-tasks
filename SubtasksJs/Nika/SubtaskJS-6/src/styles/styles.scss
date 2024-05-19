@@ -101,6 +101,7 @@ $color-dark-brown: #721b1b;
   &__select {
     width: rem(50);
     height: rem(30);
+    display: block;
     font-size: rem(20);
     color: $color-black;
     border-radius: rem(4);
@@ -152,14 +153,14 @@ $color-dark-brown: #721b1b;
     font-size: rem(18);
     width: 100%;
   }
-}
-.control {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: rem(20);
-  margin-bottom: rem(50);
-  flex-wrap: wrap;
+  &__control {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: rem(20);
+    flex-wrap: wrap;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: rem(640)) {

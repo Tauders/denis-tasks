@@ -5,9 +5,11 @@ import {
   inputFileText,
   formResult,
   buttonSendID,
+  formControlID,
+  formControlClassName,
 } from './js/const';
 import readFile from './js/readFile';
-import { createButton } from './js/createElements';
+import { createButton, createElement } from './js/createElements';
 import { validateFile } from './js/validate';
 import { clearResults } from './js/clear';
 import { handleResetButton, handleSendButton } from './js/handler';
@@ -33,7 +35,11 @@ buttonHandle.addEventListener('click', async function (e) {
 
   const buttonSend = createButton('Отправить', 'send');
   const buttonReset = createButton('Сбросить', 'reset');
-  handleSendButton(buttonSend);
+  const formControl = createElement('div', formControlID, formControlClassName);
+  formControl.append(buttonSend);
+  formControl.append(buttonReset);
+  formResult.append(formControl);
+  handleSendButton(formControl);
   handleResetButton(buttonReset, buttonSend);
   buttonHandle.disabled = true;
   buttonSend.disabled = true;
