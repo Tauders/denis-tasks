@@ -41,9 +41,11 @@ export function createError(text, id) {
   }
 }
 
-export function createElement(tag, id, className) {
+export function createElement(tag, className, id) {
   const element = document.createElement(tag);
-  element.id = id;
+  if (id) {
+    element.id = id;
+  }
   element.classList.add(className);
   return element;
 }

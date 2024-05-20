@@ -17,7 +17,6 @@ export function handleResetButton(button, buttonSend) {
       if (elem instanceof HTMLInputElement) {
         elem.classList.remove(classInputError);
       }
-      elem.value = '';
     }
     const errors = document.querySelectorAll('.' + errorTextClassName);
     for (const error of errors) {

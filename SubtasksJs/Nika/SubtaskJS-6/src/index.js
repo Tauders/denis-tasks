@@ -8,7 +8,7 @@ import {
   buttonResetID,
   formControlID,
   formControlClassName,
-  buttonSendClassName
+  buttonSendClassName,
 } from './js/const';
 import readFile from './js/readFile';
 import { createButton, createElement } from './js/createElements';
@@ -35,14 +35,22 @@ buttonHandle.addEventListener('click', async function (e) {
   const parseResult = JSON.parse(readingResult);
   generate(parseResult);
 
-  const buttonSend = createButton('Отправить', buttonSendID, buttonSendClassName);
+  const buttonSend = createButton(
+    'Отправить',
+    buttonSendID,
+    buttonSendClassName
+  );
   const buttonReset = createButton('Сбросить', buttonResetID);
-  const formControl = createElement('div', formControlID, formControlClassName);
+  const formControl = createElement('div', formControlClassName, formControlID);
   formControl.append(buttonSend);
+
+  buttonReset.type = 'reset';
   formControl.append(buttonReset);
   formResult.append(formControl);
+
   handleSendButton(formControl);
   handleResetButton(buttonReset, buttonSend);
+
   buttonHandle.disabled = true;
   buttonSend.disabled = true;
 });
