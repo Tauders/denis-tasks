@@ -5,8 +5,10 @@ import {
   inputFileText,
   formResult,
   buttonSendID,
+  buttonResetID,
   formControlID,
   formControlClassName,
+  buttonSendClassName
 } from './js/const';
 import readFile from './js/readFile';
 import { createButton, createElement } from './js/createElements';
@@ -33,8 +35,8 @@ buttonHandle.addEventListener('click', async function (e) {
   const parseResult = JSON.parse(readingResult);
   generate(parseResult);
 
-  const buttonSend = createButton('Отправить', 'send');
-  const buttonReset = createButton('Сбросить', 'reset');
+  const buttonSend = createButton('Отправить', buttonSendID, buttonSendClassName);
+  const buttonReset = createButton('Сбросить', buttonResetID);
   const formControl = createElement('div', formControlID, formControlClassName);
   formControl.append(buttonSend);
   formControl.append(buttonReset);
@@ -43,16 +45,4 @@ buttonHandle.addEventListener('click', async function (e) {
   handleResetButton(buttonReset, buttonSend);
   buttonHandle.disabled = true;
   buttonSend.disabled = true;
-});
-
-formResult.addEventListener('input', () => {
-  const buttonSend = document.getElementById(buttonSendID);
-  for (let i = 0; i < formResult.length; i++) {
-    if (
-      formResult[i].getAttribute('required') === 'true' &&
-      formResult[i].value === ''
-    ) {
-      buttonSend.disabled = true;
-    }
-  }
 });

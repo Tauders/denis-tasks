@@ -87,7 +87,7 @@ $color-dark-brown: #721b1b;
     color: $color-black;
     border-radius: rem(4);
     border: 1px solid $color-black;
-    &_error {
+    &:invalid, &_error {
       border-color: $color-red;
     }
     &_file {
@@ -106,7 +106,7 @@ $color-dark-brown: #721b1b;
     color: $color-black;
     border-radius: rem(4);
     border: 1px solid $color-black;
-    &_error {
+    &:invalid {
       border-color: $color-red;
     }
   }
@@ -121,11 +121,12 @@ $color-dark-brown: #721b1b;
     background-color: $color-brown;
     border-radius: rem(5);
     cursor: pointer;
-    &:disabled {
-      opacity: 0.5;
-    }
     &:hover {
       background-color: $color-dark-brown;
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
     a,
     a:active,
@@ -160,6 +161,12 @@ $color-dark-brown: #721b1b;
     gap: rem(20);
     flex-wrap: wrap;
     width: 100%;
+  }
+  &:invalid {
+    #{$this}__button_send {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }
 

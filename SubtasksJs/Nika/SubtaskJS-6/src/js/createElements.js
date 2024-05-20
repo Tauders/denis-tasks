@@ -6,7 +6,7 @@ import {
   errorTextClassName,
 } from './const';
 
-export function createButton(children, id) {
+export function createButton(children, id, className) {
   const button = document.createElement('button');
 
   if (typeof children === 'object') {
@@ -17,6 +17,9 @@ export function createButton(children, id) {
 
   button.id = id;
   button.classList.add(buttonClassName);
+  if (className) {
+    button.classList.add(className);
+  }
   return button;
 }
 

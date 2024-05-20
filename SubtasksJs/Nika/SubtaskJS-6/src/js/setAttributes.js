@@ -8,6 +8,11 @@ export default function setAttributes(elem, objAttrs) {
         option.innerText = item.name;
         elem.append(option);
       });
+    } else if (key === 'required') {
+      if (value === true) {
+        elem.setAttribute(key, '');
+      }
+      continue;
     } else {
       elem.setAttribute(key, value);
     }

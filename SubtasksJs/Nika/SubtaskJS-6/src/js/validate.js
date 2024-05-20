@@ -1,12 +1,12 @@
 import {
   classInputError,
-  EMAIL_REGEXP,
   NAME_REGEXP,
   error,
   buttonHandle,
   visibleErrorClassName,
   blockError,
   buttonSendID,
+  linkID,
 } from './const';
 import { createError } from './createElements';
 import { clearElement } from './clear';
@@ -20,16 +20,16 @@ export function validateFile(file) {
     buttonHandle.disabled = true;
   } else {
     clearElement(error.file.id);
-    blockError.classList.contains(visibleErrorClassName) &&
+    if (blockError.classList.contains(visibleErrorClassName)) {
       blockError.classList.remove(visibleErrorClassName);
+    }
   }
 }
 
 export function validateFormResult(formElem) {
   const buttonSend = document.getElementById(buttonSendID);
   buttonSend.disabled = true;
-  document.getElementById('download') &&
-    document.getElementById('download').remove();
+  clearElement(linkID);
   if (
     formElem instanceof HTMLInputElement &&
     formElem.getAttribute('name') === 'firstName'
@@ -53,37 +53,6 @@ export function validateFormResult(formElem) {
       return;
     } else {
       clearElement(error.lastname.id);
-      formElem.classList.remove(classInputError);
-    }
-  }
-  if (
-    formElem instanceof HTMLInputElement &&
-    formElem.getAttribute('name') === 'email'
-  ) {
-    if (!EMAIL_REGEXP.test(formElem.value)) {
-      createError(error.email.text, error.email.id, formElem);
-      formElem.classList.add(classInputError);
-      return;
-    } else {
-      clearElement(error.email.id);
-      formElem.classList.remove(classInputError);
-    }
-  }
-  if (
-    formElem instanceof HTMLInputElement &&
-    formElem.getAttribute('name') === 'phoneNumber'
-  ) {
-    if (
-      formElem.value !== '' &&
-      !new RegExp(`^(${formElem.getAttribute('pattern')}$)`).test(
-        formElem.value
-      )
-    ) {
-      createError(error.phone.text, error.phone.id, formElem);
-      formElem.classList.add(classInputError);
-      return;
-    } else {
-      clearElement(error.phone.id);
       formElem.classList.remove(classInputError);
     }
   }
