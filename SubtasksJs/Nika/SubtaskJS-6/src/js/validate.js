@@ -17,13 +17,9 @@ export function validateFile(file) {
     return;
   }
   if (file.type !== 'application/json') {
-    const err = createError(error.file.text, error.file.id);
-    blockError.append(err);
-    blockError.classList.add(visibleErrorClassName);
-    buttonHandle.disabled = true;
+    return false;
   } else {
-    clearElement(error.file.id);
-    blockError.classList.remove(visibleErrorClassName);
+    return true;
   }
 }
 

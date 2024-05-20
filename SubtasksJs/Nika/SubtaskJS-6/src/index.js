@@ -9,9 +9,13 @@ import {
   formControlID,
   formControlClassName,
   buttonSendClassName,
+  error,
+  blockError,
+  visibleErrorClassName,
 } from './js/const';
 import readFile from './js/readFile';
-import { createButton, createElement } from './js/createElements';
+import { clearElement } from './js/clear';
+import { createButton, createElement, createError } from './js/createElements';
 import { validateFile } from './js/validate';
 import { clearResults } from './js/clear';
 import { handleResetButton, handleSendButton } from './js/handler';
@@ -25,7 +29,15 @@ inputSelectFile.addEventListener('change', function () {
     inputFileText.innerText = 'Выбрать файл';
     buttonHandle.disabled = true;
   }
-  validateFile(inputSelectFile.files[0]);
+  if (validateFile(inputSelectFile.files[0])) {
+    clearElement(error.file.id);
+    blockError.classList.remove(visibleErrorClassName);
+  } else {
+    const err = createError(error.file.text, error.file.id);
+    blockError.append(err);
+    blockError.classList.add(visibleErrorClassName);
+    buttonHandle.disabled = true;
+  }
 });
 
 buttonHandle.addEventListener('click', async function (e) {
