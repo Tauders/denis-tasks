@@ -1,5 +1,4 @@
 import {
-  blockControl,
   buttonHandle,
   formResult,
   visibleFormClassName,

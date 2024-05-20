@@ -1,12 +1,23 @@
 import setAttributes from './setAttributes';
-import { formResult, visibleFormClassName } from './const';
+import {
+  formResult,
+  visibleFormClassName,
+  buttonSendID,
+  linkID,
+  error,
+  classInputError,
+  formElementClassName,
+  formRequiredClassName,
+} from './const';
 import { validateFormResult } from './validate';
-import { createElement } from './createElements';
+import { createElement, createError } from './createElements';
+import { clearElement } from './clear';
+import { addFormErrors, deleteFormErrors } from './handleFormErrors';
 
 export default function generate(file) {
   file.form.map(formItem => {
-    const wrapElem = createElement('div', 'form__element');
-    const required = createElement('span', 'form__required');
+    const wrapElem = createElement('div', formElementClassName);
+    const required = createElement('span', formRequiredClassName);
     const arrFormElems = Object.entries(formItem);
     for (const [formElem, attrs] of arrFormElems) {
       const elem = document.createElement(formElem);
@@ -25,6 +36,19 @@ export default function generate(file) {
     }
   });
   for (const elem of formResult) {
-    elem.addEventListener('input', e => validateFormResult(e.target));
+    elem.addEventListener('input', e => {
+      const buttonSend = document.getElementById(buttonSendID);
+      buttonSend.disabled = true;
+      clearElement(linkID);
+      if (validateFormResult(e.target)) {
+        buttonSend.disabled = false;
+        deleteFormErrors(elem, error, clearElement);
+        elem.classList.remove(classInputError);
+      } else {
+        const wrapElem = elem.parentNode;
+        elem.classList.add(classInputError);
+        addFormErrors(elem, wrapElem, error, createError);
+      }
+    });
   }
 }

@@ -36,3 +36,5 @@ export const initialContentOfResultBlock =
 export const linkID = 'download';
 export const buttonSendClassName = 'form__button_send';
 export const buttonResetID = 'reset';
+export const formElementClassName = 'form__element';
+export const formRequiredClassName = 'form__required';
