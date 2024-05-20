@@ -25,8 +25,7 @@ export const error = {
   lastname: {
     id: 'error-incorrect-lastname',
     text: 'Введите корректное значение фамилии',
-  },
-  phone: { id: 'error-incorrect-phone', text: 'Некорректный номер телефона' },
+  }
 };
 export const visibleFormClassName = 'form_visible';
 export const visibleErrorClassName = 'form__error_visible';

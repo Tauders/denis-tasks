@@ -1,5 +1,11 @@
-import setAttributes from './setAttributes';
-import {
+import { setAttributes } from './setAttributes';
+import { validateFormResult } from './validate';
+import { createElement, createError } from './createElements';
+import { clearElement } from './clear';
+import { addFormErrors, deleteFormErrors } from './handleFormErrors';
+
+export function generate(
+  file,
   formResult,
   visibleFormClassName,
   buttonSendID,
@@ -8,13 +14,9 @@ import {
   classInputError,
   formElementClassName,
   formRequiredClassName,
-} from './const';
-import { validateFormResult } from './validate';
-import { createElement, createError } from './createElements';
-import { clearElement } from './clear';
-import { addFormErrors, deleteFormErrors } from './handleFormErrors';
-
-export default function generate(file) {
+  errorTextClassName,
+  NAME_REGEXP
+) {
   file.form.map(formItem => {
     const wrapElem = createElement('div', formElementClassName);
     const required = createElement('span', formRequiredClassName);
@@ -40,14 +42,14 @@ export default function generate(file) {
       const buttonSend = document.getElementById(buttonSendID);
       buttonSend.disabled = true;
       clearElement(linkID);
-      if (validateFormResult(e.target)) {
+      if (validateFormResult(e.target, NAME_REGEXP)) {
         buttonSend.disabled = false;
         deleteFormErrors(elem, error, clearElement);
         elem.classList.remove(classInputError);
       } else {
         const wrapElem = elem.parentNode;
         elem.classList.add(classInputError);
-        addFormErrors(elem, wrapElem, error, createError);
+        addFormErrors(elem, wrapElem, error, createError, errorTextClassName);
       }
     });
   }

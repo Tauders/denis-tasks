@@ -1,5 +1,3 @@
-import { NAME_REGEXP } from './const';
-
 export function validateFile(file) {
   if (!file) {
     return;
@@ -11,7 +9,7 @@ export function validateFile(file) {
   }
 }
 
-export function validateFormResult(formElem) {
+export function validateFormResult(formElem, NAME_REGEXP) {
   if (
     formElem instanceof HTMLInputElement &&
     formElem.getAttribute('name') === 'firstName' &&

@@ -12,17 +12,32 @@ import {
   error,
   blockError,
   visibleErrorClassName,
+  buttonClassName,
+  errorTextClassName,
+  visibleFormClassName,
+  linkID,
+  classInputError,
+  formElementClassName,
+  formRequiredClassName,
+  buttonLink,
+  NAME_REGEXP,
+  initialContentOfResultBlock,
 } from './js/const';
-import readFile from './js/readFile';
+import { readFile } from './js/readFile';
 import { clearElement } from './js/clear';
 import { createButton, createElement, createError } from './js/createElements';
 import { validateFile } from './js/validate';
 import { clearResults } from './js/clear';
 import { handleResetButton, handleSendButton } from './js/handler';
-import generate from './js/generate';
+import { generate } from './js/generate';
 
 inputSelectFile.addEventListener('change', function () {
-  clearResults();
+  clearResults(
+    buttonHandle,
+    formResult,
+    visibleFormClassName,
+    initialContentOfResultBlock
+  );
   if (inputSelectFile.files[0]) {
     inputFileText.innerText = inputSelectFile.files[0].name;
   } else {
@@ -33,7 +48,7 @@ inputSelectFile.addEventListener('change', function () {
     clearElement(error.file.id);
     blockError.classList.remove(visibleErrorClassName);
   } else {
-    const err = createError(error.file.text, error.file.id);
+    const err = createError(error.file.text, error.file.id, errorTextClassName);
     blockError.append(err);
     blockError.classList.add(visibleErrorClassName);
     buttonHandle.disabled = true;
@@ -42,17 +57,32 @@ inputSelectFile.addEventListener('change', function () {
 
 buttonHandle.addEventListener('click', async function (e) {
   e.preventDefault();
+
   const selectedFile = inputSelectFile.files[0];
   const readingResult = await readFile(selectedFile);
   const parseResult = JSON.parse(readingResult);
-  generate(parseResult);
+
+  generate(
+    parseResult,
+    formResult,
+    visibleFormClassName,
+    buttonSendID,
+    linkID,
+    error,
+    classInputError,
+    formElementClassName,
+    formRequiredClassName,
+    errorTextClassName,
+    NAME_REGEXP
+  );
 
   const buttonSend = createButton(
     'Отправить',
     buttonSendID,
+    buttonClassName,
     buttonSendClassName
   );
-  const buttonReset = createButton('Сбросить', buttonResetID);
+  const buttonReset = createButton('Сбросить', buttonResetID, buttonClassName);
   const formControl = createElement('div', formControlClassName, formControlID);
   formControl.append(buttonSend);
 
@@ -60,8 +90,22 @@ buttonHandle.addEventListener('click', async function (e) {
   formControl.append(buttonReset);
   formResult.append(formControl);
 
-  handleSendButton(formControl);
-  handleResetButton(buttonReset, buttonSend);
+  handleSendButton(
+    formControl,
+    formResult,
+    buttonLink,
+    errorTextClassName,
+    buttonClassName
+  );
+
+  handleResetButton(
+    buttonReset,
+    buttonSend,
+    formResult,
+    classInputError,
+    errorTextClassName,
+    linkID
+  );
 
   buttonHandle.disabled = true;
   buttonSend.disabled = true;

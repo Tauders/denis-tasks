@@ -1,4 +1,4 @@
-export default function readFile(file) {
+export function readFile(file) {
   if (!file) {
     return;
   }

@@ -1,4 +1,4 @@
-export default function setAttributes(elem, objAttrs) {
+export function setAttributes(elem, objAttrs) {
   const arrAttrs = Object.entries(objAttrs);
   for (const [key, value] of arrAttrs) {
     if (Array.isArray(value)) {

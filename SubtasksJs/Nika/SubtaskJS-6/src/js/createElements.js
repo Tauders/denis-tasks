@@ -1,12 +1,4 @@
-import {
-  blockError,
-  buttonClassName,
-  formResult,
-  visibleErrorClassName,
-  errorTextClassName,
-} from './const';
-
-export function createButton(children, id, className) {
+export function createButton(children, id, buttonClassName, className) {
   const button = document.createElement('button');
 
   if (typeof children === 'object') {
@@ -31,7 +23,7 @@ export function createLink(url, nameFile, text) {
   return link;
 }
 
-export function createError(text, id) {
+export function createError(text, id, errorTextClassName) {
   if (!document.getElementById(id)) {
     const error = document.createElement('span');
     error.id = id;

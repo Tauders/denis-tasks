@@ -1,11 +1,9 @@
-import {
+export function clearResults(
   buttonHandle,
   formResult,
   visibleFormClassName,
-  initialContentOfResultBlock,
-} from './const';
-
-export function clearResults() {
+  initialContentOfResultBlock
+) {
   buttonHandle.disabled = false;
   formResult.innerHTML = initialContentOfResultBlock;
   formResult.classList.remove(visibleFormClassName);

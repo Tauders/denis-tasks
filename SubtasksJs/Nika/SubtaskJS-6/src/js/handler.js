@@ -1,14 +1,14 @@
 import { createButton, createLink } from './createElements';
-import {
-  formResult,
-  buttonLink,
-  classInputError,
-  errorTextClassName,
-  linkID,
-} from './const';
 import { clearElement } from './clear';
 
-export function handleResetButton(button, buttonSend) {
+export function handleResetButton(
+  button,
+  buttonSend,
+  formResult,
+  classInputError,
+  errorTextClassName,
+  linkID
+) {
   button.addEventListener('click', () => {
     for (const elem of formResult) {
       if (elem instanceof HTMLLabelElement) {
@@ -27,8 +27,14 @@ export function handleResetButton(button, buttonSend) {
   });
 }
 
-export function handleSendButton(formControl) {
-  formResult.addEventListener('submit', (e) => {
+export function handleSendButton(
+  formControl,
+  formResult,
+  buttonLink,
+  errorTextClassName,
+  buttonClassName
+) {
+  formResult.addEventListener('submit', e => {
     e.preventDefault();
     if (!document.querySelector('.' + errorTextClassName)) {
       const formData = new FormData(formResult);
@@ -40,7 +46,11 @@ export function handleSendButton(formControl) {
         buttonLink.innerHTML = '';
         buttonLink.append(createLink(url, 'file.json', 'Скачать'));
       } else {
-        const buttonDownload = createButton(createLink(url, 'file.json', 'Скачать'), 'download');
+        const buttonDownload = createButton(
+          createLink(url, 'file.json', 'Скачать'),
+          'download',
+          buttonClassName
+        );
         formControl.append(buttonDownload);
       }
     }
