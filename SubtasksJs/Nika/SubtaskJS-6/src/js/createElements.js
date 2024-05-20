@@ -31,19 +31,13 @@ export function createLink(url, nameFile, text) {
   return link;
 }
 
-export function createError(text, id, elem) {
+export function createError(text, id) {
   if (!document.getElementById(id)) {
     const error = document.createElement('span');
     error.id = id;
     error.innerText = text;
     error.classList.add(errorTextClassName);
-    if (elem) {
-      formResult.insertBefore(error, elem);
-    } else {
-      blockError.append(error);
-      !blockError.classList.contains(visibleErrorClassName) &&
-        blockError.classList.add(visibleErrorClassName);
-    }
+    return error;
   }
 }
 

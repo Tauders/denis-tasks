@@ -7,6 +7,7 @@ import {
   blockError,
   buttonSendID,
   linkID,
+  formResult,
 } from './const';
 import { createError } from './createElements';
 import { clearElement } from './clear';
@@ -16,13 +17,13 @@ export function validateFile(file) {
     return;
   }
   if (file.type !== 'application/json') {
-    createError(error.file.text, error.file.id);
+    const err = createError(error.file.text, error.file.id);
+    blockError.append(err);
+    blockError.classList.add(visibleErrorClassName);
     buttonHandle.disabled = true;
   } else {
     clearElement(error.file.id);
-    if (blockError.classList.contains(visibleErrorClassName)) {
-      blockError.classList.remove(visibleErrorClassName);
-    }
+    blockError.classList.remove(visibleErrorClassName);
   }
 }
 
@@ -35,7 +36,8 @@ export function validateFormResult(formElem) {
     formElem.getAttribute('name') === 'firstName'
   ) {
     if (!NAME_REGEXP.test(formElem.value)) {
-      createError(error.firstname.text, error.firstname.id, formElem);
+      const err = createError(error.firstname.text, error.firstname.id);
+      err && formResult.insertBefore(err, formElem);
       formElem.classList.add(classInputError);
       return;
     } else {
@@ -48,7 +50,8 @@ export function validateFormResult(formElem) {
     formElem.getAttribute('name') === 'lastName'
   ) {
     if (!NAME_REGEXP.test(formElem.value)) {
-      createError(error.lastname.text, error.lastname.id, formElem);
+      const err = createError(error.lastname.text, error.lastname.id);
+      err && formResult.insertBefore(err, formElem);
       formElem.classList.add(classInputError);
       return;
     } else {
