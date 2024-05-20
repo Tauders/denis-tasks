@@ -17,7 +17,8 @@ export const inputFileTextID = 'selectFileText';
 export const inputFileText = document.getElementById(inputFileTextID);
 export const NAME_REGEXP = /^[a-zA-Zа-яА-ЯЁё]+$/;
 export const error = {
-  file: { id: 'error-file-type', text: 'Требуемый тип файла "Json' },
+  file: { id: 'error-file-type', text: 'Требуемый тип файла Json' },
+  parseResult: { id: 'error-parseResult', text: 'Некорректный файл Json' },
   firstname: {
     id: 'error-incorrect-firstname',
     text: 'Введите корректное значение имени',

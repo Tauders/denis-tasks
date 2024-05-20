@@ -30,6 +30,7 @@ import { validateFile } from './js/validate';
 import { clearResults } from './js/clear';
 import { handleResetButton, handleSendButton } from './js/handler';
 import { generate } from './js/generate';
+import { validateParseResult } from './js/validate';
 
 inputSelectFile.addEventListener('change', function () {
   clearResults(
@@ -57,10 +58,24 @@ inputSelectFile.addEventListener('change', function () {
 
 buttonHandle.addEventListener('click', async function (e) {
   e.preventDefault();
+  clearElement(error.parseResult.id);
+  blockError.classList.remove(visibleErrorClassName);
 
   const selectedFile = inputSelectFile.files[0];
   const readingResult = await readFile(selectedFile);
   const parseResult = JSON.parse(readingResult);
+
+  if (!validateParseResult(parseResult)) {
+    const err = createError(
+      error.parseResult.text,
+      error.parseResult.id,
+      errorTextClassName
+    );
+    blockError.append(err);
+    blockError.classList.add(visibleErrorClassName);
+    buttonHandle.disabled = true;
+    return;
+  }
 
   generate(
     parseResult,
