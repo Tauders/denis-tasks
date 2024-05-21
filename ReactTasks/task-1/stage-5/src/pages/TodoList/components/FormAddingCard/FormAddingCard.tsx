@@ -2,26 +2,45 @@ import { Task } from '../../../../data/dataTasks';
 import { v4 as uuidv4 } from 'uuid';
 import { Form } from '../../../../components/Form/Form';
 import { useForm } from '../../../../hooks/useForm';
+import { isString } from '../../../../ts/isType';
+import { useEffect } from 'react';
 
 type FormAddingCardProps = {
   onAddCard: (task: Task) => void;
   onCloseModal: () => void;
+  isOpen: boolean;
 };
 
 export const FormAddingCard = (props: FormAddingCardProps) => {
-  const { onAddCard, onCloseModal } = props;
+  const { onAddCard, onCloseModal, isOpen } = props;
 
   const {
-    title,
-    description,
-    handleChangeTitle,
-    handleChangeDescription,
-    clearTitle,
-    clearDescription,
-  } = useForm();
+    state,
+    onChangeTitle,
+    onChangeDescription,
+    onClearTitle,
+    onClearDescription,
+  } = useForm({
+    title: '',
+    description: '',
+  });
+
+  const { title, description } = state;
+
+  useEffect(() => {
+    if (!isOpen) {
+      onClearTitle();
+      onClearDescription();
+    }
+  }, [isOpen]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isString(description)) {
+      return;
+    }
+
     const newCard: Task = {
       id: uuidv4(),
       title,
@@ -29,9 +48,6 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
     };
 
     onAddCard(newCard);
-
-    clearTitle();
-    clearDescription();
     onCloseModal();
   };
 
@@ -39,14 +55,14 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
     <Form onSubmit={handleSubmit} textBtn="Add card">
       <input
         value={title}
-        onChange={handleChangeTitle}
+        onChange={onChangeTitle}
         type="text"
         placeholder="Title"
         required
       />
       <textarea
         value={description}
-        onChange={handleChangeDescription}
+        onChange={onChangeDescription}
         placeholder="Description"
         required
       />

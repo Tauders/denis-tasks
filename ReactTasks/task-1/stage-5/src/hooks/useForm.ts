@@ -1,39 +1,60 @@
-import { useCallback, useState } from 'react';
+import { useReducer } from 'react';
 
-export const useForm = (
-  initialTitle: string = '',
-  initialDescription: string = ''
-) => {
-  const [title, setTitle] = useState(initialTitle);
-  const [description, setDescription] = useState(initialDescription);
+const enum reducerAction {
+  setTitle = 'setTitle',
+  setDescription = 'setDescription',
+}
 
-  const handleChangeTitle = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTitle(e.currentTarget.value);
-    },
-    [title]
-  );
+type reducerActionType = {
+  type: reducerAction;
+  payload: string;
+};
 
-  const handleChangeDescription = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setDescription(e.currentTarget.value);
-    },
-    [description]
-  );
+type stateType = {
+  title: string;
+  description?: string;
+};
 
-  const clearTitle = () => {
-    setTitle('');
-  };
-  const clearDescription = () => {
-    setDescription('');
-  };
+const reducer = (
+  state: stateType,
+  action: reducerActionType
+): stateType => {
+  switch (action?.type) {
+    case reducerAction.setTitle:
+      return { ...state, title: action.payload };
+    case reducerAction.setDescription:
+      return { ...state, description: action.payload };
+    default:
+      return state
+  }
+};
+
+export const useForm = (initState: stateType) => {
+  const [state, dispatch] = useReducer(reducer, initState);
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
+    dispatch({
+      type: reducerAction.setTitle,
+      payload: e.currentTarget.value,
+    });
+
+  const onChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    dispatch({
+      type: reducerAction.setDescription,
+      payload: e.currentTarget.value,
+    });
+
+  const onClearTitle = () =>
+    dispatch({ type: reducerAction.setTitle, payload: '' });
+
+  const onClearDescription = () =>
+    dispatch({ type: reducerAction.setDescription, payload: '' });
 
   return {
-    title,
-    description,
-    handleChangeTitle,
-    handleChangeDescription,
-    clearTitle,
-    clearDescription,
+    state,
+    onChangeTitle,
+    onChangeDescription,
+    onClearTitle,
+    onClearDescription,
   };
 };

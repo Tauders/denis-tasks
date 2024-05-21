@@ -93,6 +93,7 @@ export const List = (props: ListProps) => {
         <FormAddingCard
           onAddCard={handleAddCard}
           onCloseModal={handleCloseModal}
+          isOpen={isOpen}
         />
       </Modal>
       <div className={classes.list__header}>

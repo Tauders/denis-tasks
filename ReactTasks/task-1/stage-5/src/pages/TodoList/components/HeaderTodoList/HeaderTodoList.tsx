@@ -18,7 +18,11 @@ export const HeaderTodoList = (props: HeaderTodoListProps) => {
   return (
     <div className={classes.headerTodoList}>
       <Modal isOpen={isOpen} onCloseModal={handleCloseModal} title="Add list">
-        <FormAddingList onAddList={onAddList} onCloseModal={handleCloseModal} />
+        <FormAddingList
+          onAddList={onAddList}
+          onCloseModal={handleCloseModal}
+          isOpen={isOpen}
+        />
       </Modal>
       <h1 className={classes.headerTodoList__title}>{title}</h1>
       <Button
