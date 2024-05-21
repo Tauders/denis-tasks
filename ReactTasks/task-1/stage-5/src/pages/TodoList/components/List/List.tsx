@@ -9,6 +9,7 @@ import { sortByCardOrder } from '../../../../ts/utils';
 import { useEffect, useState } from 'react';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon.svg?react';
 import classNames from 'classnames';
+import { useModal } from '../../../../hooks/useModal';
 
 export type List = {
   id: string;
@@ -26,8 +27,9 @@ export const List = (props: ListProps) => {
   const { list, onList, onDeleteList } = props;
 
   const [cards, setCards] = useState(list.tasks);
-  const [isOpen, setIsOpen] = useState(false);
   const [currentCard, setCurrentCard] = useState<null | Task>(null);
+
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 
   useEffect(() => {
     onList(list.id, list.title, cards);
@@ -59,12 +61,6 @@ export const List = (props: ListProps) => {
     );
   };
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
   const handleDragCard = (task: Task) => {
     setCurrentCard(task);
   };
@@ -102,7 +98,10 @@ export const List = (props: ListProps) => {
       <div className={classes.list__header}>
         <h2 className={classes.list__title}>{list.title}</h2>
         <Button
-          className={classNames(classes.list__button_light, classes.list__button_delete)}
+          className={classNames(
+            classes.list__button_light,
+            classes.list__button_delete
+          )}
           onClick={handleDeleteList}
         >
           <DeleteIcon className={classes.list__icon} color="#000000" />

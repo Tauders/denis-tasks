@@ -1,6 +1,6 @@
 import { Form } from '../../../../components/Form/Form';
+import { useForm } from '../../../../hooks/useForm';
 import { List } from '../List/List';
-import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 type FormAddingListProps = {
@@ -11,11 +11,7 @@ type FormAddingListProps = {
 export const FormAddingList = (props: FormAddingListProps) => {
   const { onAddList, onCloseModal } = props;
 
-  const [title, setTitle] = useState('');
-
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value);
-  };
+  const { title, handleChangeTitle, clearTitle } = useForm();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +22,8 @@ export const FormAddingList = (props: FormAddingListProps) => {
     };
 
     onAddList(newList);
-    setTitle('');
+
+    clearTitle();
     onCloseModal();
   };
 

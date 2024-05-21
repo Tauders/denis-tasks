@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Task } from '../../../../data/dataTasks';
 import { v4 as uuidv4 } from 'uuid';
 import { Form } from '../../../../components/Form/Form';
+import { useForm } from '../../../../hooks/useForm';
 
 type FormAddingCardProps = {
   onAddCard: (task: Task) => void;
@@ -11,23 +11,14 @@ type FormAddingCardProps = {
 export const FormAddingCard = (props: FormAddingCardProps) => {
   const { onAddCard, onCloseModal } = props;
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value);
-  };
-
-  const handleChangeDescription = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setDescription(e.currentTarget.value);
-  };
-
-  const clearForm = () => {
-    setTitle('');
-    setDescription('');
-  };
+  const {
+    title,
+    description,
+    handleChangeTitle,
+    handleChangeDescription,
+    clearTitle,
+    clearDescription,
+  } = useForm();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +30,8 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
 
     onAddCard(newCard);
 
-    clearForm();
+    clearTitle();
+    clearDescription();
     onCloseModal();
   };
 
