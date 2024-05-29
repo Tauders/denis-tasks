@@ -1,33 +1,33 @@
 export function addFormErrors(
-  elem,
-  wrapElem,
-  error,
-  createError,
+  element,
+  wrapElement,
+  errorFields,
+  createErrorElement,
   errorTextClassName
 ) {
-  if (elem.getAttribute('name') === 'firstName') {
-    const err = createError(
-      error.firstname.text,
-      error.firstname.id,
+  if (element.getAttribute('name') === 'firstName') {
+    const errorElement = createErrorElement(
+      errorFields.firstname.text,
+      errorFields.firstname.id,
       errorTextClassName
     );
-    err && wrapElem.append(err);
+    errorElement && wrapElement.append(errorElement);
   }
-  if (elem.getAttribute('name') === 'lastName') {
-    const err = createError(
-      error.lastname.text,
-      error.lastname.id,
+  if (element.getAttribute('name') === 'lastName') {
+    const errorElement = createErrorElement(
+      errorFields.lastname.text,
+      errorFields.lastname.id,
       errorTextClassName
     );
-    err && wrapElem.append(err);
+    errorElement && wrapElement.append(errorElement);
   }
 }
 
-export function deleteFormErrors(elem, error, clearElement) {
-  if (elem.getAttribute('name') === 'firstName') {
-    clearElement(error.firstname.id);
+export function deleteFormErrors(element, errorFields, removeElement) {
+  if (element.getAttribute('name') === 'firstName') {
+    removeElement(errorFields.firstname.id);
   }
-  if (elem.getAttribute('name') === 'lastName') {
-    clearElement(error.lastname.id);
+  if (element.getAttribute('name') === 'lastName') {
+    removeElement(errorFields.lastname.id);
   }
 }

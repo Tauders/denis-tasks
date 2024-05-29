@@ -1,35 +1,35 @@
 export function createButton(children, id, buttonClassName, className) {
-  const button = document.createElement('button');
+  const buttonElement = document.createElement('button');
 
   if (typeof children === 'object') {
-    button.append(children);
+    buttonElement.append(children);
   } else {
-    button.innerText = children;
+    buttonElement.innerText = children;
   }
 
-  button.id = id;
-  button.classList.add(buttonClassName);
+  buttonElement.id = id;
+  buttonElement.classList.add(buttonClassName);
   if (className) {
-    button.classList.add(className);
+    buttonElement.classList.add(className);
   }
-  return button;
+  return buttonElement;
 }
 
 export function createLink(url, nameFile, text) {
-  const link = document.createElement('a');
-  link.setAttribute('href', url);
-  link.setAttribute('download', nameFile);
-  link.innerText = text;
-  return link;
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', url);
+  linkElement.setAttribute('download', nameFile);
+  linkElement.innerText = text;
+  return linkElement;
 }
 
-export function createError(text, id, errorTextClassName) {
+export function createErrorElement(text, id, errorTextClassName) {
   if (!document.getElementById(id)) {
-    const error = document.createElement('span');
-    error.id = id;
-    error.innerText = text;
-    error.classList.add(errorTextClassName);
-    return error;
+    const errorElement = document.createElement('span');
+    errorElement.id = id;
+    errorElement.innerText = text;
+    errorElement.classList.add(errorTextClassName);
+    return errorElement;
   }
 }
 

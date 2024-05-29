@@ -1,20 +1,20 @@
-export function setAttributes(elem, objAttrs) {
-  const arrAttrs = Object.entries(objAttrs);
-  for (const [key, value] of arrAttrs) {
+export function setAttributes(element, objectAttributes) {
+  const arrayAttributes = Object.entries(objectAttributes);
+  for (const [key, value] of arrayAttributes) {
     if (Array.isArray(value)) {
       value.map(item => {
         const option = document.createElement('option');
         setAttributes(option, item);
         option.innerText = item.name;
-        elem.append(option);
+        element.append(option);
       });
     } else if (key === 'required') {
       if (value === true) {
-        elem.setAttribute(key, '');
+        element.setAttribute(key, '');
       }
       continue;
     } else {
-      elem.setAttribute(key, value);
+      element.setAttribute(key, value);
     }
   }
 }

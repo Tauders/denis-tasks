@@ -9,7 +9,7 @@ import {
   formControlID,
   formControlClassName,
   buttonSendClassName,
-  error,
+  errorFields,
   blockError,
   visibleErrorClassName,
   buttonClassName,
@@ -22,35 +22,41 @@ import {
   buttonLink,
   NAME_REGEXP,
   initialContentOfResultBlock,
+  arrayOfValidFormElements
 } from './js/const';
 import { readFile } from './js/readFile';
-import { clearElement } from './js/clear';
-import { createButton, createElement, createError } from './js/createElements';
-import { validateFile } from './js/validate';
-import { clearResults } from './js/clear';
+import { removeElement } from './js/remove';
+import {
+  createButton,
+  createElement,
+  createErrorElement,
+} from './js/createElements';
+import { validateFileType } from './js/validate';
 import { handleResetButton, handleSendButton } from './js/handler';
 import { generate } from './js/generate';
-import { validateParseResult } from './js/validate';
+import { validateFileStructure } from './js/validate';
 
 inputSelectFile.addEventListener('change', function () {
-  clearResults(
-    buttonHandle,
-    formResult,
-    visibleFormClassName,
-    initialContentOfResultBlock
-  );
-  if (inputSelectFile.files[0]) {
-    inputFileText.innerText = inputSelectFile.files[0].name;
+  buttonHandle.disabled = false;
+  formResult.innerHTML = initialContentOfResultBlock;
+  formResult.classList.remove(visibleFormClassName);
+  const file = inputSelectFile.files[0];
+  if (file) {
+    inputFileText.innerText = file.name;
   } else {
     inputFileText.innerText = 'Выбрать файл';
     buttonHandle.disabled = true;
   }
-  if (validateFile(inputSelectFile.files[0])) {
-    clearElement(error.file.id);
+  if (validateFileType(file)) {
+    removeElement(errorFields.file.id);
     blockError.classList.remove(visibleErrorClassName);
   } else {
-    const err = createError(error.file.text, error.file.id, errorTextClassName);
-    blockError.append(err);
+    const errorElement = createErrorElement(
+      errorFields.file.text,
+      errorFields.file.id,
+      errorTextClassName
+    );
+    blockError.append(errorElement);
     blockError.classList.add(visibleErrorClassName);
     buttonHandle.disabled = true;
   }
@@ -58,32 +64,31 @@ inputSelectFile.addEventListener('change', function () {
 
 buttonHandle.addEventListener('click', async function (e) {
   e.preventDefault();
-  clearElement(error.parseResult.id);
+  removeElement(errorFields.resultOfParse.id);
   blockError.classList.remove(visibleErrorClassName);
+  const file = inputSelectFile.files[0];
+  const readingResult = await readFile(file);
+  const resultOfParse = JSON.parse(readingResult);
 
-  const selectedFile = inputSelectFile.files[0];
-  const readingResult = await readFile(selectedFile);
-  const parseResult = JSON.parse(readingResult);
-
-  if (!validateParseResult(parseResult)) {
-    const err = createError(
-      error.parseResult.text,
-      error.parseResult.id,
+  if (!validateFileStructure(resultOfParse, arrayOfValidFormElements)) {
+    const errorElement = createErrorElement(
+      errorFields.resultOfParse.text,
+      errorFields.resultOfParse.id,
       errorTextClassName
     );
-    blockError.append(err);
+    blockError.append(errorElement);
     blockError.classList.add(visibleErrorClassName);
     buttonHandle.disabled = true;
     return;
   }
 
   generate(
-    parseResult,
+    resultOfParse,
     formResult,
     visibleFormClassName,
     buttonSendID,
     linkID,
-    error,
+    errorFields,
     classInputError,
     formElementClassName,
     formRequiredClassName,

@@ -1,7 +1,7 @@
 import { setAttributes } from './setAttributes';
 import { validateFormResult } from './validate';
-import { createElement, createError } from './createElements';
-import { clearElement } from './clear';
+import { createElement, createErrorElement } from './createElements';
+import { removeElement } from './remove';
 import { addFormErrors, deleteFormErrors } from './handleFormErrors';
 
 export function generate(
@@ -10,7 +10,7 @@ export function generate(
   visibleFormClassName,
   buttonSendID,
   linkID,
-  error,
+  errorFields,
   classInputError,
   formElementClassName,
   formRequiredClassName,
@@ -18,38 +18,43 @@ export function generate(
   NAME_REGEXP
 ) {
   file.form.map(formItem => {
-    const wrapElem = createElement('div', formElementClassName);
-    const required = createElement('span', formRequiredClassName);
-    const arrFormElems = Object.entries(formItem);
-    for (const [formElem, attrs] of arrFormElems) {
-      const elem = document.createElement(formElem);
-      elem.classList.add(`form__${formElem}`);
-      setAttributes(elem, attrs);
-      if (formElem === 'label') {
-        elem.innerHTML = attrs.name;
+    const wrapElement = createElement('div', formElementClassName);
+    const requiredElement = createElement('span', formRequiredClassName);
+    for (const [formElement, attributes] of Object.entries(formItem)) {
+      const element = document.createElement(formElement);
+      element.classList.add(`form__${formElement}`);
+      setAttributes(element, attributes);
+      if (formElement === 'label') {
+        element.innerHTML = attributes.name;
       }
-      if (attrs.required === true) {
-        required.innerText = ' *';
-        wrapElem.append(required);
+      if (attributes.required === true) {
+        requiredElement.innerText = ' *';
+        wrapElement.append(requiredElement);
       }
-      wrapElem.append(elem);
-      formResult.append(wrapElem);
+      wrapElement.append(element);
+      formResult.append(wrapElement);
       formResult.classList.add(visibleFormClassName);
     }
   });
-  for (const elem of formResult) {
-    elem.addEventListener('input', e => {
+  for (const element of formResult) {
+    element.addEventListener('input', e => {
       const buttonSend = document.getElementById(buttonSendID);
       buttonSend.disabled = true;
-      clearElement(linkID);
+      removeElement(linkID);
       if (validateFormResult(e.target, NAME_REGEXP)) {
         buttonSend.disabled = false;
-        deleteFormErrors(elem, error, clearElement);
-        elem.classList.remove(classInputError);
+        deleteFormErrors(element, errorFields, removeElement);
+        element.classList.remove(classInputError);
       } else {
-        const wrapElem = elem.parentNode;
-        elem.classList.add(classInputError);
-        addFormErrors(elem, wrapElem, error, createError, errorTextClassName);
+        const wrapElement = element.parentNode;
+        element.classList.add(classInputError);
+        addFormErrors(
+          element,
+          wrapElement,
+          errorFields,
+          createErrorElement,
+          errorTextClassName
+        );
       }
     });
   }

@@ -1,5 +1,5 @@
 import { createButton, createLink } from './createElements';
-import { clearElement } from './clear';
+import { removeElement } from './remove';
 
 export function handleResetButton(
   button,
@@ -22,7 +22,7 @@ export function handleResetButton(
     for (const error of errors) {
       error.remove();
     }
-    clearElement(linkID);
+    removeElement(linkID);
     buttonSend.disabled = true;
   });
 }
