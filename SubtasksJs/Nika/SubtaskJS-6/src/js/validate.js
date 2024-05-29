@@ -1,4 +1,4 @@
-export function validateFile(file) {
+export function validateFileType(file) {
   if (!file) {
     return;
   }
@@ -9,19 +9,19 @@ export function validateFile(file) {
   }
 }
 
-export function validateParseResult(parseResult) {
+export function validateFileStructure(resultOfParse, arrayOfValidFormElements) {
   if (
-    typeof parseResult === 'object' &&
-    Object.keys(parseResult).length === 1 &&
-    'form' in parseResult &&
-    Array.isArray(parseResult.form)
+    typeof resultOfParse === 'object' &&
+    Object.keys(resultOfParse).length === 1 &&
+    'form' in resultOfParse &&
+    Array.isArray(resultOfParse.form)
   ) {
-    for (const elem of parseResult.form) {
-      if (!typeof elem === 'object') {
+    for (const element of resultOfParse.form) {
+      if (!typeof element === 'object') {
         return false;
       }
-      for (const prop of Object.keys(elem)) {
-        if (prop !== 'label' && prop !== 'input' && prop !== 'select') {
+      for (const prop of Object.keys(element)) {
+        if (!arrayOfValidFormElements.includes(prop)) {
           return false;
         }
       }
@@ -31,18 +31,18 @@ export function validateParseResult(parseResult) {
   return false;
 }
 
-export function validateFormResult(formElem, NAME_REGEXP) {
+export function validateFormResult(formElement, NAME_REGEXP) {
   if (
-    formElem instanceof HTMLInputElement &&
-    formElem.getAttribute('name') === 'firstName' &&
-    !NAME_REGEXP.test(formElem.value)
+    formElement instanceof HTMLInputElement &&
+    formElement.getAttribute('name') === 'firstName' &&
+    !NAME_REGEXP.test(formElement.value)
   ) {
     return false;
   }
   if (
-    formElem instanceof HTMLInputElement &&
-    formElem.getAttribute('name') === 'lastName' &&
-    !NAME_REGEXP.test(formElem.value)
+    formElement instanceof HTMLInputElement &&
+    formElement.getAttribute('name') === 'lastName' &&
+    !NAME_REGEXP.test(formElement.value)
   ) {
     return false;
   }

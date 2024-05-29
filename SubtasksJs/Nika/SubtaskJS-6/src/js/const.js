@@ -16,9 +16,9 @@ export const inputSelectFile = document.getElementById(inputSelectFileID);
 export const inputFileTextID = 'selectFileText';
 export const inputFileText = document.getElementById(inputFileTextID);
 export const NAME_REGEXP = /^[a-zA-Zа-яА-ЯЁё]+$/;
-export const error = {
+export const errorFields = {
   file: { id: 'error-file-type', text: 'Требуемый тип файла Json' },
-  parseResult: { id: 'error-parseResult', text: 'Некорректный файл Json' },
+  resultOfParse: { id: 'error-resultOfParse', text: 'Некорректный файл Json' },
   firstname: {
     id: 'error-incorrect-firstname',
     text: 'Введите корректное значение имени',
@@ -38,3 +38,4 @@ export const buttonSendClassName = 'form__button_send';
 export const buttonResetID = 'reset';
 export const formElementClassName = 'form__element';
 export const formRequiredClassName = 'form__required';
+export const arrayOfValidFormElements = ['label', 'input', 'select'];
