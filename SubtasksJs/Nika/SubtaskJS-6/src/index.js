@@ -40,6 +40,7 @@ inputSelectFile.addEventListener('change', function () {
   buttonHandle.disabled = false;
   formResult.innerHTML = initialContentOfResultBlock;
   formResult.classList.remove(visibleFormClassName);
+  removeElement(errorFields.resultOfParse.id);
   const file = inputSelectFile.files[0];
   if (file) {
     inputFileText.innerText = file.name;
@@ -64,7 +65,6 @@ inputSelectFile.addEventListener('change', function () {
 
 buttonHandle.addEventListener('click', async function (e) {
   e.preventDefault();
-  removeElement(errorFields.resultOfParse.id);
   blockError.classList.remove(visibleErrorClassName);
   const file = inputSelectFile.files[0];
   const readingResult = await readFile(file);
