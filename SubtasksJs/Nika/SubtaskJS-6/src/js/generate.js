@@ -33,9 +33,9 @@ export function generate(
       }
       wrapElement.append(element);
       formResult.append(wrapElement);
-      formResult.classList.add(visibleFormClassName);
     }
   });
+  formResult.classList.add(visibleFormClassName);
   for (const element of formResult) {
     element.addEventListener('input', e => {
       const buttonSend = document.getElementById(buttonSendID);
