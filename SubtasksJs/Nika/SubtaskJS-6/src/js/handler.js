@@ -30,9 +30,9 @@ export function handleResetButton(
 export function handleSendButton(
   formControl,
   formResult,
-  buttonLink,
   errorTextClassName,
-  buttonClassName
+  buttonClassName,
+  buttonLinkID
 ) {
   formResult.addEventListener('submit', e => {
     e.preventDefault();
@@ -42,6 +42,7 @@ export function handleSendButton(
       const url = URL.createObjectURL(
         new Blob([json], { type: 'application/json' })
       );
+      const buttonLink = document.getElementById(buttonLinkID);
       if (buttonLink) {
         buttonLink.innerHTML = '';
         buttonLink.append(createLink(url, 'file.json', 'Скачать'));

@@ -3,6 +3,7 @@ import { validateFormResult } from './validate';
 import { createElement, createErrorElement } from './createElements';
 import { removeElement } from './remove';
 import { addFormErrors, deleteFormErrors } from './handleFormErrors';
+import { NAME_REGEXP } from './const';
 
 export function generate(
   file,
@@ -15,7 +16,6 @@ export function generate(
   formElementClassName,
   formRequiredClassName,
   errorTextClassName,
-  NAME_REGEXP
 ) {
   file.form.map(formItem => {
     const wrapElement = createElement('div', formElementClassName);

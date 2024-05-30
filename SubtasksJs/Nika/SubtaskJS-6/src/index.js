@@ -1,16 +1,16 @@
 import './styles/styles.scss';
 import {
-  buttonHandle,
-  inputSelectFile,
-  inputFileText,
-  formResult,
+  buttonHandleID,
+  inputSelectFileID,
+  inputFileTextID,
+  formResultID,
   buttonSendID,
   buttonResetID,
   formControlID,
   formControlClassName,
   buttonSendClassName,
   errorFields,
-  blockError,
+  blockErrorID,
   visibleErrorClassName,
   buttonClassName,
   errorTextClassName,
@@ -19,10 +19,9 @@ import {
   classInputError,
   formElementClassName,
   formRequiredClassName,
-  buttonLink,
-  NAME_REGEXP,
   initialContentOfResultBlock,
-  arrayOfValidFormElements
+  arrayOfValidFormElements,
+  buttonLinkID
 } from './js/const';
 import { readFile } from './js/readFile';
 import { removeElement } from './js/remove';
@@ -36,12 +35,18 @@ import { handleResetButton, handleSendButton } from './js/handler';
 import { generate } from './js/generate';
 import { validateFileStructure } from './js/validate';
 
+const buttonHandle = document.getElementById(buttonHandleID);
+const formResult = document.getElementById(formResultID);
+const blockError = document.getElementById(blockErrorID);
+const inputSelectFile = document.getElementById(inputSelectFileID);
+
 inputSelectFile.addEventListener('change', function () {
   buttonHandle.disabled = false;
   formResult.innerHTML = initialContentOfResultBlock;
   formResult.classList.remove(visibleFormClassName);
   removeElement(errorFields.resultOfParse.id);
   const file = inputSelectFile.files[0];
+  const inputFileText = document.getElementById(inputFileTextID);
   if (file) {
     inputFileText.innerText = file.name;
   } else {
@@ -92,8 +97,7 @@ buttonHandle.addEventListener('click', async function (e) {
     classInputError,
     formElementClassName,
     formRequiredClassName,
-    errorTextClassName,
-    NAME_REGEXP
+    errorTextClassName
   );
 
   const buttonSend = createButton(
@@ -113,9 +117,9 @@ buttonHandle.addEventListener('click', async function (e) {
   handleSendButton(
     formControl,
     formResult,
-    buttonLink,
     errorTextClassName,
-    buttonClassName
+    buttonClassName,
+    buttonLinkID
   );
 
   handleResetButton(
