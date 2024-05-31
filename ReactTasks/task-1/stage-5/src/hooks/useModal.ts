@@ -5,10 +5,10 @@ export const useModal = (initialValue: boolean) => {
 
   const handleOpenModal = useCallback(() => {
     setIsOpen(true);
-  }, [isOpen]);
+  }, []);
   const handleCloseModal = useCallback(() => {
     setIsOpen(false);
-  }, [isOpen]);
+  }, []);
 
   return { isOpen, handleOpenModal, handleCloseModal };
 };
