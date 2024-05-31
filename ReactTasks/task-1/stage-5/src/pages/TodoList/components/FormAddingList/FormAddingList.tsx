@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Form } from '../../../../components/Form/Form';
-import { List } from '../List/List';
+import { ListType } from '../../TodoList';
 import { v4 as uuidv4 } from 'uuid';
 
 type FormAddingListProps = {
-  onAddList: (list: List) => void;
+  onAddList: (list: ListType) => void;
   onCloseModal: () => void;
   isOpen: boolean;
 };
@@ -27,7 +27,7 @@ export const FormAddingList = (props: FormAddingListProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const newList: List = {
+    const newList: ListType = {
       id: uuidv4(),
       title,
       tasks: [],

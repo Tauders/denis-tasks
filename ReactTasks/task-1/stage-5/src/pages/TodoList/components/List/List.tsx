@@ -10,17 +10,12 @@ import { useEffect, useState } from 'react';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon.svg?react';
 import classNames from 'classnames';
 import { useModal } from '../../../../hooks/useModal';
-
-export type List = {
-  id: string;
-  title: string;
-  tasks: Task[];
-};
+import { ListType } from '../../TodoList';
 
 type ListProps = {
-  list: List;
+  list: ListType;
   onChangeList: (id: string, title: string, cards: Task[]) => void;
-  onDeleteList: (list: List) => void;
+  onDeleteList: (list: ListType) => void;
 };
 
 export const List = (props: ListProps) => {

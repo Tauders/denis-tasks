@@ -9,7 +9,13 @@ import {
   setItemToLocalStorage,
 } from '../../ts/operateLocalStorage';
 
-const defaultLists: List[] = [
+export type ListType = {
+  id: string;
+  title: string;
+  tasks: Task[];
+};
+
+const defaultLists: ListType[] = [
   {
     id: uuidv4(),
     title: 'List 1',
@@ -24,11 +30,11 @@ export const TodoList = () => {
     setItemToLocalStorage(lists);
   }, [lists]);
 
-  const handleAddList = (newList: List) => {
+  const handleAddList = (newList: ListType) => {
     setLists([...lists, newList]);
   };
 
-  const handleDeleteList = (list: List) => {
+  const handleDeleteList = (list: ListType) => {
     setLists(prevLists => prevLists.filter(elem => elem.id !== list.id));
   };
 
