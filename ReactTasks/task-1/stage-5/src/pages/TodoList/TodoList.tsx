@@ -9,15 +9,15 @@ import {
   setItemToLocalStorage,
 } from '../../ts/operateLocalStorage';
 
-export const TodoList = () => {
-  const defaultLists = [
-    {
-      id: uuidv4(),
-      title: 'List 1',
-      tasks: prepareDataTasks(dataTasks),
-    },
-  ];
+const defaultLists: List[] = [
+  {
+    id: uuidv4(),
+    title: 'List 1',
+    tasks: prepareDataTasks(dataTasks),
+  },
+];
 
+export const TodoList = () => {
   const [lists, setLists] = useState(getItemsFromLocalStorage(defaultLists));
 
   useEffect(() => {
