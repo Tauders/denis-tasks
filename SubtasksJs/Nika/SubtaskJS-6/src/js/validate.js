@@ -31,18 +31,10 @@ export function validateFileStructure(resultOfParse, arrayOfValidFormElements) {
   return false;
 }
 
-export function validateFormResult(formElement, NAME_REGEXP) {
+export function validateFormResult(formElement) {
   if (
-    formElement instanceof HTMLInputElement &&
-    formElement.getAttribute('name') === 'firstName' &&
-    !NAME_REGEXP.test(formElement.value)
-  ) {
-    return false;
-  }
-  if (
-    formElement instanceof HTMLInputElement &&
-    formElement.getAttribute('name') === 'lastName' &&
-    !NAME_REGEXP.test(formElement.value)
+    formElement.hasAttribute('pattern') &&
+    !new RegExp(formElement.getAttribute('pattern')).test(formElement.value)
   ) {
     return false;
   }
