@@ -46,7 +46,12 @@ export const TodoList = () => {
     <section className={classes.todoListSection}>
       <HeaderTodoList title="TO-DO List" onAddList={handleAddList} />
       {lists.map(list => (
-        <List key={list.id} list={list} onList={handleChangeList} onDeleteList={handleDeleteList} />
+        <List
+          key={list.id}
+          list={list}
+          onList={handleChangeList}
+          onDeleteList={handleDeleteList}
+        />
       ))}
     </section>
   );

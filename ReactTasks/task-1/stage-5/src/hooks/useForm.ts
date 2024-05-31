@@ -15,17 +15,14 @@ type stateType = {
   description?: string;
 };
 
-const reducer = (
-  state: stateType,
-  action: reducerActionType
-): stateType => {
+const reducer = (state: stateType, action: reducerActionType): stateType => {
   switch (action?.type) {
     case reducerAction.setTitle:
       return { ...state, title: action.payload };
     case reducerAction.setDescription:
       return { ...state, description: action.payload };
     default:
-      return state
+      return state;
   }
 };
 

@@ -45,4 +45,3 @@ export const prepareDataTasks = (data: Array<Task>) => {
     })
     .sort(sortByCardOrder);
 };
-
