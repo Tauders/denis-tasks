@@ -49,7 +49,7 @@ export const TodoList = () => {
         <List
           key={list.id}
           list={list}
-          onList={handleChangeList}
+          onChangeList={handleChangeList}
           onDeleteList={handleDeleteList}
         />
       ))}

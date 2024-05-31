@@ -19,12 +19,12 @@ export type List = {
 
 type ListProps = {
   list: List;
-  onList: (id: string, title: string, cards: Task[]) => void;
+  onChangeList: (id: string, title: string, cards: Task[]) => void;
   onDeleteList: (list: List) => void;
 };
 
 export const List = (props: ListProps) => {
-  const { list, onList, onDeleteList } = props;
+  const { list, onChangeList, onDeleteList } = props;
 
   const [cards, setCards] = useState(list.tasks);
   const [currentCard, setCurrentCard] = useState<null | Task>(null);
@@ -32,7 +32,7 @@ export const List = (props: ListProps) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 
   useEffect(() => {
-    onList(list.id, list.title, cards);
+    onChangeList(list.id, list.title, cards);
   }, [cards]);
 
   const handleDeleteList = () => {

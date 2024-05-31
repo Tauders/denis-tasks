@@ -9,6 +9,7 @@ type FormProps = {
 
 export const Form = (props: FormProps) => {
   const { onSubmit, textButton, children } = props;
+  
   return (
     <form className={classes.form} onSubmit={onSubmit}>
       {children}
