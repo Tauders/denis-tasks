@@ -99,6 +99,7 @@ export const List = (props: ListProps) => {
             classes.list__button_delete
           )}
           onClick={handleDeleteList}
+          type="button"
         >
           <DeleteIcon className={classes.list__icon} color="#000000" />
         </Button>
@@ -117,7 +118,11 @@ export const List = (props: ListProps) => {
           );
         })}
       </ul>
-      <Button className={classes.list__button_light} onClick={handleOpenModal}>
+      <Button
+        className={classes.list__button_light}
+        onClick={handleOpenModal}
+        type="button"
+      >
         <AddIcon className={classes.list__icon} color="#7c4886" />
       </Button>
     </div>

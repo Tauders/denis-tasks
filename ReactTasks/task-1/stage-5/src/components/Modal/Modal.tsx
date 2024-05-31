@@ -20,6 +20,7 @@ export const Modal = (props: ModalProps) => {
           <Button
             className={classes.modal__button_close}
             onClick={onCloseModal}
+            type="button"
           >
             <CloseIcon className={classes.modal__icon} color="#7c4886" />
           </Button>

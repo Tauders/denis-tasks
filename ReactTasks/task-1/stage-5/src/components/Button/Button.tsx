@@ -7,10 +7,11 @@ type ButtonProps = {
   onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
   isDisabled?: boolean;
+  type: 'button' | 'submit' | 'reset';
 };
 
 export const Button = (props: ButtonProps) => {
-  const { className, onClick, onKeyDown, children, isDisabled } = props;
+  const { className, onClick, onKeyDown, children, isDisabled, type } = props;
 
   return (
     <button
@@ -18,6 +19,7 @@ export const Button = (props: ButtonProps) => {
       onClick={onClick}
       onKeyDown={onKeyDown}
       disabled={isDisabled}
+      type={type}
     >
       {children}
     </button>

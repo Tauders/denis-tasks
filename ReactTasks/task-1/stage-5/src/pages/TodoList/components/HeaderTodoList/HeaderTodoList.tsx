@@ -28,6 +28,7 @@ export const HeaderTodoList = (props: HeaderTodoListProps) => {
       <Button
         className={classes.headerTodoList__button}
         onClick={handleOpenModal}
+        type="button"
       >
         Create list
       </Button>

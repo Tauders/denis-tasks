@@ -28,7 +28,11 @@ export const Card = (props: CardProps) => {
     >
       <h3 className={classes.card__title}>{card.title}</h3>
       <p className={classes.card__description}>{card.description}</p>
-      <Button className={classes.card__button_light} onClick={handleDeleteCard}>
+      <Button
+        className={classes.card__button_light}
+        onClick={handleDeleteCard}
+        type="button"
+      >
         <DeleteIcon className={classes.card__icon} color="#7c4886" />
       </Button>
     </li>

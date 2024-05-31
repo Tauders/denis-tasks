@@ -9,11 +9,13 @@ type FormProps = {
 
 export const Form = (props: FormProps) => {
   const { onSubmit, textButton, children } = props;
-  
+
   return (
     <form className={classes.form} onSubmit={onSubmit}>
       {children}
-      <Button className={classes.form__button}>{textButton}</Button>
+      <Button className={classes.form__button} type="submit">
+        {textButton}
+      </Button>
     </form>
   );
 };
