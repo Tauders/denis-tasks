@@ -27,7 +27,7 @@ export const List = (props: ListProps) => {
   const { list, onChangeList, onDeleteList } = props;
 
   const [cards, setCards] = useState(list.tasks);
-  const [currentCard, setCurrentCard] = useState<null | Task>(null);
+  const [currentCard, setCurrentCard] = useState<undefined | Task>(undefined);
 
   const { isOpen, handleOpenModal, handleCloseModal } = useModal(false);
 
@@ -71,7 +71,7 @@ export const List = (props: ListProps) => {
 
   const handleDrop = (e: React.DragEvent, task: Task) => {
     e.preventDefault();
-    currentCard !== null &&
+    currentCard !== undefined &&
       setCards(
         [...cards]
           .map(card => {
