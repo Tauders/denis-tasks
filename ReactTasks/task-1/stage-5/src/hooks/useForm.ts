@@ -5,17 +5,17 @@ const enum reducerAction {
   setDescription = 'setDescription',
 }
 
-type reducerActionType = {
+type ReducerActionType = {
   type: reducerAction;
   payload: string;
 };
 
-type stateType = {
+type StateType = {
   title: string;
   description?: string;
 };
 
-const reducer = (state: stateType, action: reducerActionType): stateType => {
+const reducer = (state: StateType, action: ReducerActionType): StateType => {
   switch (action?.type) {
     case reducerAction.setTitle:
       return { ...state, title: action.payload };
@@ -26,7 +26,7 @@ const reducer = (state: stateType, action: reducerActionType): stateType => {
   }
 };
 
-export const useForm = (initState: stateType) => {
+export const useForm = (initState: StateType) => {
   const [state, dispatch] = useReducer(reducer, initState);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
