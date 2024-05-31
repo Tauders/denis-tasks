@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from '../../../../components/Form/Form';
-import { useForm } from '../../../../hooks/useForm';
 import { List } from '../List/List';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,13 +12,15 @@ type FormAddingListProps = {
 export const FormAddingList = (props: FormAddingListProps) => {
   const { onAddList, onCloseModal, isOpen } = props;
 
-  const { state, onChangeTitle, onClearTitle } = useForm({ title: '' });
+  const [title, setTitle] = useState('');
 
-  const { title } = state;
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value);
+  };
 
   useEffect(() => {
     if (!isOpen) {
-      onClearTitle();
+      setTitle('');
     }
   }, [isOpen]);
 
@@ -40,7 +41,7 @@ export const FormAddingList = (props: FormAddingListProps) => {
     <Form onSubmit={handleSubmit} textButton="Add list">
       <input
         value={title}
-        onChange={onChangeTitle}
+        onChange={handleChangeTitle}
         type="text"
         placeholder="Title"
         required

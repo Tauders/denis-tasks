@@ -61,10 +61,3 @@ export const isLists = (lists: unknown): lists is List[] => {
   }
   return true;
 };
-
-export const isString = (prop: unknown): prop is string => {
-  if (typeof prop === 'string') {
-    return true;
-  }
-  return false;
-};
