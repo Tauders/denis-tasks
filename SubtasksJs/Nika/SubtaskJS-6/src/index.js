@@ -132,5 +132,4 @@ buttonHandle.addEventListener('click', async function (e) {
   );
 
   buttonHandle.disabled = true;
-  buttonSend.disabled = true;
 });

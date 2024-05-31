@@ -23,7 +23,6 @@ export function handleResetButton(
       error.remove();
     }
     removeElement(linkID);
-    buttonSend.disabled = true;
   });
 }
 

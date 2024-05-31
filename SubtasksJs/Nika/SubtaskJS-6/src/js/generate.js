@@ -38,11 +38,8 @@ export function generate(
   formResult.classList.add(visibleFormClassName);
   for (const element of formResult) {
     element.addEventListener('input', e => {
-      const buttonSend = document.getElementById(buttonSendID);
-      buttonSend.disabled = true;
       removeElement(linkID);
       if (validateFormResult(e.target, NAME_REGEXP)) {
-        buttonSend.disabled = false;
         deleteFormErrors(element, errorFields, removeElement);
         element.classList.remove(classInputError);
       } else {
