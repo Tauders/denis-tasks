@@ -1,5 +1,4 @@
-import { ListOfTasks, Task } from "./types";
-
+import { ListOfTasks, Task } from './types';
 
 export const isTask = (task: unknown): task is Task => {
   if (
