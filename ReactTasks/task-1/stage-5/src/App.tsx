@@ -1,10 +1,10 @@
-import { TodoList } from './pages/TodoList/TodoList';
+import { TodoLists } from './pages/TodoLists/TodoLists';
 import classes from './App.module.scss';
 
 export const App = () => {
   return (
     <main className={classes.main}>
-      <TodoList />
+      <TodoLists />
     </main>
   );
 };

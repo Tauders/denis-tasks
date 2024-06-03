@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { dataTasks, prepareDataTasks } from '../../data/dataTasks';
-import classes from './TodoList.module.scss';
+import classes from './TodoLists.module.scss';
 import { List } from './components/List/List';
 import { v4 as uuidv4 } from 'uuid';
-import { HeaderTodoList } from './components/HeaderTodoList/HeaderTodoList';
+import { HeaderTodoLists } from './components/HeaderTodoLists/HeaderTodoLists';
 import {
   getItemsFromLocalStorage,
   setItemToLocalStorage,
@@ -20,7 +20,7 @@ const defaultLists: ListOfTasks[] = [
   },
 ];
 
-export const TodoList = () => {
+export const TodoLists = () => {
   const [lists, setLists] = useState(getItemsFromLocalStorage(defaultLists));
 
   useEffect(() => {
@@ -46,8 +46,8 @@ export const TodoList = () => {
   };
 
   return (
-    <section className={classes.todoListSection}>
-      <HeaderTodoList title="TO-DO List" onAddList={handleAddList} />
+    <section className={classes.todoListsSection}>
+      <HeaderTodoLists title="TO-DO Lists" onAddList={handleAddList} />
       {lists.map(list => (
         <List
           key={list.id}
