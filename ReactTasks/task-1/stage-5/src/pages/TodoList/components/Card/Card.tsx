@@ -21,7 +21,7 @@ export const Card = (props: CardProps) => {
   return (
     <li
       className={classes.card}
-      draggable={true}
+      draggable
       onDrag={onDrag}
       onDragOver={onDragOver}
       onDrop={onDrop}
