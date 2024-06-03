@@ -1,6 +1,5 @@
 import { Button } from '../../../../components/Button/Button';
 import { Modal } from '../../../../components/Modal/Modal';
-import { Task } from '../../../../data/dataTasks';
 import { Card } from '../Card/Card';
 import { FormAddingCard } from '../FormAddingCard/FormAddingCard';
 import classes from './List.module.scss';
@@ -10,12 +9,12 @@ import { useEffect, useState } from 'react';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon.svg?react';
 import classNames from 'classnames';
 import { useModal } from '../../../../hooks/useModal';
-import { ListType } from '../../TodoList';
+import { ListOfTasks, Task } from '../../../../ts/types';
 
 type ListProps = {
-  list: ListType;
+  list: ListOfTasks;
   onChangeList: (id: string, title: string, cards: Task[]) => void;
-  onDeleteList: (list: ListType) => void;
+  onDeleteList: (list: ListOfTasks) => void;
 };
 
 export const List = (props: ListProps) => {

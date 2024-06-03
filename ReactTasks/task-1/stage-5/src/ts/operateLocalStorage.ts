@@ -1,9 +1,9 @@
-import { List } from '../pages/TodoList/components/List/List';
 import { isLists } from './isType';
+import { ListOfTasks } from './types';
 
 const localStorageListsKey = 'lists';
 
-export const getItemsFromLocalStorage = (defaultValues: List[] = []) => {
+export const getItemsFromLocalStorage = (defaultValues: ListOfTasks[] = []) => {
   const listsJson = localStorage.getItem(localStorageListsKey);
   if (listsJson === null) {
     return defaultValues;
@@ -18,6 +18,6 @@ export const getItemsFromLocalStorage = (defaultValues: List[] = []) => {
   return lists;
 };
 
-export const setItemToLocalStorage = (lists: List[]) => {
+export const setItemToLocalStorage = (lists: ListOfTasks[]) => {
   localStorage.setItem(localStorageListsKey, JSON.stringify(lists));
 };

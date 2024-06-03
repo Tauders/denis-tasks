@@ -1,7 +1,7 @@
-import { Task } from '../../../../data/dataTasks';
 import { Button } from '../../../../components/Button/Button';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon.svg?react';
 import classes from './Card.module.scss';
+import { Task } from '../../../../ts/types';
 
 type CardProps = {
   card: Task;

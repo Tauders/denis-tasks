@@ -1,5 +1,5 @@
-import { Task } from '../data/dataTasks';
-import { List } from '../pages/TodoList/components/List/List';
+import { ListOfTasks, Task } from "./types";
+
 
 export const isTask = (task: unknown): task is Task => {
   if (
@@ -32,7 +32,7 @@ export const isTasks = (tasks: unknown): tasks is Task[] => {
   return true;
 };
 
-export const isList = (list: unknown): list is List => {
+export const isList = (list: unknown): list is ListOfTasks => {
   if (
     !(list instanceof Object) ||
     !('title' in list) ||
@@ -50,7 +50,7 @@ export const isList = (list: unknown): list is List => {
   return true;
 };
 
-export const isLists = (lists: unknown): lists is List[] => {
+export const isLists = (lists: unknown): lists is ListOfTasks[] => {
   if (!Array.isArray(lists)) {
     return false;
   }

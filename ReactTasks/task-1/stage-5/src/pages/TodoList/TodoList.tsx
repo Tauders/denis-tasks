@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Task, dataTasks, prepareDataTasks } from '../../data/dataTasks';
+import { dataTasks, prepareDataTasks } from '../../data/dataTasks';
 import classes from './TodoList.module.scss';
 import { List } from './components/List/List';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,14 +8,11 @@ import {
   getItemsFromLocalStorage,
   setItemToLocalStorage,
 } from '../../ts/operateLocalStorage';
+import { ListOfTasks, Task } from '../../ts/types';
 
-export type ListType = {
-  id: string;
-  title: string;
-  tasks: Task[];
-};
 
-const defaultLists: ListType[] = [
+
+const defaultLists: ListOfTasks[] = [
   {
     id: uuidv4(),
     title: 'List 1',
@@ -30,11 +27,11 @@ export const TodoList = () => {
     setItemToLocalStorage(lists);
   }, [lists]);
 
-  const handleAddList = (newList: ListType) => {
+  const handleAddList = (newList: ListOfTasks) => {
     setLists([...lists, newList]);
   };
 
-  const handleDeleteList = (list: ListType) => {
+  const handleDeleteList = (list: ListOfTasks) => {
     setLists(prevLists => prevLists.filter(elem => elem.id !== list.id));
   };
 

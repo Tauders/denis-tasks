@@ -1,8 +1,8 @@
-import { Task } from '../../../../data/dataTasks';
 import { v4 as uuidv4 } from 'uuid';
 import { Form } from '../../../../components/Form/Form';
 import { useForm } from '../../../../hooks/useForm';
 import { useEffect } from 'react';
+import { Task } from '../../../../ts/types';
 
 type FormAddingCardProps = {
   onAddCard: (task: Task) => void;

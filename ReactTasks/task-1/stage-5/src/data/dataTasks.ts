@@ -1,12 +1,6 @@
+import { Task } from '../ts/types';
 import { sortByCardOrder } from '../ts/utils';
 import { v4 as uuidv4 } from 'uuid';
-
-export interface Task {
-  id?: string;
-  order?: number;
-  title: string;
-  description: string;
-}
 
 export const dataTasks: Array<Task> = [
   {

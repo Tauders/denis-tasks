@@ -2,11 +2,11 @@ import classes from './HeaderTodoList.module.scss';
 import { Modal } from '../../../../components/Modal/Modal';
 import { FormAddingList } from '../FormAddingList/FormAddingList';
 import { Button } from '../../../../components/Button/Button';
-import { ListType } from '../../TodoList';
 import { useModal } from '../../../../hooks/useModal';
+import { ListOfTasks } from '../../../../ts/types';
 
 type HeaderTodoListProps = {
-  onAddList: (list: ListType) => void;
+  onAddList: (list: ListOfTasks) => void;
   title: string;
 };
 
