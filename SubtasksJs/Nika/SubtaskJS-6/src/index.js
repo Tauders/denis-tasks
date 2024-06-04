@@ -41,7 +41,6 @@ inputSelectFile.addEventListener('change', function () {
   blockError.innerHTML = '';
 
   removeElementById(formResultID);
-  removeElementById(errorFields.resultOfParse.id);
 
   const file = inputSelectFile.files[0];
   const inputFileText = document.getElementById(inputFileTextID);
