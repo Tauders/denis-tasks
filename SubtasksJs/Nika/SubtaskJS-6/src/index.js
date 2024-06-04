@@ -19,9 +19,10 @@ import {
   classInputError,
   formElementClassName,
   formRequiredClassName,
-  initialContentOfResultBlock,
+  headerTextOfResultBlock,
+  headerOfResultBlockClassName,
   arrayOfValidFormElements,
-  buttonLinkID
+  buttonLinkID,
 } from './js/const';
 import { readFile } from './js/readFile';
 import { removeElement } from './js/remove';
@@ -42,7 +43,14 @@ const inputSelectFile = document.getElementById(inputSelectFileID);
 
 inputSelectFile.addEventListener('change', function () {
   buttonHandle.disabled = false;
-  formResult.innerHTML = initialContentOfResultBlock;
+
+  const headerElementOfResultBlock = createElement(
+    'h2',
+    headerOfResultBlockClassName
+  );
+  headerElementOfResultBlock.innerText = headerTextOfResultBlock;
+  formResult.innerHTML = '';
+  formResult.append(headerElementOfResultBlock);
   formResult.classList.remove(visibleFormClassName);
   removeElement(errorFields.resultOfParse.id);
   const file = inputSelectFile.files[0];
