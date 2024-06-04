@@ -12,7 +12,6 @@ export function setAttributes(element, objectAttributes) {
       if (value === true) {
         element.setAttribute(key, '');
       }
-      continue;
     } else {
       element.setAttribute(key, value);
     }
