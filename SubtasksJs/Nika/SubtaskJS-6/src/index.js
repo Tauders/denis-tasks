@@ -25,15 +25,10 @@ import {
 } from './js/const';
 import { readFile } from './js/readFile';
 import { removeElementById } from './js/remove';
-import {
-  createButton,
-  createElement,
-  createErrorElement,
-} from './js/createElements';
+import { createElement, createErrorElement } from './js/createElements';
 import { validateFileType } from './js/validate';
-import { handleResetButton, handleSendButton } from './js/handler';
-import { generate } from './js/generate';
 import { validateFileStructure } from './js/validate';
+import { createForm } from './js/createForm';
 
 const buttonHandle = document.getElementById(buttonHandleID);
 const formResult = document.getElementById(formResultID);
@@ -52,6 +47,7 @@ inputSelectFile.addEventListener('change', function () {
   formResult.append(headerElementOfResultBlock);
   formResult.classList.remove(visibleFormClassName);
   removeElementById(errorFields.resultOfParse.id);
+  
   const file = inputSelectFile.files[0];
   const inputFileText = document.getElementById(inputFileTextID);
   if (file) {
@@ -94,39 +90,20 @@ buttonHandle.addEventListener('click', async function (e) {
     return;
   }
 
-  generate(
+  createForm(
     resultOfParse,
     formResult,
     visibleFormClassName,
     linkID,
+    buttonLinkID,
     formElementClassName,
     formRequiredClassName,
-  );
-
-  const buttonSend = createButton(
-    'Отправить',
     buttonSendID,
     buttonClassName,
-    buttonSendClassName
-  );
-  const buttonReset = createButton('Сбросить', buttonResetID, buttonClassName);
-  const formControl = createElement('div', formControlClassName, formControlID);
-  formControl.append(buttonSend);
-
-  buttonReset.type = 'reset';
-  formControl.append(buttonReset);
-  formResult.append(formControl);
-
-  handleSendButton(
-    formControl,
-    formResult,
-    buttonClassName,
-    buttonLinkID
-  );
-
-  handleResetButton(
-    buttonReset,
-    linkID
+    buttonSendClassName,
+    buttonResetID,
+    formControlClassName,
+    formControlID
   );
 
   buttonHandle.disabled = true;
