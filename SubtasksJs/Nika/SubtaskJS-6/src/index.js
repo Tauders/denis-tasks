@@ -16,7 +16,6 @@ import {
   errorTextClassName,
   visibleFormClassName,
   linkID,
-  classInputError,
   formElementClassName,
   formRequiredClassName,
   headerTextOfResultBlock,
@@ -99,13 +98,9 @@ buttonHandle.addEventListener('click', async function (e) {
     resultOfParse,
     formResult,
     visibleFormClassName,
-    buttonSendID,
     linkID,
-    errorFields,
-    classInputError,
     formElementClassName,
     formRequiredClassName,
-    errorTextClassName
   );
 
   const buttonSend = createButton(
@@ -125,17 +120,12 @@ buttonHandle.addEventListener('click', async function (e) {
   handleSendButton(
     formControl,
     formResult,
-    errorTextClassName,
     buttonClassName,
     buttonLinkID
   );
 
   handleResetButton(
     buttonReset,
-    buttonSend,
-    formResult,
-    classInputError,
-    errorTextClassName,
     linkID
   );
 

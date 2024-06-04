@@ -30,13 +30,3 @@ export function validateFileStructure(resultOfParse, arrayOfValidFormElements) {
   }
   return false;
 }
-
-export function validateFormResult(formElement) {
-  if (
-    formElement.hasAttribute('pattern') &&
-    !new RegExp(formElement.getAttribute('pattern')).test(formElement.value)
-  ) {
-    return false;
-  }
-  return true;
-}

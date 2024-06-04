@@ -6,21 +6,11 @@ export const formResultID = 'result';
 export const buttonClassName = 'form__button';
 export const blockErrorID = 'error';
 export const buttonLinkID = 'download';
-export const classInputError = 'form__input_error';
 export const inputSelectFileID = 'selectFile';
 export const inputFileTextID = 'selectFileText';
-export const NAME_REGEXP = /^[a-zA-Zа-яА-ЯЁё]+$/;
 export const errorFields = {
   file: { id: 'error-file-type', text: 'Требуемый тип файла Json' },
   resultOfParse: { id: 'error-resultOfParse', text: 'Некорректный файл Json' },
-  firstname: {
-    id: 'error-incorrect-firstname',
-    text: 'Введите корректное значение имени',
-  },
-  lastname: {
-    id: 'error-incorrect-lastname',
-    text: 'Введите корректное значение фамилии',
-  },
 };
 export const visibleFormClassName = 'form_visible';
 export const visibleErrorClassName = 'form__error_visible';
