@@ -1,9 +1,9 @@
 import { createButton, createLink } from './createElements';
-import { removeElement } from './remove';
+import { removeElementById } from './remove';
 
 export function handleResetButton(button, linkID) {
   button.addEventListener('click', () => {
-    removeElement(linkID);
+    removeElementById(linkID);
   });
 }
 

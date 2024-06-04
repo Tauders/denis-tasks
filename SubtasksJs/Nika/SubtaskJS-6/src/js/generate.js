@@ -1,6 +1,6 @@
 import { setAttributes } from './setAttributes';
 import { createElement } from './createElements';
-import { removeElement } from './remove';
+import { removeElementById } from './remove';
 
 export function generate(
   file,
@@ -31,7 +31,7 @@ export function generate(
   formResult.classList.add(visibleFormClassName);
   for (const element of formResult) {
     element.addEventListener('input', e => {
-      removeElement(linkID);
+      removeElementById(linkID);
     });
   }
 }

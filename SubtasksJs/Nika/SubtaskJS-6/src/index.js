@@ -24,7 +24,7 @@ import {
   buttonLinkID,
 } from './js/const';
 import { readFile } from './js/readFile';
-import { removeElement } from './js/remove';
+import { removeElementById } from './js/remove';
 import {
   createButton,
   createElement,
@@ -51,7 +51,7 @@ inputSelectFile.addEventListener('change', function () {
   formResult.innerHTML = '';
   formResult.append(headerElementOfResultBlock);
   formResult.classList.remove(visibleFormClassName);
-  removeElement(errorFields.resultOfParse.id);
+  removeElementById(errorFields.resultOfParse.id);
   const file = inputSelectFile.files[0];
   const inputFileText = document.getElementById(inputFileTextID);
   if (file) {
@@ -61,7 +61,7 @@ inputSelectFile.addEventListener('change', function () {
     buttonHandle.disabled = true;
   }
   if (validateFileType(file)) {
-    removeElement(errorFields.file.id);
+    removeElementById(errorFields.file.id);
     blockError.classList.remove(visibleErrorClassName);
   } else {
     const errorElement = createErrorElement(
