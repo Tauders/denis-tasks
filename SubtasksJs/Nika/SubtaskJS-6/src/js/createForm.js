@@ -4,7 +4,6 @@ import { handleResetButton, handleSendButton } from './handler';
 
 export const createForm = (
   resultOfParse,
-  visibleFormClassName,
   linkID,
   buttonLinkID,
   formElementClassName,
@@ -35,7 +34,6 @@ export const createForm = (
   generate(
     resultOfParse,
     formResult,
-    visibleFormClassName,
     linkID,
     formElementClassName,
     formRequiredClassName
@@ -56,6 +54,5 @@ export const createForm = (
   formResult.append(formControl);
 
   handleSendButton(formControl, formResult, buttonClassName, buttonLinkID);
-
   handleResetButton(buttonReset, linkID);
 };

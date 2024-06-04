@@ -5,7 +5,6 @@ import { removeElementById } from './remove';
 export function generate(
   file,
   formResult,
-  visibleFormClassName,
   linkID,
   formElementClassName,
   formRequiredClassName
@@ -28,9 +27,8 @@ export function generate(
       formResult.append(wrapElement);
     }
   });
-  formResult.classList.add(visibleFormClassName);
   for (const element of formResult) {
-    element.addEventListener('input', e => {
+    element.addEventListener('input', () => {
       removeElementById(linkID);
     });
   }

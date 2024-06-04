@@ -14,7 +14,6 @@ import {
   visibleErrorClassName,
   buttonClassName,
   errorTextClassName,
-  visibleFormClassName,
   linkID,
   formElementClassName,
   formRequiredClassName,
@@ -23,7 +22,8 @@ import {
   arrayOfValidFormElements,
   buttonLinkID,
   formResultClassNames,
-  mainID
+  mainID,
+  initialTextforInputFile,
 } from './js/const';
 import { readFile } from './js/readFile';
 import { removeElementById } from './js/remove';
@@ -31,6 +31,8 @@ import { createErrorElement } from './js/createElements';
 import { validateFileType } from './js/validate';
 import { validateFileStructure } from './js/validate';
 import { createForm } from './js/createForm';
+import { setTextForInputFile } from './js/setTextForInputFile';
+import { handleValidationResult } from './js/handler';
 
 const buttonHandle = document.getElementById(buttonHandleID);
 const blockError = document.getElementById(blockErrorID);
@@ -43,26 +45,20 @@ inputSelectFile.addEventListener('change', function () {
   removeElementById(formResultID);
 
   const file = inputSelectFile.files[0];
-  const inputFileText = document.getElementById(inputFileTextID);
-  if (file) {
-    inputFileText.innerText = file.name;
-  } else {
-    inputFileText.innerText = 'Выбрать файл';
+
+  if (!setTextForInputFile(file, inputFileTextID, initialTextforInputFile)) {
     buttonHandle.disabled = true;
   }
-  if (validateFileType(file)) {
-    removeElementById(errorFields.file.id);
-    blockError.classList.remove(visibleErrorClassName);
-  } else {
-    const errorElement = createErrorElement(
-      errorFields.file.text,
-      errorFields.file.id,
-      errorTextClassName
-    );
-    blockError.append(errorElement);
-    blockError.classList.add(visibleErrorClassName);
-    buttonHandle.disabled = true;
-  }
+
+  const validationResult = validateFileType(file);
+  handleValidationResult(
+    validationResult,
+    errorFields,
+    errorTextClassName,
+    blockError,
+    visibleErrorClassName,
+    buttonHandle
+  );
 });
 
 buttonHandle.addEventListener('click', async function (e) {
@@ -86,7 +82,6 @@ buttonHandle.addEventListener('click', async function (e) {
 
   createForm(
     resultOfParse,
-    visibleFormClassName,
     linkID,
     buttonLinkID,
     formElementClassName,

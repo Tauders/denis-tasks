@@ -12,7 +12,6 @@ export const errorFields = {
   file: { id: 'error-file-type', text: 'Требуемый тип файла Json' },
   resultOfParse: { id: 'error-resultOfParse', text: 'Некорректный файл Json' },
 };
-export const visibleFormClassName = 'form_visible';
 export const visibleErrorClassName = 'form__error_visible';
 export const errorTextClassName = 'form__error-text';
 export const headerTextOfResultBlock = 'Результат генерации';
@@ -25,3 +24,4 @@ export const formRequiredClassName = 'form__required';
 export const arrayOfValidFormElements = ['label', 'input', 'select'];
 export const formResultClassNames = ['form', 'form_result'];
 export const mainID = 'main';
+export const initialTextforInputFile = 'Выбрать файл';
