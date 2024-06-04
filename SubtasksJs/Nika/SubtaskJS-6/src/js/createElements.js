@@ -33,11 +33,16 @@ export function createErrorElement(text, id, errorTextClassName) {
   }
 }
 
-export function createElement(tag, className, id) {
+export function createElement(tag, classNames, id) {
   const element = document.createElement(tag);
   if (id) {
     element.id = id;
   }
-  element.classList.add(className);
+  if (typeof classNames === 'string') {
+    element.classList.add(classNames);
+  }
+  if (Array.isArray(classNames)) {
+    element.classList.add(...classNames);
+  }
   return element;
 }

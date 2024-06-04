@@ -22,32 +22,27 @@ import {
   headerOfResultBlockClassName,
   arrayOfValidFormElements,
   buttonLinkID,
+  formResultClassNames,
+  mainID
 } from './js/const';
 import { readFile } from './js/readFile';
 import { removeElementById } from './js/remove';
-import { createElement, createErrorElement } from './js/createElements';
+import { createErrorElement } from './js/createElements';
 import { validateFileType } from './js/validate';
 import { validateFileStructure } from './js/validate';
 import { createForm } from './js/createForm';
 
 const buttonHandle = document.getElementById(buttonHandleID);
-const formResult = document.getElementById(formResultID);
 const blockError = document.getElementById(blockErrorID);
 const inputSelectFile = document.getElementById(inputSelectFileID);
 
 inputSelectFile.addEventListener('change', function () {
   buttonHandle.disabled = false;
+  blockError.innerHTML = '';
 
-  const headerElementOfResultBlock = createElement(
-    'h2',
-    headerOfResultBlockClassName
-  );
-  headerElementOfResultBlock.innerText = headerTextOfResultBlock;
-  formResult.innerHTML = '';
-  formResult.append(headerElementOfResultBlock);
-  formResult.classList.remove(visibleFormClassName);
+  removeElementById(formResultID);
   removeElementById(errorFields.resultOfParse.id);
-  
+
   const file = inputSelectFile.files[0];
   const inputFileText = document.getElementById(inputFileTextID);
   if (file) {
@@ -92,7 +87,6 @@ buttonHandle.addEventListener('click', async function (e) {
 
   createForm(
     resultOfParse,
-    formResult,
     visibleFormClassName,
     linkID,
     buttonLinkID,
@@ -103,7 +97,12 @@ buttonHandle.addEventListener('click', async function (e) {
     buttonSendClassName,
     buttonResetID,
     formControlClassName,
-    formControlID
+    formControlID,
+    headerTextOfResultBlock,
+    headerOfResultBlockClassName,
+    formResultID,
+    formResultClassNames,
+    mainID
   );
 
   buttonHandle.disabled = true;

@@ -4,7 +4,6 @@ import { handleResetButton, handleSendButton } from './handler';
 
 export const createForm = (
   resultOfParse,
-  formResult,
   visibleFormClassName,
   linkID,
   buttonLinkID,
@@ -15,8 +14,24 @@ export const createForm = (
   buttonSendClassName,
   buttonResetID,
   formControlClassName,
-  formControlID
+  formControlID,
+  headerTextOfResultBlock,
+  headerOfResultBlockClassName,
+  formResultID,
+  formResultClassNames,
+  mainID
 ) => {
+  const formResult = createElement('form', formResultClassNames, formResultID);
+  const headerElementOfResultBlock = createElement(
+    'h2',
+    headerOfResultBlockClassName
+  );
+  headerElementOfResultBlock.innerText = headerTextOfResultBlock;
+  formResult.append(headerElementOfResultBlock);
+
+  const main = document.getElementById(mainID);
+  main.append(formResult);
+
   generate(
     resultOfParse,
     formResult,

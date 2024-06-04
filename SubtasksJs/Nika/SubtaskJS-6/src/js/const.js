@@ -23,3 +23,5 @@ export const buttonResetID = 'reset';
 export const formElementClassName = 'form__element';
 export const formRequiredClassName = 'form__required';
 export const arrayOfValidFormElements = ['label', 'input', 'select'];
+export const formResultClassNames = ['form', 'form_result'];
+export const mainID = 'main';
