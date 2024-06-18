@@ -1,18 +1,13 @@
 import { createButton, createLink, createErrorElement } from './createElements';
 import { removeElementById } from './remove';
 
-export function handleResetButton(button, linkID) {
+export function handleResetButton(button, buttonLinkID) {
   button.addEventListener('click', () => {
-    removeElementById(linkID);
+    removeElementById(buttonLinkID);
   });
 }
 
-export function handleSendButton(
-  formControl,
-  formResult,
-  buttonClassName,
-  buttonLinkID
-) {
+export function handleSendButton(formControl, formResult, buttonLinkID) {
   formResult.addEventListener('submit', e => {
     e.preventDefault();
     const formData = new FormData(formResult);
@@ -27,8 +22,7 @@ export function handleSendButton(
     } else {
       const buttonDownload = createButton(
         createLink(url, 'file.json', 'Скачать'),
-        'download',
-        buttonClassName
+        'download'
       );
       formControl.append(buttonDownload);
     }
@@ -38,7 +32,6 @@ export function handleSendButton(
 export function handleValidationResult(
   validationResult,
   errorFields,
-  errorTextClassName,
   blockError,
   visibleErrorClassName,
   buttonHandle
@@ -49,8 +42,7 @@ export function handleValidationResult(
   } else {
     const errorElement = createErrorElement(
       errorFields.file.text,
-      errorFields.file.id,
-      errorTextClassName
+      errorFields.file.id
     );
     blockError.append(errorElement);
     blockError.classList.add(visibleErrorClassName);

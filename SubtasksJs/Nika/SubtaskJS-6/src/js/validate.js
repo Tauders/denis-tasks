@@ -9,7 +9,9 @@ export function validateFileType(file) {
   }
 }
 
-export function validateFileStructure(resultOfParse, arrayOfValidFormElements) {
+const arrayOfValidFormElements = ['label', 'input', 'select'];
+
+export function validateFileStructure(resultOfParse) {
   if (
     typeof resultOfParse === 'object' &&
     Object.keys(resultOfParse).length === 1 &&

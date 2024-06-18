@@ -2,13 +2,10 @@ import { setAttributes } from './setAttributes';
 import { createElement } from './createElements';
 import { removeElementById } from './remove';
 
-export function generate(
-  file,
-  formResult,
-  linkID,
-  formElementClassName,
-  formRequiredClassName
-) {
+const formElementClassName = 'form__element';
+const formRequiredClassName = 'form__required';
+
+export function generate(file, formResult, buttonLinkID) {
   file.form.map(formItem => {
     const wrapElement = createElement('div', formElementClassName);
     const requiredElement = createElement('span', formRequiredClassName);
@@ -29,7 +26,7 @@ export function generate(
   });
   for (const element of formResult) {
     element.addEventListener('input', () => {
-      removeElementById(linkID);
+      removeElementById(buttonLinkID);
     });
   }
 }

@@ -1,30 +1,4 @@
 import './styles/styles.scss';
-import {
-  buttonHandleID,
-  inputSelectFileID,
-  inputFileTextID,
-  formResultID,
-  buttonSendID,
-  buttonResetID,
-  formControlID,
-  formControlClassName,
-  buttonSendClassName,
-  errorFields,
-  blockErrorID,
-  visibleErrorClassName,
-  buttonClassName,
-  errorTextClassName,
-  linkID,
-  formElementClassName,
-  formRequiredClassName,
-  headerTextOfResultBlock,
-  headerOfResultBlockClassName,
-  arrayOfValidFormElements,
-  buttonLinkID,
-  formResultClassNames,
-  mainID,
-  initialTextforInputFile,
-} from './js/const';
 import { readFile } from './js/readFile';
 import { removeElementById } from './js/remove';
 import { createErrorElement } from './js/createElements';
@@ -34,9 +8,18 @@ import { createForm } from './js/createForm';
 import { setTextForInputFile } from './js/setTextForInputFile';
 import { handleValidationResult } from './js/handler';
 
+const buttonHandleID = 'handle';
 const buttonHandle = document.getElementById(buttonHandleID);
+const blockErrorID = 'error';
 const blockError = document.getElementById(blockErrorID);
+const inputSelectFileID = 'selectFile';
 const inputSelectFile = document.getElementById(inputSelectFileID);
+const formResultID = 'result';
+const errorFields = {
+  file: { id: 'error-file-type', text: 'Требуемый тип файла Json' },
+  resultOfParse: { id: 'error-resultOfParse', text: 'Некорректный файл Json' },
+};
+const visibleErrorClassName = 'form__error_visible';
 
 inputSelectFile.addEventListener('change', function () {
   buttonHandle.disabled = false;
@@ -46,7 +29,7 @@ inputSelectFile.addEventListener('change', function () {
 
   const file = inputSelectFile.files[0];
 
-  if (!setTextForInputFile(file, inputFileTextID, initialTextforInputFile)) {
+  if (!setTextForInputFile(file)) {
     buttonHandle.disabled = true;
   }
 
@@ -54,7 +37,6 @@ inputSelectFile.addEventListener('change', function () {
   handleValidationResult(
     validationResult,
     errorFields,
-    errorTextClassName,
     blockError,
     visibleErrorClassName,
     buttonHandle
@@ -68,11 +50,10 @@ buttonHandle.addEventListener('click', async function (e) {
   const readingResult = await readFile(file);
   const resultOfParse = JSON.parse(readingResult);
 
-  if (!validateFileStructure(resultOfParse, arrayOfValidFormElements)) {
+  if (!validateFileStructure(resultOfParse)) {
     const errorElement = createErrorElement(
       errorFields.resultOfParse.text,
-      errorFields.resultOfParse.id,
-      errorTextClassName
+      errorFields.resultOfParse.id
     );
     blockError.append(errorElement);
     blockError.classList.add(visibleErrorClassName);
@@ -80,24 +61,7 @@ buttonHandle.addEventListener('click', async function (e) {
     return;
   }
 
-  createForm(
-    resultOfParse,
-    linkID,
-    buttonLinkID,
-    formElementClassName,
-    formRequiredClassName,
-    buttonSendID,
-    buttonClassName,
-    buttonSendClassName,
-    buttonResetID,
-    formControlClassName,
-    formControlID,
-    headerTextOfResultBlock,
-    headerOfResultBlockClassName,
-    formResultID,
-    formResultClassNames,
-    mainID
-  );
+  createForm(resultOfParse, formResultID);
 
   buttonHandle.disabled = true;
 });

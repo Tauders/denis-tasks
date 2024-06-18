@@ -2,24 +2,18 @@ import { generate } from './generate';
 import { createButton, createElement } from './createElements';
 import { handleResetButton, handleSendButton } from './handler';
 
-export const createForm = (
-  resultOfParse,
-  linkID,
-  buttonLinkID,
-  formElementClassName,
-  formRequiredClassName,
-  buttonSendID,
-  buttonClassName,
-  buttonSendClassName,
-  buttonResetID,
-  formControlClassName,
-  formControlID,
-  headerTextOfResultBlock,
-  headerOfResultBlockClassName,
-  formResultID,
-  formResultClassNames,
-  mainID
-) => {
+const formControlID = 'control';
+const formControlClassName = 'form__control';
+const buttonSendID = 'send';
+const headerTextOfResultBlock = 'Результат генерации';
+const headerOfResultBlockClassName = 'form__title';
+const buttonSendClassName = 'form__button_send';
+const buttonResetID = 'reset';
+const formResultClassNames = ['form', 'form_result'];
+const mainID = 'main';
+const buttonLinkID = 'download';
+
+export const createForm = (resultOfParse, formResultID) => {
   const formResult = createElement('form', formResultClassNames, formResultID);
   const headerElementOfResultBlock = createElement(
     'h2',
@@ -31,21 +25,14 @@ export const createForm = (
   const main = document.getElementById(mainID);
   main.append(formResult);
 
-  generate(
-    resultOfParse,
-    formResult,
-    linkID,
-    formElementClassName,
-    formRequiredClassName
-  );
+  generate(resultOfParse, formResult, buttonLinkID);
 
   const buttonSend = createButton(
     'Отправить',
     buttonSendID,
-    buttonClassName,
     buttonSendClassName
   );
-  const buttonReset = createButton('Сбросить', buttonResetID, buttonClassName);
+  const buttonReset = createButton('Сбросить', buttonResetID);
   const formControl = createElement('div', formControlClassName, formControlID);
   formControl.append(buttonSend);
 
@@ -53,6 +40,6 @@ export const createForm = (
   formControl.append(buttonReset);
   formResult.append(formControl);
 
-  handleSendButton(formControl, formResult, buttonClassName, buttonLinkID);
-  handleResetButton(buttonReset, linkID);
+  handleSendButton(formControl, formResult, buttonLinkID);
+  handleResetButton(buttonReset, buttonLinkID);
 };

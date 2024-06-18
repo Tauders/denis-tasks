@@ -1,4 +1,6 @@
-export function createButton(children, id, buttonClassName, className) {
+const buttonClassName = 'form__button';
+
+export function createButton(children, id, className) {
   const buttonElement = document.createElement('button');
 
   if (typeof children === 'object') {
@@ -23,7 +25,9 @@ export function createLink(url, nameFile, text) {
   return linkElement;
 }
 
-export function createErrorElement(text, id, errorTextClassName) {
+const errorTextClassName = 'form__error-text';
+
+export function createErrorElement(text, id) {
   if (!document.getElementById(id)) {
     const errorElement = document.createElement('span');
     errorElement.id = id;

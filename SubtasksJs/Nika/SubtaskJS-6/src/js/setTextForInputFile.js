@@ -1,8 +1,7 @@
-export function setTextForInputFile(
-  file,
-  inputFileTextID,
-  initialTextforInputFile
-) {
+const initialTextforInputFile = 'Выбрать файл';
+const inputFileTextID = 'selectFileText';
+
+export function setTextForInputFile(file) {
   const inputFileText = document.getElementById(inputFileTextID);
   if (file) {
     inputFileText.innerText = file.name;
