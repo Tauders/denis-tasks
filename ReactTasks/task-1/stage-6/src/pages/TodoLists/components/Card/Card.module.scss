@@ -9,18 +9,17 @@
   border-radius: rem(10);
   box-shadow: 10px 10px 12px -10px rgba($color_grey, 0.2);
   cursor: grab;
+  gap: rem(10);
   &__title {
     width: 100%;
     font-size: rem(20);
     text-align: center;
     font-weight: 500;
-    margin-bottom: rem(10);
   }
   &__description {
     font-size: rem(14);
     font-weight: 400;
     text-align: justify;
-    margin-bottom: rem(10);
     width: 100%;
   }
   &__button_light {
@@ -33,5 +32,14 @@
     display: inline-block;
     width: rem(16);
     height: rem(16);
+  }
+  &__control {
+    display: flex;
+    gap: rem(5);
+  }
+  &__form {
+    padding: 0;
+    border: none;
+    box-shadow: none;
   }
 }

@@ -12,20 +12,24 @@
   input {
     width: 100%;
     border: none;
-    font-size: rem(18);
+    font-size: rem(20);
     text-align: center;
     font-weight: 500;
   }
   textarea {
     width: 100%;
     border: none;
-    font-size: rem(12);
+    font-size: rem(14);
     font-weight: 400;
     text-align: justify;
-    min-height: rem(50);
+    min-height: rem(80);
+    line-height: normal;
   }
   input:invalid + &__button,
   textarea:invalid + &__button {
     opacity: 0.8;
+  }
+  button {
+    padding: rem(5);
   }
 }

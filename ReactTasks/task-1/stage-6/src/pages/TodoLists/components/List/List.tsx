@@ -55,6 +55,17 @@ export const List = (props: ListProps) => {
     );
   };
 
+  const handleUpdateCard = (updatedCard: Task) => {
+    setCards(
+      cards.map(card => {
+        if (card.id === updatedCard.id) {
+          return updatedCard;
+        }
+        return card;
+      })
+    );
+  };
+
   const handleDragCard = (task: Task) => {
     setCurrentCard(task);
   };
@@ -108,6 +119,7 @@ export const List = (props: ListProps) => {
           return (
             <Card
               key={card.id}
+              onEditCard={handleUpdateCard}
               onDelete={handleDeleteCard}
               onDrag={() => handleDragCard(card)}
               onDrop={e => handleDrop(e, card)}
