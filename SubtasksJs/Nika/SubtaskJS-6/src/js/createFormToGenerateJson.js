@@ -13,7 +13,7 @@ const formResultClassNames = ['form', 'form_result'];
 const mainID = 'main';
 const buttonLinkID = 'download';
 
-export function createForm(resultOfParse, formResultID) {
+export function createFormToGenerateJson(resultOfParse, formResultID) {
   const formResult = createElement('form', formResultClassNames, formResultID);
   const headerElementOfResultBlock = createElement(
     'h2',

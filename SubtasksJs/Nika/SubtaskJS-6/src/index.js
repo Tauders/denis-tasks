@@ -4,7 +4,7 @@ import { removeElementById } from './js/remove';
 import { createErrorElement } from './js/createElements';
 import { validateFileType } from './js/validate';
 import { validateFileStructure } from './js/validate';
-import { createForm } from './js/createForm';
+import { createFormToGenerateJson } from './js/createFormToGenerateJson';
 import { setTextForInputFile } from './js/setTextForInputFile';
 import { handleValidationResult } from './js/handler';
 
@@ -61,7 +61,7 @@ buttonHandle.addEventListener('click', async function (e) {
     return;
   }
 
-  createForm(resultOfParse, formResultID);
+  createFormToGenerateJson(resultOfParse, formResultID);
 
   buttonHandle.disabled = true;
 });
