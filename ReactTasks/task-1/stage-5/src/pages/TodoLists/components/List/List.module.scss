@@ -1,0 +1,49 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: rem(10);
+  padding: rem(15);
+  width: 100%;
+  max-width: rem(300);
+  background-color: $color_violet-light;
+  border: 1px solid rgba($color_violet, 0.3);
+  border-radius: rem(10);
+  &__header {
+    display: flex;
+    gap: rem(10);
+    align-items: center;
+    width: 100%;
+    padding-right: rem(5);
+  }
+  &__title {
+    font-size: rem(24);
+    width: 100%;
+    text-align: center;
+  }
+  &__button_light {
+    background-color: $color_violet-light;
+    &:hover {
+      background-color: $color_white;
+    }
+  }
+  &__button_delete {
+    border: 1px solid $color_black;
+    &:hover {
+      border: 1px solid $color_black;
+    }
+  }
+
+  &__icon {
+    display: inline-block;
+    width: rem(16);
+    height: rem(16);
+  }
+}
+.list__list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: rem(10);
+  width: 100%;
+}

@@ -1,0 +1,31 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: rem(10);
+  width: 100%;
+  padding: rem(10);
+  background-color: $color_white;
+  border: 1px solid rgba($color_grey, 0.2);
+  border-radius: rem(10);
+  box-shadow: 10px 10px 12px -10px rgba($color_grey, 0.2);
+  input {
+    width: 100%;
+    border: none;
+    font-size: rem(18);
+    text-align: center;
+    font-weight: 500;
+  }
+  textarea {
+    width: 100%;
+    border: none;
+    font-size: rem(12);
+    font-weight: 400;
+    text-align: justify;
+    min-height: rem(50);
+  }
+  input:invalid + &__button,
+  textarea:invalid + &__button {
+    opacity: 0.8;
+  }
+}
