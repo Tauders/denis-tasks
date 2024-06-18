@@ -13,7 +13,7 @@ const formResultClassNames = ['form', 'form_result'];
 const mainID = 'main';
 const buttonLinkID = 'download';
 
-export const createForm = (resultOfParse, formResultID) => {
+export function createForm(resultOfParse, formResultID) {
   const formResult = createElement('form', formResultClassNames, formResultID);
   const headerElementOfResultBlock = createElement(
     'h2',
@@ -42,4 +42,4 @@ export const createForm = (resultOfParse, formResultID) => {
 
   handleSendButton(formControl, formResult, buttonLinkID);
   handleResetButton(buttonReset, buttonLinkID);
-};
+}
