@@ -5,7 +5,7 @@ import { removeElementById } from './remove';
 const formElementClassName = 'form__element';
 const formRequiredClassName = 'form__required';
 
-export function generate(file, formResult, buttonLinkID) {
+export function generateForm(file, formResult, buttonLinkID) {
   file.form.map(formItem => {
     const wrapElement = createElement('div', formElementClassName);
     const requiredElement = createElement('span', formRequiredClassName);

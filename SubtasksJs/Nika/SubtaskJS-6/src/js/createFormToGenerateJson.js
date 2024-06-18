@@ -1,4 +1,4 @@
-import { generate } from './generate';
+import { generateForm } from './generateForm';
 import { createButton, createElement } from './createElements';
 import { handleResetButton, handleSendButton } from './handler';
 
@@ -25,7 +25,7 @@ export function createFormToGenerateJson(resultOfParse, formResultID) {
   const main = document.getElementById(mainID);
   main.append(formResult);
 
-  generate(resultOfParse, formResult, buttonLinkID);
+  generateForm(resultOfParse, formResult, buttonLinkID);
 
   const buttonSend = createButton(
     'Отправить',
