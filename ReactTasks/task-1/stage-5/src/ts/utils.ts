@@ -1,4 +1,4 @@
-import { Task } from "./types";
+import { Task } from './types';
 
 export const sortByCardOrder = (a: Task, b: Task) => {
   if (a.order === undefined || b.order === undefined) {

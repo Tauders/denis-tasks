@@ -10,8 +10,6 @@ import {
 } from '../../ts/operateLocalStorage';
 import { ListOfTasks, Task } from '../../ts/types';
 
-
-
 const defaultLists: ListOfTasks[] = [
   {
     id: uuidv4(),
