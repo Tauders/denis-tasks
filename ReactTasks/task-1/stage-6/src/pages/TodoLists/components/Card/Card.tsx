@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Form } from '../../../../components/Form/Form';
 import { useForm } from '../../../../hooks/useForm';
 import classes from './Card.module.scss';
+import { FormEditingCard } from '../FormEditingCard/FormEditingCard';
 
 type CardProps = {
   card: Task;
@@ -21,28 +22,16 @@ export const Card = (props: CardProps) => {
 
   const [isEdit, setIsEdit] = useState(false);
 
-  const { title, description, handleChangeTitle, handleChangeDescription } =
-    useForm(card.title, card.description);
-
   const handleDeleteCard = () => {
     onDelete(card);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const updatedCard: Task = {
-      id: card.id,
-      title,
-      description,
-    };
-
-    onEditCard(updatedCard);
-    setIsEdit(false);
-  };
-
   const handleClickButtonEdit = () => {
     setIsEdit(true);
+  };
+
+  const handleClickSaveCard = () => {
+    setIsEdit(false);
   };
 
   return (
@@ -53,30 +42,7 @@ export const Card = (props: CardProps) => {
       onDragOver={onDragOver}
       onDrop={onDrop}
     >
-      {isEdit ? (
-        <Form
-          className={classes.card__form}
-          onSubmit={handleSubmit}
-          textButton="Save card"
-        >
-          <input
-            value={title}
-            onChange={handleChangeTitle}
-            type="text"
-            placeholder="Title"
-            required
-          />
-          <textarea
-            value={description}
-            onChange={handleChangeDescription}
-            placeholder="Description"
-            required
-          />
-        </Form>
-      ) : (
-        <>
-          <h3 className={classes.card__title}>{card.title}</h3>
-          <p className={classes.card__description}>{card.description}</p>
+      <div className={classes.card__header}>
           <div className={classes.card__control}>
             <Button
               className={classes.card__button_light}
@@ -93,6 +59,17 @@ export const Card = (props: CardProps) => {
               <DeleteIcon className={classes.card__icon} color="#7c4886" />
             </Button>
           </div>
+      </div>
+      {isEdit ? (
+        <FormEditingCard
+          card={card}
+          handleClickSaveCard={handleClickSaveCard}
+          onEditCard={onEditCard}
+        />
+      ) : (
+        <>
+          <h3 className={classes.card__title}>{card.title}</h3>
+          <p className={classes.card__description}>{card.description}</p>
         </>
       )}
     </li>
