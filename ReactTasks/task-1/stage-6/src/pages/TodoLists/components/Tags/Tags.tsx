@@ -4,6 +4,7 @@ import { useModal } from '../../../../hooks/useModal';
 import { Task } from '../../../../ts/types';
 import classes from './Tags.module.scss';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 type TagsProps = {
   card: Task;
@@ -48,6 +49,7 @@ export const Tags = (props: TagsProps) => {
               <li
                 className={classes.tags__tag}
                 onClick={() => handleClickTag(tag)}
+                key={uuidv4()}
               >
                 {tag}
               </li>
