@@ -67,7 +67,7 @@ export const Card = (props: CardProps) => {
         />
       </Modal>
       <div className={classes.card__header}>
-        <Tags card={card} onDeleteTagToCard={onDeleteTagToCard}/>
+        <Tags card={card} onDeleteTagToCard={onDeleteTagToCard} />
         <div className={classes.card__control}>
           <Button
             className={classes.card__button_light}

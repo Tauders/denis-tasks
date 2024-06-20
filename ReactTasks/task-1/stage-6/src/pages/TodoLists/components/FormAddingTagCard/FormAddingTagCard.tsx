@@ -25,9 +25,9 @@ export const FormAddingTagCard = (props: FormAddingTagCardProps) => {
     e.preventDefault();
     const updatedCard = {
       ...card,
-      tags: card.tags ? [...card.tags, title] : [title]
-    }
-    onAddLabel(updatedCard)
+      tags: card.tags ? [...card.tags, title] : [title],
+    };
+    onAddLabel(updatedCard);
     onCloseModal();
   };
 
