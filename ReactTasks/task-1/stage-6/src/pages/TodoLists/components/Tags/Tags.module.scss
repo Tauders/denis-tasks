@@ -1,0 +1,30 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(5);
+  max-width: calc(100% - rem(120));
+  &__tag {
+    font-size: rem(10);
+    font-weight: 400;
+    background-color: $color_violet;
+    color: $color_white;
+    padding: rem(3);
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+  }
+  &__modalButton {
+    width: rem(60);
+    height: rem(25);
+    font-size: rem(14);
+    background-color: $color_red;
+    border-color: $color_red;
+    margin-left: calc(100% - rem(60));
+    transition: 0.4s ease-in-out;
+    &:hover {
+      background-color: $color_red;
+      border-color: $color_red;
+      opacity: 0.7;
+    }
+  }
+}
