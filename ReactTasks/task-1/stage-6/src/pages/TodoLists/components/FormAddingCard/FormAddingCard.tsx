@@ -34,6 +34,7 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
       id: uuidv4(),
       title,
       description,
+      tags: []
     };
 
     onAddCard(newCard);

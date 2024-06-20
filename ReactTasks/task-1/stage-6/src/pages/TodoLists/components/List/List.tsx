@@ -120,6 +120,8 @@ export const List = (props: ListProps) => {
             <Card
               key={card.id}
               onEditCard={handleUpdateCard}
+              onAddTagToCard={handleUpdateCard}
+              onDeleteTagToCard={handleUpdateCard}
               onDelete={handleDeleteCard}
               onDrag={() => handleDragCard(card)}
               onDrop={e => handleDrop(e, card)}
