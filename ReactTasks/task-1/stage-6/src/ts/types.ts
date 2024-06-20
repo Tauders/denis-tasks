@@ -3,6 +3,7 @@ export interface Task {
   order?: number;
   title: string;
   description: string;
+  tags?: string[];
 }
 
 export type ListOfTasks = {
@@ -10,4 +11,3 @@ export type ListOfTasks = {
   title: string;
   tasks: Task[];
 };
-

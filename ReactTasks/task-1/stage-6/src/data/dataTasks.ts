@@ -35,6 +35,7 @@ export const prepareDataTasks = (data: Array<Task>) => {
     .map((task, index) => {
       task.id = uuidv4();
       task.order = index + 1;
+      task.tags = [];
       return task;
     })
     .sort(sortByCardOrder);
