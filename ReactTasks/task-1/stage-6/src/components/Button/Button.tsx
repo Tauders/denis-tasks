@@ -7,9 +7,6 @@ export const Button = (props: ButtonProps) => {
   const { className, ...restProps } = props;
 
   return (
-    <button
-      className={classNames(classes.button, className)}
-      {...restProps}
-    />
+    <button className={classNames(classes.button, className)} {...restProps} />
   );
 };
