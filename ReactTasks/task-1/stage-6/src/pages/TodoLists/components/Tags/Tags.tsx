@@ -13,7 +13,7 @@ type TagsProps = {
 
 export const Tags = (props: TagsProps) => {
   const { card, onDeleteTagToCard } = props;
-  const { isOpen, handleOpenModal, handleCloseModal } = useModal(false);
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const [currentTag, setCurrentTag] = useState('');
 
   const handleClickTag = (tag: string) => {

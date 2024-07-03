@@ -34,7 +34,7 @@ export const Card = (props: CardProps) => {
     onDragOver,
   } = props;
 
-  const { isOpen, handleOpenModal, handleCloseModal } = useModal(false);
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
   const [isEdit, setIsEdit] = useState(false);
 

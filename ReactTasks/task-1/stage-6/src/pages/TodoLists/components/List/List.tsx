@@ -23,7 +23,7 @@ export const List = (props: ListProps) => {
   const [cards, setCards] = useState(list.tasks);
   const [currentCard, setCurrentCard] = useState<undefined | Task>(undefined);
 
-  const { isOpen, handleOpenModal, handleCloseModal } = useModal(false);
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
   useEffect(() => {
     onChangeList(list.id, list.title, cards);

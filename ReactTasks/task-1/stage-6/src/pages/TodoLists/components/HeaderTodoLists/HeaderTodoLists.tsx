@@ -13,7 +13,7 @@ type HeaderTodoListsProps = {
 export const HeaderTodoLists = (props: HeaderTodoListsProps) => {
   const { onAddList, title } = props;
 
-  const { isOpen, handleOpenModal, handleCloseModal } = useModal(false);
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
   return (
     <div className={classes.headerTodoLists}>
