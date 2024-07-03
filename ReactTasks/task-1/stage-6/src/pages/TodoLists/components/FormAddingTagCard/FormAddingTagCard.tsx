@@ -5,13 +5,13 @@ import { Task } from '../../../../ts/types';
 
 type FormAddingTagCardProps = {
   card: Task;
-  onAddLabel: (task: Task) => void;
+  onAddTag: (task: Task) => void;
   onCloseModal: () => void;
   isOpen: boolean;
 };
 
 export const FormAddingTagCard = (props: FormAddingTagCardProps) => {
-  const { card, onAddLabel, onCloseModal, isOpen } = props;
+  const { card, onAddTag, onCloseModal, isOpen } = props;
 
   const { title, handleChangeTitle, clearForm } = useForm();
 
@@ -27,7 +27,7 @@ export const FormAddingTagCard = (props: FormAddingTagCardProps) => {
       ...card,
       tags: card.tags ? [...card.tags, title] : [title],
     };
-    onAddLabel(updatedCard);
+    onAddTag(updatedCard);
     onCloseModal();
   };
 

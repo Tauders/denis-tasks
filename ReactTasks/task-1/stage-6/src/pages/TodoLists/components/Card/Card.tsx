@@ -61,7 +61,7 @@ export const Card = (props: CardProps) => {
       <Modal isOpen={isOpen} onCloseModal={handleCloseModal} title="Add tag">
         <FormAddingTagCard
           card={card}
-          onAddLabel={onAddTagToCard}
+          onAddTag={onAddTagToCard}
           onCloseModal={handleCloseModal}
           isOpen={isOpen}
         />
