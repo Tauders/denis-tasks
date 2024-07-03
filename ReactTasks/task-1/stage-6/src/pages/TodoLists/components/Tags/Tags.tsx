@@ -8,11 +8,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 type TagsProps = {
   card: Task;
-  onDeleteTagToCard: (card: Task) => void;
+  onDeleteTagFromCard: (card: Task) => void;
 };
 
 export const Tags = (props: TagsProps) => {
-  const { card, onDeleteTagToCard } = props;
+  const { card, onDeleteTagFromCard } = props;
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const [currentTag, setCurrentTag] = useState('');
 
@@ -26,8 +26,9 @@ export const Tags = (props: TagsProps) => {
       ...card,
       tags: card.tags && card.tags.filter(tag => tag !== currentTag),
     };
-    onDeleteTagToCard(updatedCard);
+    onDeleteTagFromCard(updatedCard);
     handleCloseModal();
+    console.log(isOpen);
   };
 
   return (

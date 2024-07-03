@@ -15,7 +15,7 @@ type CardProps = {
   card: Task;
   onEditCard: (card: Task) => void;
   onAddTagToCard: (card: Task) => void;
-  onDeleteTagToCard: (card: Task) => void;
+  onDeleteTagFromCard: (card: Task) => void;
   onDelete: (card: Task) => void;
   onDrop: React.DragEventHandler;
   onDrag: React.DragEventHandler;
@@ -27,7 +27,7 @@ export const Card = (props: CardProps) => {
     card,
     onEditCard,
     onAddTagToCard,
-    onDeleteTagToCard,
+    onDeleteTagFromCard,
     onDelete,
     onDrop,
     onDrag,
@@ -67,7 +67,7 @@ export const Card = (props: CardProps) => {
         />
       </Modal>
       <div className={classes.card__header}>
-        <Tags card={card} onDeleteTagToCard={onDeleteTagToCard} />
+        <Tags card={card} onDeleteTagFromCard={onDeleteTagFromCard} />
         <div className={classes.card__control}>
           <Button
             className={classes.card__button_light}
