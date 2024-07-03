@@ -1,10 +1,10 @@
-import { Button } from '../../../../components/Button/Button';
 import { Modal } from '../../../../components/Modal/Modal';
 import { useModal } from '../../../../hooks/useModal';
 import { Task } from '../../../../ts/types';
 import classes from './Tags.module.scss';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { ConfirmDeleteTag } from '../ConfirmDeleteTag/ConfirmDeleteTag';
 
 type TagsProps = {
   card: Task;
@@ -28,7 +28,6 @@ export const Tags = (props: TagsProps) => {
     };
     onDeleteTagFromCard(updatedCard);
     handleCloseModal();
-    console.log(isOpen);
   };
 
   return (
@@ -38,10 +37,10 @@ export const Tags = (props: TagsProps) => {
         onCloseModal={handleCloseModal}
         title="Delete tag?"
       >
-        <p>Are you sure you want to remove the tag?</p>
-        <Button onClick={handleDeleteTag} className={classes.tags__modalButton}>
-          Yes
-        </Button>
+        <ConfirmDeleteTag
+          onCloseModal={handleCloseModal}
+          onDeleteTag={handleDeleteTag}
+        />
       </Modal>
       <ul className={classes.tags}>
         {card.tags &&

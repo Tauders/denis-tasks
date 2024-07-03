@@ -1,0 +1,21 @@
+.ConfirmDeleteTag {
+  &__control {
+    display: flex;
+    justify-content: flex-end;
+    gap: rem(10);
+  }
+  &__button {
+    width: rem(60);
+    height: rem(25);
+    font-size: rem(14);
+    &_ok {
+      background-color: $color_red;
+      border-color: $color_red;
+      &:hover {
+        background-color: $color_red;
+        border-color: $color_red;
+        opacity: 0.7;
+      }
+    }
+  }
+}
