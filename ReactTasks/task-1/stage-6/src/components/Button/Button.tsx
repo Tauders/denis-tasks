@@ -8,7 +8,7 @@ export const Button = (props: ButtonProps) => {
 
   return (
     <button
-      className={classNames(classes.button, className && className)}
+      className={classNames(classes.button, className)}
       {...restProps}
     />
   );

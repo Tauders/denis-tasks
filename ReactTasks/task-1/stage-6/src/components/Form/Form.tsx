@@ -4,19 +4,19 @@ import classNames from 'classnames';
 
 type FormProps = {
   onSubmit: React.FormEventHandler;
-  textButton: string;
+  submitButtonText: string;
   children: React.ReactNode;
   className?: string;
 };
 
 export const Form = (props: FormProps) => {
-  const { onSubmit, textButton, children, className } = props;
+  const { onSubmit, submitButtonText, children, className } = props;
 
   return (
     <form className={classNames(classes.form, className)} onSubmit={onSubmit}>
       {children}
       <Button className={classes.form__button} type="submit">
-        {textButton}
+        {submitButtonText}
       </Button>
     </form>
   );
