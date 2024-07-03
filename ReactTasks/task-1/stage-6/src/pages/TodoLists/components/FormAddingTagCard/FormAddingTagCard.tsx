@@ -23,7 +23,7 @@ export const FormAddingTagCard = (props: FormAddingTagCardProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updatedCard = {
+    const updatedCard: Task = {
       ...card,
       tags: card.tags ? [...card.tags, title] : [title],
     };
