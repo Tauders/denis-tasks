@@ -32,7 +32,7 @@ export const FormEditingCard = (props: FormEditingCardProps) => {
     <Form
       className={classes.formEditingCardForm}
       onSubmit={handleSubmit}
-      textButton="Save card"
+      submitButtonText="Save card"
     >
       <input
         value={title}

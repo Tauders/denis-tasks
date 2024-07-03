@@ -42,7 +42,7 @@ export const FormAddingCard = (props: FormAddingCardProps) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} textButton="Add card">
+    <Form onSubmit={handleSubmit} submitButtonText="Add card">
       <input
         value={title}
         onChange={handleChangeTitle}

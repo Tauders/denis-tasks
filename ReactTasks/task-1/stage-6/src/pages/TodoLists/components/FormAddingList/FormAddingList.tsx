@@ -38,7 +38,7 @@ export const FormAddingList = (props: FormAddingListProps) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} textButton="Add list">
+    <Form onSubmit={handleSubmit} submitButtonText="Add list">
       <input
         value={title}
         onChange={handleChangeTitle}
