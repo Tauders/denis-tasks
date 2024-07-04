@@ -1,7 +1,8 @@
-import { generateForm } from './generateForm';
+import { generateFormFields } from './generateFormFields';
 import { createButton, createElement } from './createElements';
 import { addHandlerToResetButton, addSubmitHandlerToForm } from './handler';
 import { formResultID } from './const';
+import { removeElementById } from './remove';
 
 const formControlsID = 'control';
 const formControlsClassName = 'form__control';
@@ -22,7 +23,15 @@ export function createFormToGenerateJson(resultOfParse) {
   );
   headerElementOfResultBlock.innerText = headerTextOfResultBlock;
 
-  generateForm(resultOfParse, formResult, buttonLinkID);
+  const formFields = generateFormFields(resultOfParse);
+
+  for (const element of formFields) {
+    element.addEventListener('input', () => {
+      removeElementById(buttonLinkID);
+    });
+  }
+
+  const formControls = createElement('div', formControlsClassName, formControlsID);
 
   const buttonSend = createButton(
     'Отправить',
@@ -35,10 +44,8 @@ export function createFormToGenerateJson(resultOfParse) {
   buttonReset.type = 'reset';
   addHandlerToResetButton(buttonReset, buttonLinkID);
 
-  const formControls = createElement('div', formControlsClassName, formControlsID);
   formControls.append(buttonSend, buttonReset);
-
-  formResult.append(headerElementOfResultBlock, formControls);
+  formResult.append(headerElementOfResultBlock, ...formFields, formControls);
 
   const main = document.getElementById(mainID);
   main.append(formResult);

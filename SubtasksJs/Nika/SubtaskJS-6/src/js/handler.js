@@ -7,7 +7,7 @@ export function addHandlerToResetButton(button, buttonLinkID) {
   });
 }
 
-export function addSubmitHandlerToForm(formControl, formResult, buttonLinkID) {
+export function addSubmitHandlerToForm(formControls, formResult, buttonLinkID) {
   formResult.addEventListener('submit', e => {
     e.preventDefault();
     const formData = new FormData(formResult);
@@ -24,7 +24,7 @@ export function addSubmitHandlerToForm(formControl, formResult, buttonLinkID) {
         createDownloadLink(url, 'file.json', 'Скачать'),
         'download'
       );
-      formControl.append(buttonDownload);
+      formControls.append(buttonDownload);
     }
   });
 }
