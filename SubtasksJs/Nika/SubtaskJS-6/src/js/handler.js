@@ -1,13 +1,13 @@
 import { createButton, createDownloadLink } from './createElements';
 import { removeElementById } from './remove';
 
-export function handleResetButton(button, buttonLinkID) {
+export function addHandlerToResetButton(button, buttonLinkID) {
   button.addEventListener('click', () => {
     removeElementById(buttonLinkID);
   });
 }
 
-export function handleSendButton(formControl, formResult, buttonLinkID) {
+export function addSubmitHandlerToForm(formControl, formResult, buttonLinkID) {
   formResult.addEventListener('submit', e => {
     e.preventDefault();
     const formData = new FormData(formResult);

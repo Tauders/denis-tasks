@@ -1,10 +1,10 @@
 import { generateForm } from './generateForm';
 import { createButton, createElement } from './createElements';
-import { handleResetButton, handleSendButton } from './handler';
+import { addHandlerToResetButton, addSubmitHandlerToForm } from './handler';
 import { formResultID } from './const';
 
-const formControlID = 'control';
-const formControlClassName = 'form__control';
+const formControlsID = 'control';
+const formControlsClassName = 'form__control';
 const buttonSendID = 'send';
 const headerTextOfResultBlock = 'Результат генерации';
 const headerOfResultBlockClassName = 'form__title';
@@ -21,10 +21,6 @@ export function createFormToGenerateJson(resultOfParse) {
     headerOfResultBlockClassName
   );
   headerElementOfResultBlock.innerText = headerTextOfResultBlock;
-  formResult.append(headerElementOfResultBlock);
-
-  const main = document.getElementById(mainID);
-  main.append(formResult);
 
   generateForm(resultOfParse, formResult, buttonLinkID);
 
@@ -33,14 +29,17 @@ export function createFormToGenerateJson(resultOfParse) {
     buttonSendID,
     buttonSendClassName
   );
+  addSubmitHandlerToForm(formControls, formResult, buttonLinkID);
+
   const buttonReset = createButton('Сбросить', buttonResetID);
-  const formControl = createElement('div', formControlClassName, formControlID);
-  formControl.append(buttonSend);
-
   buttonReset.type = 'reset';
-  formControl.append(buttonReset);
-  formResult.append(formControl);
+  addHandlerToResetButton(buttonReset, buttonLinkID);
 
-  handleSendButton(formControl, formResult, buttonLinkID);
-  handleResetButton(buttonReset, buttonLinkID);
+  const formControls = createElement('div', formControlsClassName, formControlsID);
+  formControls.append(buttonSend, buttonReset);
+
+  formResult.append(headerElementOfResultBlock, formControls);
+
+  const main = document.getElementById(mainID);
+  main.append(formResult);
 }
