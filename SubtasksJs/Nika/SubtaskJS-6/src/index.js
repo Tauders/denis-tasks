@@ -8,8 +8,8 @@ import { createFormToGenerateJson } from './js/createFormToGenerateJson';
 import { setTextForInputFile } from './js/setTextForInputFile';
 import { handleValidationResult } from './js/handler';
 
-const buttonHandleID = 'handle';
-const buttonHandle = document.getElementById(buttonHandleID);
+const buttonToGenerateFormID = 'buttonToGenerateForm';
+const buttonToGenerateForm = document.getElementById(buttonToGenerateFormID);
 const blockErrorID = 'error';
 const blockError = document.getElementById(blockErrorID);
 const inputSelectFileID = 'selectFile';
@@ -22,16 +22,18 @@ const errorFields = {
 const visibleErrorClassName = 'form__error_visible';
 
 inputSelectFile.addEventListener('change', function () {
-  buttonHandle.disabled = false;
+  buttonToGenerateForm.disabled = false;
   blockError.innerHTML = '';
 
   removeElementById(formResultID);
 
   const file = inputSelectFile.files[0];
 
-  if (!setTextForInputFile(file)) {
-    buttonHandle.disabled = true;
+  if (!file) {
+    buttonToGenerateForm.disabled = true;
   }
+
+  setTextForInputFile(file?.name)
 
   const validationResult = validateFileType(file);
   handleValidationResult(
@@ -39,11 +41,11 @@ inputSelectFile.addEventListener('change', function () {
     errorFields,
     blockError,
     visibleErrorClassName,
-    buttonHandle
+    buttonToGenerateForm
   );
 });
 
-buttonHandle.addEventListener('click', async function (e) {
+buttonToGenerateForm.addEventListener('click', async function (e) {
   e.preventDefault();
   blockError.classList.remove(visibleErrorClassName);
   const file = inputSelectFile.files[0];
@@ -57,11 +59,11 @@ buttonHandle.addEventListener('click', async function (e) {
     );
     blockError.append(errorElement);
     blockError.classList.add(visibleErrorClassName);
-    buttonHandle.disabled = true;
+    buttonToGenerateForm.disabled = true;
     return;
   }
 
   createFormToGenerateJson(resultOfParse, formResultID);
 
-  buttonHandle.disabled = true;
+  buttonToGenerateForm.disabled = true;
 });
