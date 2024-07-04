@@ -1,0 +1,50 @@
+{
+  "form": [
+    {
+      "label": { "name": "Имя" },
+      "input": {
+        "type": "text",
+        "name": "firstName",
+        "required": true,
+        "pattern": "^[a-zA-Zа-яА-ЯЁё]+$"
+      }
+    },
+    {
+      "label": { "name": "Фамилия" },
+      "input": {
+        "type": "text",
+        "name": "lastName",
+        "required": true,
+        "pattern": "^[a-zA-Zа-яА-ЯЁё]+$"
+      }
+    },
+    {
+      "label": { "name": "Email" },
+      "input": {
+        "type": "email",
+        "name": "email",
+        "required": true
+      }
+    },
+    {
+      "label": { "name": "Номер телефона" },
+      "input": {
+        "type": "tel",
+        "name": "phoneNumber",
+        "required": false,
+        "pattern": "[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+      }
+    },
+    {
+      "label": { "name": "Пол" },
+      "select": {
+        "name": "gender",
+        "required": true,
+        "options": [
+          { "name": "М", "value": "male" },
+          { "name": "Ж", "value": "female" }
+        ]
+      }
+    }
+  ]
+}
