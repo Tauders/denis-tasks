@@ -32,7 +32,7 @@ inputSelectFile.addEventListener('change', function () {
     clearFileValidationError();
   } else {
     addFileValidationError();
-    buttonHandle.disabled = true;
+    buttonToGenerateForm.disabled = true;
   }
 });
 

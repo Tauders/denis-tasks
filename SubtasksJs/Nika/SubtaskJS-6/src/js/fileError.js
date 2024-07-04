@@ -13,6 +13,9 @@ export function clearFileValidationError() {
 }
 
 export function addFileValidationError() {
+  if (document.getElementById(errorFields.file.id)) {
+    return;
+  }
   const errorElement = createErrorElement(
     errorFields.file.text,
     errorFields.file.id
@@ -22,6 +25,9 @@ export function addFileValidationError() {
 }
 
 export function addFileStructureError() {
+  if (document.getElementById(errorFields.file.id)) {
+    return;
+  }
   const errorElement = createErrorElement(
     errorFields.resultOfParse.text,
     errorFields.resultOfParse.id

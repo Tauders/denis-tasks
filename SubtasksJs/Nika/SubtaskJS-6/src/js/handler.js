@@ -1,4 +1,4 @@
-import { createButton, createLink } from './createElements';
+import { createButton, createDownloadLink } from './createElements';
 import { removeElementById } from './remove';
 
 export function handleResetButton(button, buttonLinkID) {
@@ -18,10 +18,10 @@ export function handleSendButton(formControl, formResult, buttonLinkID) {
     const buttonLink = document.getElementById(buttonLinkID);
     if (buttonLink) {
       buttonLink.innerHTML = '';
-      buttonLink.append(createLink(url, 'file.json', 'Скачать'));
+      buttonLink.append(createDownloadLink(url, 'file.json', 'Скачать'));
     } else {
       const buttonDownload = createButton(
-        createLink(url, 'file.json', 'Скачать'),
+        createDownloadLink(url, 'file.json', 'Скачать'),
         'download'
       );
       formControl.append(buttonDownload);
