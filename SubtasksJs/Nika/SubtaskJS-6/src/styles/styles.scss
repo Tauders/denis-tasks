@@ -113,6 +113,7 @@ $color-dark-brown: #721b1b;
     }
   }
   &__button {
+    display: block;
     max-width: rem(150);
     width: 100%;
     height: rem(40);
@@ -136,6 +137,9 @@ $color-dark-brown: #721b1b;
       color: $color-white;
       text-decoration: none;
     }
+  }
+  &__button_d-none {
+    display: none;
   }
   &__error_visible {
     display: flex;

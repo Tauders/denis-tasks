@@ -1,7 +1,7 @@
 import { generateFormFields } from './generateFormFields';
 import { createButton, createElement } from './createElements';
 import { addHandlerToResetButton, addSubmitHandlerToForm } from './handler';
-import { formResultID } from './const';
+import { formResultID, buttonDownloadClassnameHidden } from './const';
 import { removeElementById } from './remove';
 
 const formControlsID = 'control';
@@ -13,7 +13,7 @@ const buttonSendClassName = 'form__button_send';
 const buttonResetID = 'reset';
 const formResultClassNames = ['form', 'form_result'];
 const mainID = 'main';
-const buttonLinkID = 'download';
+const buttonLinkID = 'buttonDownload';
 
 export function createFormToGenerateJson(resultOfParse) {
   const formResult = createElement('form', formResultClassNames, formResultID);
@@ -25,26 +25,22 @@ export function createFormToGenerateJson(resultOfParse) {
 
   const formFields = generateFormFields(resultOfParse);
 
-  for (const element of formFields) {
-    element.addEventListener('input', () => {
-      removeElementById(buttonLinkID);
-    });
-  }
-
-  const formControls = createElement('div', formControlsClassName, formControlsID);
-
   const buttonSend = createButton(
     'Отправить',
     buttonSendID,
     buttonSendClassName
   );
-  addSubmitHandlerToForm(formControls, formResult, buttonLinkID);
+  addSubmitHandlerToForm(formResult, buttonLinkID, formFields);
 
   const buttonReset = createButton('Сбросить', buttonResetID);
   buttonReset.type = 'reset';
   addHandlerToResetButton(buttonReset, buttonLinkID);
 
-  formControls.append(buttonSend, buttonReset);
+  const buttonDownload = createButton('', 'buttonDownload', buttonDownloadClassnameHidden);
+
+  const formControls = createElement('div', formControlsClassName, formControlsID);
+  formControls.append(buttonSend, buttonReset, buttonDownload);
+
   formResult.append(headerElementOfResultBlock, ...formFields, formControls);
 
   const main = document.getElementById(mainID);

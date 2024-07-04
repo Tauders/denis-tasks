@@ -9,7 +9,7 @@ export function setAttributes(element, objectAttributes) {
         element.append(option);
       });
     } else if (typeof value === 'boolean') {
-      if (value === true) {
+      if (value) {
         element.setAttribute(key, '');
       }
     } else {
