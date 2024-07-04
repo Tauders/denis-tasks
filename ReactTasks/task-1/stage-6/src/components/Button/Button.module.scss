@@ -1,0 +1,16 @@
+.button {
+  padding: rem(3);
+  font-size: rem(12);
+  background-color: $color_violet;
+  color: $color_white;
+  border: 1px solid $color_violet;
+  border-radius: rem(4);
+  transition: background-color 0.3s ease;
+  &:hover {
+    background: $color_dark-violet;
+    border-color: $color_dark-violet;
+  }
+  &:disabled {
+    opacity: 0.7;
+  }
+}

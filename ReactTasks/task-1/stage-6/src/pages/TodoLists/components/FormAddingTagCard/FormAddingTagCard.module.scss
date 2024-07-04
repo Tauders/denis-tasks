@@ -1,0 +1,7 @@
+.FormAddingTagCard {
+  &__error {
+    color: $color_red;
+    display: inline-block;
+    margin-bottom: rem(5);
+  }
+}

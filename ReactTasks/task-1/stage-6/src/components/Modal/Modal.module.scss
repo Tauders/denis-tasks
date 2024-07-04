@@ -1,0 +1,44 @@
+.modal {
+  background-color: rgba($color_black, 0.4);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  border: none;
+  z-index: 1;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: rem(20);
+  }
+  &__title {
+    width: 100%;
+    font-size: rem(20);
+    text-align: center;
+    font-weight: 500;
+  }
+  &__content {
+    width: 100%;
+    max-width: rem(300);
+    background-color: $color_white;
+    padding: rem(20);
+    border-radius: rem(5);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  &__button_close {
+    background-color: $color_violet-light;
+    &:hover {
+      background-color: $color_white;
+    }
+  }
+  &__icon {
+    display: inline-block;
+    width: rem(16);
+    height: rem(16);
+  }
+}
