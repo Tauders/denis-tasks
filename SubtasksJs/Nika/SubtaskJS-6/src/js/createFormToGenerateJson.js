@@ -1,6 +1,7 @@
 import { generateForm } from './generateForm';
 import { createButton, createElement } from './createElements';
 import { handleResetButton, handleSendButton } from './handler';
+import { formResultID } from './const';
 
 const formControlID = 'control';
 const formControlClassName = 'form__control';
@@ -13,7 +14,7 @@ const formResultClassNames = ['form', 'form_result'];
 const mainID = 'main';
 const buttonLinkID = 'download';
 
-export function createFormToGenerateJson(resultOfParse, formResultID) {
+export function createFormToGenerateJson(resultOfParse) {
   const formResult = createElement('form', formResultClassNames, formResultID);
   const headerElementOfResultBlock = createElement(
     'h2',

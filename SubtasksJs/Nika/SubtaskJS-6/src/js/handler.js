@@ -1,4 +1,4 @@
-import { createButton, createLink, createErrorElement } from './createElements';
+import { createButton, createLink } from './createElements';
 import { removeElementById } from './remove';
 
 export function handleResetButton(button, buttonLinkID) {
@@ -27,25 +27,4 @@ export function handleSendButton(formControl, formResult, buttonLinkID) {
       formControl.append(buttonDownload);
     }
   });
-}
-
-export function handleValidationResult(
-  validationResult,
-  errorFields,
-  blockError,
-  visibleErrorClassName,
-  buttonHandle
-) {
-  if (validationResult) {
-    removeElementById(errorFields.file.id);
-    blockError.classList.remove(visibleErrorClassName);
-  } else {
-    const errorElement = createErrorElement(
-      errorFields.file.text,
-      errorFields.file.id
-    );
-    blockError.append(errorElement);
-    blockError.classList.add(visibleErrorClassName);
-    buttonHandle.disabled = true;
-  }
 }

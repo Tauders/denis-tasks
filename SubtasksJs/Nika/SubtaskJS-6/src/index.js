@@ -1,25 +1,17 @@
 import './styles/styles.scss';
 import { readFile } from './js/readFile';
 import { removeElementById } from './js/remove';
-import { createErrorElement } from './js/createElements';
 import { validateFileType } from './js/validate';
 import { validateFileStructure } from './js/validate';
 import { createFormToGenerateJson } from './js/createFormToGenerateJson';
 import { setTextForInputFile } from './js/setTextForInputFile';
-import { handleValidationResult } from './js/handler';
+import { addFileStructureError, addFileValidationError, clearFileValidationError } from './js/fileError';
+import { visibleErrorClassName, formResultID, blockError } from './js/const'
 
 const buttonToGenerateFormID = 'buttonToGenerateForm';
 const buttonToGenerateForm = document.getElementById(buttonToGenerateFormID);
-const blockErrorID = 'error';
-const blockError = document.getElementById(blockErrorID);
 const inputSelectFileID = 'selectFile';
 const inputSelectFile = document.getElementById(inputSelectFileID);
-const formResultID = 'result';
-const errorFields = {
-  file: { id: 'error-file-type', text: 'Требуемый тип файла Json' },
-  resultOfParse: { id: 'error-resultOfParse', text: 'Некорректный файл Json' },
-};
-const visibleErrorClassName = 'form__error_visible';
 
 inputSelectFile.addEventListener('change', function () {
   buttonToGenerateForm.disabled = false;
@@ -36,13 +28,12 @@ inputSelectFile.addEventListener('change', function () {
   setTextForInputFile(file?.name)
 
   const validationResult = validateFileType(file);
-  handleValidationResult(
-    validationResult,
-    errorFields,
-    blockError,
-    visibleErrorClassName,
-    buttonToGenerateForm
-  );
+  if (validationResult) {
+    clearFileValidationError();
+  } else {
+    addFileValidationError();
+    buttonHandle.disabled = true;
+  }
 });
 
 buttonToGenerateForm.addEventListener('click', async function (e) {
@@ -53,12 +44,7 @@ buttonToGenerateForm.addEventListener('click', async function (e) {
   const resultOfParse = JSON.parse(readingResult);
 
   if (!validateFileStructure(resultOfParse)) {
-    const errorElement = createErrorElement(
-      errorFields.resultOfParse.text,
-      errorFields.resultOfParse.id
-    );
-    blockError.append(errorElement);
-    blockError.classList.add(visibleErrorClassName);
+    addFileStructureError();
     buttonToGenerateForm.disabled = true;
     return;
   }
