@@ -1,0 +1,10 @@
+﻿Cube Кости 0,4
+Sphere Мяч 10
+Pyramid Куличик 4,5 4,5 7
+Cube Куб 4
+Cylinder Шляпа 5 11 
+Sphere Шар 12
+Cylinder Мелок 0,3 1,4
+Pyramid ВигВам 12 12 15
+Cube КубикРубика 4,6
+Sphere Попрыгунчик 2

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ShapePack": {
+      "commandName": "Project",
+      "commandLineArgs": "input.txt",
+      "workingDirectory": "C:\\Users\\anato\\source\\repos\\ShapePack\\ShapePack\\bin\\Debug\\net5.0"
+    }
+  }
+}
